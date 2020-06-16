@@ -2,7 +2,7 @@
 
 Contoso Healthcare, headquartered in Detroit, Michigan, is a national healthcare provider with hospitals and doctors offices located throughout North America. The nature of their business requires a high level of security of personal health information (PHI) of patients, and personal identifiable information (PII) for their employees.
 
-The business of healthcare has become more relient on mobile devices to access patient health records, which has created a concern over theft and data exposure.  Contoso would like to eliminate the possibility of any PHI or PII being located on a local device through use of a virtual desktop infrastructure.
+The business of healthcare has become more reliant on mobile devices to access patient health records, which has created a concern over theft and data exposure.  Contoso would like to eliminate the possibility of any PHI or PII being located on a local device through use of a virtual desktop infrastructure.
 
 Being a healthcare provider, Contoso has a requirement for applications to be accessible 24x7x365, so any infrastructure should be designed with high availability and scalability in mind.
 
