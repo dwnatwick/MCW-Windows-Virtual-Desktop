@@ -238,9 +238,6 @@ Contoso Healthcare has completed an initial cloud assessment of their current in
 
 ### Infographic for common scenarios
 
-### Microsoft 365 Scenarios
-![Microsoft 365 scenarios apply to the subscriptions that would be required for Windows 10 multi-user licensing and the additional data protection, threat protection, and conditional access requirements.](images/m365scenario.png "Microsoft 365 Scenarios ")
-
 
 ### Security Scenarios
 ![The security scenario applies to the potential security, monitoring, and compliance auditing options needed to design the solution. ](images/security.png "Security Scenarios")
