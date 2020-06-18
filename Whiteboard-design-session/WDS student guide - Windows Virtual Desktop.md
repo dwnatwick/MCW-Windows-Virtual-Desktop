@@ -110,17 +110,17 @@ Contoso Healthcare has completed an initial cloud assessment of their current in
 
 5. Connections between the cloud and existing data centers must be secure and reliable to support their requirements.  How will this be addressed and monitored?
 
-### Infographic for common scenarios (Need to replace with WVD images)
+### Infographic for common scenarios
 
-![Azure Site Recovery Scenarios apply to multiple on-premises and cloud-based replication infrastructures, including Hyper-V to Hyper-V, Hyper-V to Azure, VMWare or physical to VMWare, VMWare or Physical to Azure, and Azure to Azure.](images/Whiteboarddesignsessiontrainerguide-Businesscontinuityanddisasterrecoveryimages/media/image2.png "Azure Site Recovery Scenarios ")
+![Microsoft 365 scenarios apply to the subscriptions that would be required for Windows 10 multi-user licensing and the additional data protection, threat protection, and conditional access requirements.](images/m365scenario.png "Microsoft 365 Scenarios ")
 
-![Recovering Hyper-V VMs to Azure Architecture has the source as Hyper-V Hosts (Windows or Linux), an Azure Recovery Services agent, SCVMM with a Site Recovery DRA, Azure Site Recovery, and a Microsoft Azure cloud service. ](images/Whiteboarddesignsessiontrainerguide-Businesscontinuityanddisasterrecoveryimages/media/image3.png "Recover Hyper-V VMs to Azure Architecture")
+![The security scenario applies to the potential security, monitoring, and compliance auditing options needed to design the solution. ](images/security.png "Security Scenarios")
 
-![In this environment, the Source Environment (East US) has a storage account with two disks and a storage account cache asr with cache data. These interact with a VNet environment made up of an availability set of two Azure Virtual Machines, and a subnet. Data flows from here through the Cache data, and to the Target Environment (Central US) Storage account ASR disks. In the Target Environment, the VNet-asr is empty.](images/Whiteboarddesignsessiontrainerguide-Businesscontinuityanddisasterrecoveryimages/media/image4.png "Azure Site Recovery Region to Region Failover")
+![Network scenarios diagram the potential options for connecting from Microsoft Azure to the on-premises network.](images/network.png "Network Scenarios")
 
-![Screenshot of the Azure Marketplace in the Azure Portal. Backup Exec 16 - Standard is called out.](images/Whiteboarddesignsessiontrainerguide-Businesscontinuityanddisasterrecoveryimages/media/image5.png "Azure Portal, Azure Marketplace")
+![This diagram outlines a simple Windows Virtual Desktop architecture with Azure and Microsoft 365. This includes the Windows Virtual Desktop user connection and the Windows Virtual Desktop host pools.](images/wvdarchitecture.png "Windows Virtual Desktop standard architecture")
 
-![The Native Azure Backup Option one has an on-premises solution of one SharePoint and one SQL virtual machine that use an Azure backup server. On-premises uses the internet to upload to Azure Backup, which then downloads for App/Item-level restore. Option two has a solution of one SharePoint and one SQL virtual machine that use either a Commvault Simpana or VCC for Enterprise machine. This solution uses the internet to upload to Azure Storage (blob), which then downloads for App/Item-level restore.](images/Whiteboarddesignsessiontrainerguide-Businesscontinuityanddisasterrecoveryimages/media/image6.png "Azure Backup and third-party back solutions")
+
 
 ## Step 2: Design a proof of concept solution
 
