@@ -238,13 +238,17 @@ Contoso Healthcare has completed an initial cloud assessment of their current in
 
 ### Infographic for common scenarios
 
-![Microsoft 365 scenarios apply to the subscriptions that would be required for Windows 10 multi-user licensing and the additional data protection, threat protection, and conditional access requirements.](images/m365scenario.png "Microsoft 365 Scenarios ")
+![Microsoft 365 scenarios apply to the subscriptions that would be required for Windows 10 multi-user licensing and the additional data protection, threat protection, and conditional access requirements.]
+(images/m365scenario.png "Microsoft 365 Scenarios ")
 
-![The security scenario applies to the potential security, monitoring, and compliance auditing options needed to design the solution. ](images/security.png "Security Scenarios")
+![The security scenario applies to the potential security, monitoring, and compliance auditing options needed to design the solution. ]
+(images/security.png "Security Scenarios")
 
-![Network scenarios diagram the potential options for connecting from Microsoft Azure to the on-premises network.](images/network.png "Network Scenarios")
+![Network scenarios diagram the potential options for connecting from Microsoft Azure to the on-premises network.]
+(images/network.png "Network Scenarios")
 
-![This diagram outlines a simple Windows Virtual Desktop architecture with Azure and Microsoft 365. This includes the Windows Virtual Desktop user connection and the Windows Virtual Desktop host pools.](images/wvdarchitecture.png "Windows Virtual Desktop standard architecture")
+![This diagram outlines a simple Windows Virtual Desktop architecture with Azure and Microsoft 365. This includes the Windows Virtual Desktop user connection and the Windows Virtual Desktop host pools.]
+(images/wvdarchitecture.png "Windows Virtual Desktop standard architecture")
 
 
 ## Step 2: Design a proof of concept solution
@@ -539,7 +543,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
         - You should have used the Azure pricing calculator to create an initial capacity estimate.  This estimate calculated 2 DS4s v3 instances as the base availability set and 29 additional instances to scale capacity.  The example estimate can be accessed here: https://azure.com/e/42510b06f9be4721a00bd279c451352f
 
 
-- Replace this with the new WVD whiteboard design diagram
+- Diagram of the on-premises to Azure Windows Virtual Desktop solution:
 
     ![Diagram of the On-premises to Azure Windows Virtual Desktop solution.](images/wvdsolutiondiagram.png "On-premises to Azure Windows Virtual Desktop solution")
 
