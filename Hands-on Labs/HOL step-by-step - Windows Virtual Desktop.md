@@ -1370,7 +1370,7 @@ has existed in Windows Server Remote Desktop Services for many years.
 
     ![Host pool basics tabs](images/hostPool2.png)
 
-5.  On the Virtual Machines page, provision a Virtual machine. Once complete, click **Next:
+5.  On the Virtual Machines page, provision a Virtual machine with the Windows 10 multi-user + M365 apps. Once complete, click **Next:
     Workspace**
 
 6.  On the Workspace page, select **Yes** to register a new desktop app
