@@ -211,7 +211,7 @@ Control.]](https://danielengberg.com/domain-join-permissions-delegate-active-dir
 2.  Accept the license terms and privacy notice, then select continue. On the next screen
 select **Use express settings**. The required components will install.
 
-    ![Azure AD connect set up screen](Images/AzureADconnectExpressSetting.png)
+    ![Azure AD connect set up screen](images/AzureADconnectExpressSetting.png)
 
 3.  On the Connect to Azure AD page, enter in the Azure AD Global Admin
     credentials. For
