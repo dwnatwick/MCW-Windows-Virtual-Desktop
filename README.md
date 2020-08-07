@@ -4,9 +4,7 @@ Contoso Healthcare, headquartered in Los Angeles, California, is a national heal
 
 Contoso currently has approximately 250 workstations within their environment with business applications for non-clinical users from the Developer, Finance, and Knowledge departments. Contoso is currently supporting existing data centers in California and Northern Virginia with VMware for the server control plane and a partial deployment of Citrix virtual desktop infrastructure. These locations are connected with a private WAN connection and a backup VPN over broadband.  
 
-Contoso currently has approximately 250 workstations within their environment with a number of healthcare practice applications, insurance applications, and business applications.  Contoso is currently supporting an existing data center with VMware for the server control plane and a partial deployment of Citrix virtual desktop infrastructure.
-
-June 2020
+August 2020
 
 ## Target audience
 
