@@ -1,12 +1,10 @@
 # Windows Virtual Desktop
 
-Contoso Healthcare, headquartered in Detroit, Michigan, is a national healthcare provider with hospitals and doctor's offices located throughout North America. The nature of their business requires a high level of security of personal health information (PHI) of patients, and personal identifiable information (PII) for their employees.
+Contoso Healthcare, headquartered in Los Angeles, California, is a national healthcare provider with a network of affiliate hospitals and doctor’s offices located throughout North America. These locations continue to grow through acquisition.  The nature of their business requires a high level of security of personal identifiable information (PII) for their employees.
 
-The business of healthcare has become more reliant on mobile devices to access patient health records, which has created a concern over theft and data exposure.  Contoso would like to eliminate the possibility of any PHI or PII being located on a local device through use of a virtual desktop infrastructure.
+Contoso currently has approximately 250 workstations within their environment with business applications for non-clinical users from the Developer, Finance, and Knowledge departments. Contoso is currently supporting existing data centers in California and Northern Virginia with VMware for the server control plane and a partial deployment of Citrix virtual desktop infrastructure. These locations are connected with a private WAN connection and a backup VPN over broadband.  
 
-Being a healthcare provider, Contoso has a requirement for applications to be accessible 24x7x365, so any infrastructure should be designed with high availability and scalability in mind.
-
-Contoso currently has approximately 500 workstations within their environment with a number of healthcare practice applications, insurance applications, and business applications.  Contoso is currently supporting an existing data center with VMware for the server control plane and a partial deployment of Citrix virtual desktop infrastructure.
+Contoso currently has approximately 250 workstations within their environment with a number of healthcare practice applications, insurance applications, and business applications.  Contoso is currently supporting an existing data center with VMware for the server control plane and a partial deployment of Citrix virtual desktop infrastructure.
 
 June 2020
 
