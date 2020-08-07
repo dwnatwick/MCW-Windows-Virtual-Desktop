@@ -31,18 +31,21 @@ Microsoft and the trademarks listed at https://www.microsoft.com/en-us/legal/int
   - [Whiteboard design session flow](#whiteboard-design-session-flow)
   - [Before the whiteboard design session: How to prepare](#before-the-whiteboard-design-session-how-to-prepare)
   - [During the whiteboard design session: Tips for an effective whiteboard design session](#during-the-whiteboard-design-session-tips-for-an-effective-whiteboard-design-session)
-- [Windows Virtual Desktop whiteboard design session student guide](#Windows-Virtual-Desktop-whiteboard-design-session-student-guide)
+- [Business continuity and disaster recovery whiteboard design session student guide](#business-continuity-and-disaster-recovery-whiteboard-design-session-student-guide)
   - [Abstract](#abstract)
   - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
     - [Customer situation](#customer-situation)
     - [Customer needs](#customer-needs)
     - [Customer objections](#customer-objections)
     - [Infographic for common scenarios](#infographic-for-common-scenarios)
+    - [Security Scenarios](#security-scenarios)
+    - [Network Scenarios](#network-scenarios)
+    - [Windows Virtual Desktop standard architecuture](#windows-virtual-desktop-standard-architecuture)
   - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution)
   - [Step 3: Present the solution](#step-3-present-the-solution)
   - [Wrap-up](#wrap-up)
   - [Additional references](#additional-references)
-- [Windows Virtual Desktop whiteboard design session trainer guide](#Windows-Virtual-Desktop-whiteboard-design-session-trainer-guide)
+- [Windows Virtual Desktop whiteboard design session trainer guide](#windows-virtual-desktop-whiteboard-design-session-trainer-guide)
   - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study-1)
   - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution-1)
   - [Step 3: Present the solution](#step-3-present-the-solution-1)
@@ -192,21 +195,21 @@ Directions: With all participants in the session, the facilitator/SME presents a
 
 ### Customer situation
 
-Contoso Healthcare, headquartered in Detroit, Michigan, is a national healthcare provider with a network of affiliate hospitals and doctor’s offices located throughout North America. These locations continue to grow through acquisitions. The nature of their business requires a high level of security of personal health information (PHI) of patients, and personal identifiable information (PII) for their employees.
+Contoso Healthcare, headquartered in Los Angeles, California, is a national healthcare provider with a network of affiliate hospitals and doctor’s offices located throughout North America. These locations continue to grow through acquisition.  The nature of their business requires a high level of security of personal identifiable information (PII) for their employees.
 
-Contoso currently has approximately 500 workstations within their environment with a number of healthcare practice applications, insurance applications, and business applications. Contoso is currently supporting existing data centers in Detroit, MI and Dallas, Texas with VMware for the server control plane and a partial deployment of Citrix virtual desktop infrastructure.  These locations are connected with a private WAN connection and a backup VPN over broadband.  
+Contoso currently has approximately 250 workstations within their environment with business applications for non-clinical users from the Developer, Finance, and Knowledge departments. Contoso is currently supporting existing data centers in California and Northern Virginia with VMware for the server control plane and a partial deployment of Citrix virtual desktop infrastructure. These locations are connected with a private WAN connection and a backup VPN over broadband.  
 
-Ken Greenwald, Contoso Healthcare CTO, has been evaluating the value of the public cloud and views Microsoft Azure as an excellent option to maintain availability and increase scalability of resources to the organization.  His team has also struggled with managing 500 workstations spread across the organization and needs an option to easily manage and maintain a standardized desktop image that gives users secure access to applications.  Ideally, these desktop images would not be maintained on local machines.  As Ken states, "Contoso Healthcare has continued to grow through the acquisition of doctor's offices and hospitals throughout North America, which has created an issue with our ability to standardize hardware at these locations.  The Board of Directors has been unwilling to increase capital expeditures for new equipment and we are forced as an IT organization to maximize our current infrastructure to deliver applications to users.  We need the ability to utilize what we have in place within our data centers and integrate Microsoft Azure technologies to facilite our ability to stardardize across the organization and quickly integrate a new office acquisition."
+Ken Greenwald, Contoso Healthcare CTO, has been evaluating the value of the public cloud and views Microsoft Azure as an excellent option to maintain availability and increase scalability of resources to the organization.  His team has also struggled with managing 500 workstations spread across the organization and needs an option to easily manage and maintain a standardized desktop image that gives users secure access to applications.  Ideally, these desktop images would not be maintained on local machines.  As Ken states, "Contoso Healthcare has continued to grow through the acquisition of doctor's offices and hospitals throughout North America, which has created an issue with our ability to standardize hardware at these locations.  The Board of Directors has been unwilling to increase capital expeditures for new equipment and we are forced as an IT organization to maximize our current VMware and Citrix virtual desktop infrastructure to deliver applications to users.  We need the ability to utilize what we have in place within our data centers and integrate Microsoft Azure technologies to facilite our ability to stardardize across the organization and quickly integrate a new office acquisition."
 
-Contoso Healthcare's CISO, Laura Knight, has an additional list of objectives to address.  She is concerned with the threat of data exposure throughout the organization that is posed by the mulitple devices that they have acquired through their office acquisitions.  The continued increase in mobility of these devices raises concerns of PHI and PII being exposed to unauthorized individuals.  She also is responsible for the auditing of ISO/IEC 27001 and HIPAA controls.  Laura has said, "The growth of Contoso Healthcare has created an increased burden on my security and compliance organization.  It has become more difficult to monitor systems as they come online with variations of operating systems.  Some of these operating systems do not support mobile device management software to audit use and application access.  In addition, enforcing a centralized standard for security policies and access to confidential information has been challenging.  My organization needs to be able to maintain the security of our data and resources, and mitigate the prospect of data loss due to threat or unauthorized access to devices." 
+Contoso Healthcare's CISO, Laura Knight, has an additional list of objectives to address.  She is concerned with the threat of data exposure throughout the organization that is posed by the mulitple devices that they have acquired through their office acquisitions.  The continued increase in mobility of these devices raises concerns of PHI and PII being exposed to unauthorized individuals.  She also is responsible for the auditing of ISO/IEC 27001, HIPAA, and California Personal Protection Act (similar to GDPR) controls.  Laura has said, "The growth of Contoso Healthcare has created an increased burden on my security and compliance organization.  It has become more difficult to monitor systems as they come online with variations of operating systems.  Some of these operating systems do not support mobile device management software to audit use and application access.  In addition, enforcing a centralized standard for security policies and access to confidential information has been challenging.  My organization needs to be able to maintain the security of our data and resources, and mitigate the prospect of data loss due to threat or unauthorized access to devices." 
 
 Contoso Healthcare has completed an initial cloud assessment of their current infrastructure and applications, and they have divided the following areas that they feel that Microsoft 365 and Azure technologies can support:
 
-**Security:** The business of healthcare has become more reliant on mobile devices to access patient health records, which has created a concern over theft and data exposure. Contoso would like to eliminate the possibility of any PHI or PII being located on a local device through use of a virtual desktop infrastructure. Security controls will need to audited, logged, and reviewed to ISO 27001 and HIPAA standards.
+**Security:** The business of healthcare has become more reliant on mobile devices to access files and financial records, which has created a concern over theft and data exposure. Contoso would like to eliminate the possibility of any PHI or PII being located on a local device through use of a virtual desktop infrastructure. They would also like to be able to manage applications that are authorized, and block cloud applications that are not authorized.  Security controls will need to audited, logged, and reviewed to ISO 27001, California Personal Protection Act, and HIPAA standards.
 
-**Availability and Scalability:** Being a healthcare provider, Contoso has a requirement for applications to be accessible 24x7x365, so any infrastructure should be designed with high availability and scalability in mind. As Contoso Healthcare grows through acquisitions, they need to be able to scale out resources quickly for the addition of new users.
+**Availability and Scalability:** Being a healthcare provider, Contoso has a requirement for applications to be accessible 24x7, so any infrastructure should be designed with high availability and scalability in mind. As Contoso Healthcare grows through acquisitions, they need to be able to scale out resources quickly for the addition of new users.
 
-**Deployment Acceleration:** Contoso does not have a budget for additional capital expense required to upgrade current devices.  Therefore, they will need to utilize the current devices that are available to deliver a standard desktop image to users.   Contoso will be utilizing their current VMware and Citrix infrastructure for application delivery to user desktops.
+**Deployment Acceleration:** Contoso does not have a budget for additional capital expense required to upgrade current devices.  Therefore, they will need to utilize the current devices that are available to deliver a standard desktop image to users.   Contoso will be utilizing their current VMware and Citrix infrastructure and control plane for application delivery to user desktops.
 
 ### Customer needs
 
@@ -214,9 +217,9 @@ Contoso Healthcare has completed an initial cloud assessment of their current in
 
 2. CH requires that any PHI and PII data is stored in a central encrypted storage account and not on local devices.
 
-3. CH must be able to log activity and access, and be able to audit compliance to ISO 27001 and HIPAA controls.
+3. CH must be able to log activity and access, and be able to audit compliance to ISO 27001, California Personal Protection Act, and HIPAA controls.
 
-4. CH requires 24x7x365 access to applications and the ability to scale resources as demand increases.
+4. CH requires 24x7 access to applications and the ability to scale resources as demand increases.
 
 5. CH needs redundancy in network connections with low latency when accessing applications.
 
@@ -226,15 +229,15 @@ Contoso Healthcare has completed an initial cloud assessment of their current in
 
 ### Customer objections
 
-1. Contoso has made a substantial capital investment in their current data centers that they do not want to decommission. How can the infrastructure be architected to support the current data centers?
+1. The CTO at Contoso does not want to invest in new workstations and mobile devices to support the standardized desktop image. This includes non-OS, Macs, Android, and thin clients.  Can these devices support the new image?
 
-2. The CTO at Contoso does not want to invest in new workstations and mobile devices to support the standardized desktop image. Can these devices support the new image?
+2. The CISO at Contoso needs to be convinced that data will not be exposed. How would Microsoft handle data protection?
 
-3. The CISO at Contoso needs to be convinced that data will not be exposed. How would Microsoft handle data protection?
+3. Contoso must be able to log and audit all activity on the desktop image.  How will this be handled within the cloud and on-premises environments?
 
-4. Contoso must be able to log and audit all activity on the desktop image.  How will this be handled within the cloud and on-premises environments?
+4. Connections between the cloud and existing data centers must be secure and reliable to support their requirements.  How will this be addressed and monitored?
 
-5. Connections between the cloud and existing data centers must be secure and reliable to support their requirements.  How will this be addressed and monitored?
+5. Contoso has made a substantial capital investment in their current data centers that they do not want to decommission. How can the infrastructure be architected to utilize the current Citrix virtual desktop infrastructure and control plane?
 
 ### Infographic for common scenarios
 
@@ -482,12 +485,16 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
     - What is required to audit, log, and monitor controls for ISO 27001 and HIPAA? 
         - Azure Policy initiatives for ISO 27001 and HIPAA should be enabled for the Resource Groups that are created to govern the Windows Virtual Desktop infrastructure.  In addition, Azure Security Center should be upgraded to the Standard tier subscription to properly monitor and alert on control compliance to ISO 27001 and HIPAA standards.
+        - To address compliance with the California Personal Protection Act, the Azure Policy initiative for GDPR will be assigned and custom policies will be added as needed to comply with the CPPA.
 
     - How will you address monitoring these controls in Azure and the on-premises data centers?
-        - Azure Monitor agents should be installed on all Azure and on-premises virtual machiness in order to govern the Azure Policy initiatives.  These agents will provide activity logs that can be monitored within Azure Security Center.
+        - Azure Monitor agents should be installed on all Azure and on-premises virtual machines in order to govern the Azure Policy initiatives.  These agents will provide activity logs that can be monitored within Azure Security Center.
+        - ATP should be used to monitor threats.  
+        - Azure Sentinel should be used for incident response and investigation
 
     - How will you avoid data exposure for data in-transit and data at-rest?
         - All connections for data in-transit will be transmitted through an encrypted SSL connection.  Data at-rest will be encryted at-rest. 
+        - Cloud App Security for managing authorized applications. 
 
     - How will you maintain identity access management for the cloud and current Active Directory infrastructure, and how will they synchronize?
         - The cloud identity will be created within Azure Active Directory.  This will be the primary identity source for Microsoft 365, Windows Virtual Desktop, and Azure services.  User identities from Active Directory Domain Services will be imported into Azure Active Directory to maintain user login credentials.  Azure AD Connect will be installed at Contoso Healthcare's data center in order to synchronize user credentials for single sign-on.  Password Hash Synchronization will be used so that users have the ability to authenticate through the data center Active Directory services or the cloud Azure Active Directory services.
@@ -500,7 +507,8 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 3. Networking
 
     - What region or regions will you deploy resources and why?
-        - In order to decrease latency to the current Detroit and Dallas data centers, the recommended Azure Regions would be either the North Central US or Central US.  
+        - In order to decrease latency West US and East US regions should be peered in Azure to decrease latency to California and Northern Virginia
+        - Single resource group for the Window Virtual Desktop infrastructure
     
     - How will you design the resource groups to support your design?
         - The entire Windows Virtual Desktop infrastructure should be created within a single resource group.  This will allow for ease of management of the resources and the ability to analyze and review the consumption easily within the Azure subscription.  
@@ -509,13 +517,17 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
         - The resource group should be configured with at least three separate VNETs with subnets.  The first would be the VNET for the Virtual Desktop hostpool, the second will be the VNET used to connect to the on-premises network, and the third would be a VNET for a Bastion host to be used for secure virtual machine access for support.  The VNETs will be peered with only the Virtual Desktop hostpool VNET having gateway access for security.  This configuration of VNETs provides a level of isolation to the networks for security and control.
 
     - How will you connect to Contoso Healthcare's data centers to minimize latency and maximize security?
-        - The VNET identified above to connect to the on-premises network should have an Azure Firewall that creates a site-to-site VPN connection to the primary datacenter in Detroit.  The recommendation would be to also utilize an Azure ExpressRoute connnection directly from the Detroit datacenter to Azure, if available, and the VPN be used for backup connectivity to maximize connection speed and security.
+        - The VNET identified above to connect to the on-premises network should have an Azure Firewall that creates a site-to-site VPN connection to the primary datacenter in Los Angeles.  The recommendation would be to also utilize an Azure ExpressRoute connnection directly from the Los Angeles datacenter to Azure West US, if available, and the VPN be used for backup connectivity to maximize connection speed and security, and East US to the Northern Virginia datacenter.
 
     - How will you manage and balance network traffic to virtual desktops images?
         - The VNET being used for the hostpool should have a load balancer configured as the public facing access to the hostpool virtual machine availability set.  This will secure the virtual machines from needing a public IP address and also avoid a single virtual machine from being over used with requests.
 
     - What will you use to identify and monitor threats on the network?
-        - Azure Monitor, Azure Log Analytics, and Advanced Threat Protection should all be turned on with actions and alerts to the security group.  The Azure Security Center standard subscription will provide a central dashboard for monitoring, locating, and alerting on common threats found in the Microsoft Threat database.
+        - Azure Monitor, Azure Log Analytics, and Advanced Threat Protection should all be turned on with actions and alerts to the security group.  
+        - The Azure Security Center standard subscription will provide a central dashboard for monitoring, locating, and alerting on common threats found in the Microsoft Threat database.
+        - Network Watcher will be utilized to monitor network connection speeds and health.
+        - Service Map will be utilized for additional monitoring of virtual machines
+        - Azure Sentinel will be the central source for incident response and investigation of threats, vulnerabilities, and anomalies.
 
     - How would you monitor network throughput and latency over the network?
         - Turning on Network Watcher within the VNETs will provide logs and analysis of the network speeds across VNETs and to the on-premises network.
@@ -523,7 +535,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 4. Windows Virtual Desktop image
 
     - How will the standardized desktop image be created?
-        - The recommendation would be to create the standard image that Contoso Healthcare is wanting to deliver to their users, and create a VHD of that image.  Details on this process is in the links provided in the student guide.  Another option is to have an image created with Windows 10 multi-user licensing and Office365 ProPlus at the time of creating the Windows Virtual Desktop host pool, and then making adjustments to that image based on custom requirements.
+        - The recommendation would be to create the managed WVD image that Contoso Healthcare is wanting to deliver to their users. Optionallay, the could also create a VHD for the standard image.  Details on this process is in the links provided in the student guide.  Another option is to have an image created with Windows 10 multi-user licensing and Office365 ProPlus at the time of creating the Windows Virtual Desktop host pool, and then making adjustments to that image based on custom requirements.
 
     - How will applications be delivered to the desktop image?
         - To simplify the application delivery and licensing, Contoso Healthcare would like to leverage the current Citrix infrastructure that they have in place.  To accomplish this, a shortcut can be provided on the standard desktop image for the Citrix app marketplace that provides users with the applications that they are authorized to access.
@@ -537,15 +549,15 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 5. Windows Virtual Desktop host pool
   
     - How many con-current sessions will be required to access the virtual desktop image?
-        - We will design the capacity to support the full 500 workstations that were identified in our initial discussions with the customer. 
+        - We will design the capacity to support the full 250 workstations that were identified in our initial discussions with the customer. 
 
     - How many virtual machines are required to support the number of con-current sessions?
-        - You should have used the Azure pricing calculator to create an initial capacity estimate.  This estimate calculated 2 DS4s v3 instances as the base availability set and 29 additional instances to scale capacity.  The example estimate can be accessed here: https://azure.com/e/42510b06f9be4721a00bd279c451352f
+        - You should have used the Azure pricing calculator to create an initial capacity estimate.  This estimate calculated 25 DS4s v3 instances as the base availability set with 10 virtual desktops per host.  Additional instances to scale as capacity increases.  The example estimate can be accessed here: https://azure.com/e/42510b06f9be4721a00bd279c451352f
 
 
 - Diagram of the on-premises to Azure Windows Virtual Desktop solution:
 
-    ![Diagram of the On-premises to Azure Windows Virtual Desktop solution.](images/wvdsolutiondiagram.png "On-premises to Azure Windows Virtual Desktop solution")
+    ![Diagram of the On-premises to Azure Windows Virtual Desktop solution.](images/wvdsolutiondiagramv2.png "On-premises to Azure Windows Virtual Desktop solution")
 
   
 

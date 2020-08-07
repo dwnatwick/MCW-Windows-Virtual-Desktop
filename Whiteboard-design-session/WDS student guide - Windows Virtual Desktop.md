@@ -26,13 +26,16 @@ Microsoft and the trademarks listed at https://www.microsoft.com/en-us/legal/int
 
 <!-- TOC -->
 
-- [Windows Virtual Desktop whiteboard design session student guide](#Windows-Virtual-Desktop-whiteboard-design-session-student-guide)
+- [Windows Virtual Desktop whiteboard design session student guide](#windows-virtual-desktop-whiteboard-design-session-student-guide)
   - [Abstract](#abstract)
   - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
     - [Customer situation](#customer-situation)
     - [Customer needs](#customer-needs)
     - [Customer objections](#customer-objections)
     - [Infographic for common scenarios](#infographic-for-common-scenarios)
+    - [Security Scenarios](#security-scenarios)
+    - [Network Scenarios](#network-scenarios)
+    - [Windows Virtual Desktop standard architecuture](#windows-virtual-desktop-standard-architecuture)
   - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution)
   - [Step 3: Present the solution](#step-3-present-the-solution)
   - [Wrap-up](#wrap-up)
@@ -66,21 +69,21 @@ Directions: With all participants in the session, the facilitator/SME presents a
 
 ### Customer situation
 
-Contoso Healthcare, headquartered in Detroit, Michigan, is a national healthcare provider with a network of affiliate hospitals and doctor’s offices located throughout North America. These locations continue to grow through acquisitions. The nature of their business requires a high level of security of personal health information (PHI) of patients, and personal identifiable information (PII) for their employees.
+Contoso Healthcare, headquartered in Los Angeles, California, is a national healthcare provider with a network of affiliate hospitals and doctor’s offices located throughout North America. These locations continue to grow through acquisition.  The nature of their business requires a high level of security of personal identifiable information (PII) for their employees.
 
-Contoso currently has approximately 500 workstations within their environment with a number of healthcare practice applications, insurance applications, and business applications. Contoso is currently supporting existing data centers in Detroit, MI and Dallas, Texas with VMware for the server control plane and a partial deployment of Citrix virtual desktop infrastructure.  These locations are connected with a private WAN connection and a backup VPN over broadband.  
+Contoso currently has approximately 250 workstations within their environment with business applications for non-clinical users from the Developer, Finance, and Knowledge departments. Contoso is currently supporting existing data centers in California and Northern Virginia with VMware for the server control plane and a partial deployment of Citrix virtual desktop infrastructure. These locations are connected with a private WAN connection and a backup VPN over broadband.  
 
-Ken Greenwald, Contoso Healthcare CTO, has been evaluating the value of the public cloud and views Microsoft Azure as an excellent option to maintain availability and increase scalability of resources to the organization.  His team has also struggled with managing 500 workstations spread across the organization and needs an option to easily manage and maintain a standardized desktop image that gives users secure access to applications.  Ideally, these desktop images would not be maintained on local machines.  As Ken states, "Contoso Healthcare has continued to grow through the acquisition of doctor's offices and hospitals throughout North America, which has created an issue with our ability to standardize hardware at these locations.  The Board of Directors has been unwilling to increase capital expeditures for new equipment and we are forced as an IT organization to maximize our current infrastructure to deliver applications to users.  We need the ability to utilize what we have in place within our data centers and integrate Microsoft Azure technologies to facilite our ability to stardardize across the organization and quickly integrate a new office acquisition."
+Ken Greenwald, Contoso Healthcare CTO, has been evaluating the value of the public cloud and views Microsoft Azure as an excellent option to maintain availability and increase scalability of resources to the organization.  His team has also struggled with managing 500 workstations spread across the organization and needs an option to easily manage and maintain a standardized desktop image that gives users secure access to applications.  Ideally, these desktop images would not be maintained on local machines.  As Ken states, "Contoso Healthcare has continued to grow through the acquisition of doctor's offices and hospitals throughout North America, which has created an issue with our ability to standardize hardware at these locations.  The Board of Directors has been unwilling to increase capital expeditures for new equipment and we are forced as an IT organization to maximize our current VMware and Citrix virtual desktop infrastructure to deliver applications to users.  We need the ability to utilize what we have in place within our data centers and integrate Microsoft Azure technologies to facilite our ability to stardardize across the organization and quickly integrate a new office acquisition."
 
-Contoso Healthcare's CISO, Laura Knight, has an additional list of objectives to address.  She is concerned with the threat of data exposure throughout the organization that is posed by the mulitple devices that they have acquired through their office acquisitions.  The continued increase in mobility of these devices raises concerns of PHI and PII being exposed to unauthorized individuals.  She also is responsible for the auditing of ISO/IEC 27001 and HIPAA controls.  Laura has said, "The growth of Contoso Healthcare has created an increased burden on my security and compliance organization.  It has become more difficult to monitor systems as they come online with variations of operating systems.  Some of these operating systems do not support mobile device management software to audit use and application access.  In addition, enforcing a centralized standard for security policies and access to confidential information has been challenging.  My organization needs to be able to maintain the security of our data and resources, and mitigate the prospect of data loss due to threat or unauthorized access to devices." 
+Contoso Healthcare's CISO, Laura Knight, has an additional list of objectives to address.  She is concerned with the threat of data exposure throughout the organization that is posed by the mulitple devices that they have acquired through their office acquisitions.  The continued increase in mobility of these devices raises concerns of PHI and PII being exposed to unauthorized individuals.  She also is responsible for the auditing of ISO/IEC 27001, HIPAA, and California Personal Protection Act (similar to GDPR) controls.  Laura has said, "The growth of Contoso Healthcare has created an increased burden on my security and compliance organization.  It has become more difficult to monitor systems as they come online with variations of operating systems.  Some of these operating systems do not support mobile device management software to audit use and application access.  In addition, enforcing a centralized standard for security policies and access to confidential information has been challenging.  My organization needs to be able to maintain the security of our data and resources, and mitigate the prospect of data loss due to threat or unauthorized access to devices." 
 
 Contoso Healthcare has completed an initial cloud assessment of their current infrastructure and applications, and they have divided the following areas that they feel that Microsoft 365 and Azure technologies can support:
 
-**Security:** The business of healthcare has become more reliant on mobile devices to access patient health records, which has created a concern over theft and data exposure. Contoso would like to eliminate the possibility of any PHI or PII being located on a local device through use of a virtual desktop infrastructure. Security controls will need to audited, logged, and reviewed to ISO 27001 and HIPAA standards.
+**Security:** The business of healthcare has become more reliant on mobile devices to access files and financial records, which has created a concern over theft and data exposure. Contoso would like to eliminate the possibility of any PHI or PII being located on a local device through use of a virtual desktop infrastructure. They would also like to be able to manage applications that are authorized, and block cloud applications that are not authorized.  Security controls will need to audited, logged, and reviewed to ISO 27001, California Personal Protection Act, and HIPAA standards.
 
-**Availability and Scalability:** Being a healthcare provider, Contoso has a requirement for applications to be accessible 24x7x365, so any infrastructure should be designed with high availability and scalability in mind. As Contoso Healthcare grows through acquisitions, they need to be able to scale out resources quickly for the addition of new users.
+**Availability and Scalability:** Being a healthcare provider, Contoso has a requirement for applications to be accessible 24x7, so any infrastructure should be designed with high availability and scalability in mind. As Contoso Healthcare grows through acquisitions, they need to be able to scale out resources quickly for the addition of new users.
 
-**Deployment Acceleration:** Contoso does not have a budget for additional capital expense required to upgrade current devices.  Therefore, they will need to utilize the current devices that are available to deliver a standard desktop image to users.   Contoso will be utilizing their current VMware and Citrix infrastructure for application delivery to user desktops.
+**Deployment Acceleration:** Contoso does not have a budget for additional capital expense required to upgrade current devices.  Therefore, they will need to utilize the current devices that are available to deliver a standard desktop image to users.   Contoso will be utilizing their current VMware and Citrix infrastructure and control plane for application delivery to user desktops.
 
 ### Customer needs
 
@@ -88,9 +91,9 @@ Contoso Healthcare has completed an initial cloud assessment of their current in
 
 2. CH requires that any PHI and PII data is stored in a central encrypted storage account and not on local devices.
 
-3. CH must be able to log activity and access, and be able to audit compliance to ISO 27001 and HIPAA controls.
+3. CH must be able to log activity and access, and be able to audit compliance to ISO 27001, California Personal Protection Act, and HIPAA controls.
 
-4. CH requires 24x7x365 access to applications and the ability to scale resources as demand increases.
+4. CH requires 24x7 access to applications and the ability to scale resources as demand increases.
 
 5. CH needs redundancy in network connections with low latency when accessing applications.
 
@@ -100,15 +103,15 @@ Contoso Healthcare has completed an initial cloud assessment of their current in
 
 ### Customer objections
 
-1. Contoso has made a substantial capital investment in their current data centers that they do not want to decommission. How can the infrastructure be architected to support the current data centers?
+1. The CTO at Contoso does not want to invest in new workstations and mobile devices to support the standardized desktop image. This includes non-OS, Macs, Android, and thin clients.  Can these devices support the new image?
 
-2. The CTO at Contoso does not want to invest in new workstations and mobile devices to support the standardized desktop image. Can these devices support the new image?
+2. The CISO at Contoso needs to be convinced that data will not be exposed. How would Microsoft handle data protection?
 
-3. The CISO at Contoso needs to be convinced that data will not be exposed. How would Microsoft handle data protection?
+3. Contoso must be able to log and audit all activity on the desktop image.  How will this be handled within the cloud and on-premises environments?
 
-4. Contoso must be able to log and audit all activity on the desktop image.  How will this be handled within the cloud and on-premises environments?
+4. Connections between the cloud and existing data centers must be secure and reliable to support their requirements.  How will this be addressed and monitored?
 
-5. Connections between the cloud and existing data centers must be secure and reliable to support their requirements.  How will this be addressed and monitored?
+5. Contoso has made a substantial capital investment in their current data centers that they do not want to decommission. How can the infrastructure be architected to utilize the current Citrix virtual desktop infrastructure and control plane?
 
 ### Infographic for common scenarios
 
