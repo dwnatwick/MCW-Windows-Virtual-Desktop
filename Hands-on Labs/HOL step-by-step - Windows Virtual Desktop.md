@@ -30,11 +30,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 - [Windows Virtual Desktop Hands-on Lab](#windows-virtual-desktop-whiteboard-design-session-student-guide)
   - [Abstract](#abstract)
   - [Overview](#overview)
-    
-- [Exercise 1: Configuring Azure AD Connect with AD DS](#exercise-1-configurating-azure-ad-connect-with-ad-ds)
-  - [Step 3: Present the solution](#step-3-present-the-solution)
-  - [Wrap-up](#wrap-up)
-  - [Additional references](#additional-references)
+  
+- [Exercise 1: Configuring Azure AD Connect with AD DS](#exercise-1-configuring-azure-ad-connect-with-ad-ds)
+
 
 <!-- /TOC -->
 
