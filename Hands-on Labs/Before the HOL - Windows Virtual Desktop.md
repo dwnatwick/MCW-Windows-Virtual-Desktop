@@ -106,7 +106,7 @@ uncommon for ARM templates hosted on GitHub to get stuck during
 deployment. To avoid confusion and deployment errors, **open an
 InPrivate browser window** when deploying ARM templates from GitHub.
 
-1.  Open a browser and navigate to the ARM template:
+1.  Open a browser using "InPrivate" or "Incognito" mode, and navigate to the ARM template:
     (<https://github.com/PeterR-msft/M365WVDWS/tree/master/AAD-Hybrid-Lab> ).
 
 Note: This ARM template was developed by Peter Riedelsdorf. Extra kudos
