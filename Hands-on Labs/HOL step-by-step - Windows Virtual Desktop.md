@@ -96,27 +96,14 @@ IT costs while empowering today's modern digital workspace.
 
 **Solution architecture**
 
-At the end of the lab, attendees will have deployed an Azure Active
-Directory Tenant, Azure infrastructure, Active Directory, Active
-Directory Domain Controller using an ARM template from GitHub, Windows
-Virtual Desktop Tenant(s), Host Pool(s) and session host(s).
-
+At the end of the lab, attendees will have deployed an Azure Active Directory Tenant, Azure infrastructure, Active Directory, Active
+Directory Domain Controller using an ARM template from GitHub, Windows Virtual Desktop Tenant(s), Host Pool(s) and session host(s).
 
 ## Exercise 1: Configuring Azure AD Connect with AD DS
 
-In this exercise you will be configuring [[Azure AD
-Connect]](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/whatis-azure-ad-connect) .
-With Windows Virtual Desktop, all session host VMs within the WVD tenant
-environment are required to be domain joined to AD DS, and the domain
-must be synchronized with Azure AD. To manage the synchronization of
-objects, you will configure Azure AD Connect on the domain controller
-deployed in Azure.
+In this exercise you will be configuring [[Azure AD Connect]](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/whatis-azure-ad-connect). With Windows Virtual Desktop, all session host VMs within the WVD tenant environment are required to be domain joined to AD DS, and the domain must be synchronized with Azure AD. To manage the synchronization of objects, you will configure Azure AD Connect on the domain controller deployed in Azure.
 
-*Note:* RDP access to a domain controller using a public IP address is
-not a best practice and is only done to simplify this lab. Better
-security practices such as removing the PIP, enabling just-in-time
-access and/or leveraging a bastion host should be applied enhance
-security.
+*Note:* RDP access to a domain controller using a public IP address is not a best practice and is only done to simplify this lab. Better security practices such as removing the PIP, enabling just-in-time access and/or leveraging a bastion host should be applied enhance security.
 
 
 ### Task 1: Connecting to the domain controller
