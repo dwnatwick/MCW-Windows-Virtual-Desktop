@@ -9,7 +9,7 @@ Hands-on lab step-by-step guide
 </div>
 
 <div class="MCWHeader3">
-June 2020
+August 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -25,10 +25,21 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 **Contents**
 
-TODO 
+<!-- TOC -->
+
+- [Windows Virtual Desktop Hands-on Lab](#windows-virtual-desktop-whiteboard-design-session-student-guide)
+  - [Abstract](#abstract)
+  - [Overview](#overview)
+    
+- [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution)
+  - [Step 3: Present the solution](#step-3-present-the-solution)
+  - [Wrap-up](#wrap-up)
+  - [Additional references](#additional-references)
+
+<!-- /TOC -->
 
 
-**Abstract**
+## Abstract
 
 Understand the Windows Virtual Desktop Infrastructure and how-to setup a
 working WVD environment end-to-end in a typical Enterprise model.
@@ -47,7 +58,7 @@ working WVD environment end-to-end in a typical Enterprise model.
 
 -   Understand Master Images
 
-**Overview**
+## Overview
 
 In this lab, attendees will deploy the [Windows Virtual Desktop
 (WVD)](https://azure.microsoft.com/en-us/services/virtual-desktop/)  *solution* .
@@ -83,7 +94,7 @@ Directory Domain Controller using an ARM template from GitHub, Windows
 Virtual Desktop Tenant(s), Host Pool(s) and session host(s).
 
 
-## Exercise 1: Configuring Azure AD Connect with AD DS**
+## Exercise 1: Configuring Azure AD Connect with AD DS
 
 In this exercise you will be configuring [[Azure AD
 Connect]](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/whatis-azure-ad-connect) .
@@ -100,7 +111,7 @@ access and/or leveraging a bastion host should be applied enhance
 security.
 
 
-### Task 1: Connecting to the domain controller**
+### Task 1: Connecting to the domain controller
 
 1.  Sign in to the [[Azure Portal]](https://portal.azure.com/) .
 
@@ -139,7 +150,7 @@ not the Azure AD Global Admin account. If you have trouble signing in,
 try typing the credentials in manually, as copy and paste may include an
 unnecessary space, which will cause authentication to fail.
 
-### Task 2: Disabling IE Enhanced Security**
+### Task 2: Disabling IE Enhanced Security
 
 In an effort to simplify tasks in this lab, we will start by
 disabling [[IE Enhanced
@@ -158,7 +169,7 @@ Security]](https://docs.microsoft.com/en-us/windows-hardware/customize/desktop/u
     under **Administrators**, select the **Off** radio button and
     click **OK**.
 
-### Task 3: Creating a Domain Admin account**
+### Task 3: Creating a Domain Admin account
 
 By default, Azure AD Connect does not synchronize the built-in domain
 administrator
@@ -203,7 +214,7 @@ Control.]](https://danielengberg.com/domain-join-permissions-delegate-active-dir
 
 -   Delete computer object
 
-### Task 4: Configuring Azure AD Connect**
+### Task 4: Configuring Azure AD Connect
 
 1.  On the desktop of the domain controller, locate the icon for **Azure
     AD Connect** and double-click on it.
@@ -276,7 +287,7 @@ their blog posts:
     beyond!]](https://www.christiaanbrinkhoff.com/2020/05/01/windows-virtual-desktop-technical-2020-spring-update-arm-based-model-deployment-walkthrough/#NewAzurePortal-Dashboard)  -
     Christiaan Brinkhoff
 
-## Exercise 1: Create Azure AD Groups for WVD**
+## Exercise 2: Create Azure AD Groups for WVD
 
 In this exercise you will be working with groups in Azure Active
 Directory (Azure AD) to assist in managing access assignment to your
@@ -299,7 +310,7 @@ that already have processes defined on-prem for group management.
 
 **Contents**
 
--   [Exercise 1: Create Azure AD Groups for
+-   [Exercise 2: Create Azure AD Groups for
     WVD](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3647/Exercise-1-Create-Azure-AD-Groups-for-WVD#exercise-1%3A-create-azure-ad-groups-for-wvd)
 
     -   [Additional
@@ -392,7 +403,487 @@ a note of the group names and accounts you added for use later in this
 guide. These groups will be used to assign access to WVD application
 groups.
 
-## Exercise 2: Create a Master Image for WVD
+## Exercise 3: Create an Azure Files Share for FSLogix
+
+There are multiple solutions available for storing FSLogix profiles
+containers.
+
+-   Windows File Server - [Create a profile container for a host pool
+    using a file
+    share](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-host-pools-user-profile) 
+
+-   NetApp Files - [Create an FSLogix profile container for a host pool
+    using Azure NetApp
+    Files](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-fslogix-profile-container) 
+
+-   Azure Files - [Create an FSLogix profile container with Azure
+    Files](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-profile-container-adds) 
+
+In this exercise you will be creating an Azure Files share and enabling
+SMB access via Active Directory authentication. Azure Files is a
+platform service (PaaS) and is one of the recommended solutions for
+hosting FSLogix containers for WVD users. At the end of this exercise
+you will have the following components:
+
+-   A new storage account in your Azure subscription.
+
+-   A new Azure file share for your FSLogix profile containers.
+
+-   AD authentication enabled for your Azure storage account.
+
+-   Permissions applied for user access to the file share.
+
+**Contents**
+
+-   [Exercise 3: Create an Azure Files Share for
+    FSLogix](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3635/Exercise-3-Create-an-Azure-Files-Share-for-FSLogix#exercise-3%3A-create-an-azure-files-share-for-fslogix)
+
+    -   [Task 1: Create a Storage
+        Account](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3635/Exercise-3-Create-an-Azure-Files-Share-for-FSLogix#task-1%3A-create-a-storage-account)
+
+    -   [Task 2: Create an Azure file
+        share](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3635/Exercise-3-Create-an-Azure-Files-Share-for-FSLogix#task-2%3A-create-an-azure-file-share)
+
+    -   [Task 3: Enable AD Authentication for your Storage
+        Account](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3635/Exercise-3-Create-an-Azure-Files-Share-for-FSLogix#task-3%3A-enable-ad-authentication-for-your-storage-account)
+
+    -   [Task 4: Configure Share
+        Permissions](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3635/Exercise-3-Create-an-Azure-Files-Share-for-FSLogix#task-4%3A-configure-share-permissions)
+
+    -   [Task 5: Configure NTFS Permissions for the File
+        Share](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3635/Exercise-3-Create-an-Azure-Files-Share-for-FSLogix#task-5%3A-configure-ntfs-permissions-for-the-file-share)
+
+    -   [Task 6: Configure NTFS Permissions for the
+        Containers](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3635/Exercise-3-Create-an-Azure-Files-Share-for-FSLogix#task-6%3A-configure-ntfs-permissions-for-the-containers)
+
+### Task 1: Create a Storage Account
+
+Before you can work with an Azure file share, you need to create an
+Azure storage account. To create a general-purpose v2 storage account in
+the Azure portal, follow these steps:
+
+1.  Sign in to the [Azure Portal](https://portal.azure.com/) .
+
+2.  At the top of the page, in the **Search resources** field,
+    type **storage accounts**. Select **Storage accounts** from the
+    list.
+
+3.  On the Storage Accounts window that appears, click **+ Add**.
+
+4.  Fill in the required parameters for the storage account. Refer to
+    the following example for more information on the available
+    parameters. Make a note that contains the values you provide
+    for **Resource group** and **Storage account name**. These will be
+    needed later in the exercise.
+
+    ![](images/storacc.png)
+
+5.  Select **Review + Create** to review your storage account settings
+    and create the account.
+
+6.  Click **Create**.
+
+### Task 2: Create an Azure file share
+
+1.  At the top of the Azure Portal page, in the **Search
+    resources** field, type **storage accounts**. Select **Storage
+    accounts** from the list.
+
+2.  On the Storage accounts blade, click on the storage account you
+    created in Task 1.
+
+3.  On the Overview page for your Storage account, select **File
+    shares**.
+
+4.  On the File shares blade, click **+ File Share**.
+
+5.  Enter a Name the new file share and click **Create**.
+
+**Note:** The file share quota supports a maximum of 5,120 GiB and can
+be managed on the File shares blade.
+
+### Task 3: Enable AD Authentication for your Storage Account
+
+**Prerequisites**
+
+1.  The steps in this task need to be completed from a domain joined
+    computer. The AzFilesHybrid module use the AD PowerShell module, so
+    running from a server is preferred.
+
+2.  PowerShell version 5.0+ installed.
+
+3.  The account used in this task needs to meet the following
+    requirements:
+
+    -    Synchronized with Azure AD.
+
+    -    Permissions to create user or computer objects in Active
+        Directory.
+
+    -    Owner or Contributor rights on the Storage account.
+
+In this task we will be completing the steps on the Domain Controller in
+Azure using an account that has been assigned Global Administrator and
+Domain Administrator. In a production environment, you can scale this
+back as long as you meet the minimum requirements above.
+
+**Setup**
+
+1.  From a domain joined computer, download and unzip the [AzFilesHybrid
+    module](https://github.com/Azure-Samples/azure-files-samples/releases) .
+
+2.  Open an elevated PowerShell ISE window.
+
+3.  Configure the PowerShell execution policy **Unrestricted** for the
+    current user.
+
+    ```pwsh
+     Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
+    ```
+
+4.  Navigate to where you unzipped the AzFilesHybrid. For example:
+
+    ```pwsh
+    cd C:\\AzFilesHybrid
+    ```
+
+6.  Install the AzFilesHybrid module.
+
+    ```pwsh
+    .\\CopyToPSPath.ps1
+    ```
+
+8.  Import the AzFilesHybrid module
+
+    ```pwsh  
+    Import-Module -Name AzFilesHybrid
+    ```
+
+10. Sign in with an account that meets the prerequisites.
+
+    ```pwsh
+    Connect-AzAccount
+    ```
+
+12. Create the following PowerShell variables.
+
+    ```pwsh
+    $SubscriptionId = "\<subscription-id\>\"
+    $ResourceGroupName = "\<resource-group-name\>\"
+    $StorageAccountName = "\<storage-account-name\>\"
+    ```
+
+**Note:** The Resource Group Name and Storage Account Name were assigned
+in Task 1.
+
+**Note:** You can run **Get-AzSubscription** to lookup the available
+subscription names.
+
+1.  Select the target subscription for the current session.
+
+   ```pwsh
+   Select-AzSubscription -SubscriptionId $SubscriptionId
+   ```
+
+2.  Register the storage account with your Active Directory domain.
+
+   ```pwsh
+   Join-AzStorageAccountForAuth
+  -ResourceGroupName $ResourceGroupName
+  -Name $StorageAccountName
+  -DomainAccountType "ServiceLogonAccount" 
+  -OrganizationalUnitDistinguishedName "\<ou-name\>"
+  ```
+
+**Tip:** You have the option to not provide an OU, in which case the
+object will be created in the root of the domain and can be moved
+manually. You also have the option to
+use **-OrganizationalUnitName** instead of the DN. If you choose to
+provide just the name, the object will be created in the first OU that
+matches that name.
+
+**Tip:** You have the option to set -DomainAccountType
+to **ComputerAccount** (computer object)
+or **ServiceLogonAccount** (user object). Both objects will work but
+watch for password change policies. In this example we are using
+ServiceLogonAccount because the user object is setup automatically
+with **Password never expires**.
+
+25. Confirm the object was created successfully in **Active Directory
+    Users and Computers**.
+
+26. Confirm that the feature is enabled.
+
+    ```pwsh
+    $storageaccount = Get-AzStorageAccount -ResourceGroupName $ResourceGroupName -Name $StorageAccountName
+    ```
+
+27.  List the directory service of the selected service account
+ 
+```pwsh
+$storageAccount.AzureFilesIdentityBasedAuth.DirectoryServiceOptions
+```
+
+28. List the directory domain information if the storage account has
+    enabled AD authentication for file shares
+
+```pwsh
+$storageAccount.AzureFilesIdentityBasedAuth.ActiveDirectoryProperties
+```
+
+30. You can also confirm activation with your domain by navigating to
+    the Azure portal, going to the storage account and
+    selecting **Configuration** under **Settings**. Refer to the group
+    on Active Directory (AD), as shown in the example below.
+
+You have now successfully enabled AD authentication over SMB and
+assigned a custom role that provides access to an Azure file share with
+an AD identity.
+
+### Task 4: Configure Share Permissions
+
+There are three Azure built-in roles for granting share-level
+permissions to users and/or groups:
+
+-   **Storage File Data SMB Share Reader:** allows read access in Azure
+    Storage file shares over SMB.
+
+-   **Storage File Data SMB Share Contributor:** allows read, write, and
+    delete access in Azure Storage file shares over SMB.
+
+-   **Storage File Data SMB Share Elevated Contributor:** allows read,
+    write, delete and modify NTFS permissions in Azure Storage file
+    shares over SMB.
+
+To access Azure Files resources with identity-based authentication, an
+identity (a user, group, or service principal) must have the necessary
+permissions at the share level. This process is similar to specifying
+Windows share permissions, where you specify the type of access that a
+particular user has to a file share. The guidance in this task
+demonstrates how to assign read, write, or delete permissions for a file
+share to an identity.
+
+To simplify administration, create 4 new security groups in Active
+Directory to manage share permissions.
+
+1.  From a domain joined computer, open **Active Directory Users and
+    Computers**.
+
+2.  Create the following Active Directory security groups in an OU that
+    is synchronized with Azure AD:
+
+    -   **AZF FSLogix Contributor**
+
+    -   **AZF FSLogix Elevated Contributor**
+
+    -   **AZF FSLogix Reader**
+
+    -   **WVD Users**
+
+3.  Add an administrative account to the group **AZF FSLogix Elevated
+    Contributor**. This account will have permissions to modify file
+    share permissions.
+
+4.  Add the group **WVD Users** to the group **AZF FSLogix
+    Contributor**.
+
+5.  Add user accounts to the group **WVD Users**. These users will have
+    access to use FSLogix profiles.
+
+6.  Wait for the new groups to synchronize with Azure AD.
+
+With the new security groups available in Azure AD, use the following
+steps to assign them to your storage account in the Azure portal. This
+will enable to manage share permissions using AD security groups.
+
+1.  In the Azure portal, in the **Search resources** field,
+    type **storage accounts** and select **Storage accounts** from the
+    list.
+
+2.  On the Storage accounts blade, click on the Storage account you
+    created in Task 1.
+
+3.  On the blade for your storage account, locate and click on **File
+    shares** .
+
+4.  On the File shares blade, click on your file share.
+
+5.  Click **Access Control (IAM)**.
+
+6.  Click **+ Add** and select **Add role assignment**.
+
+7.  On the Add role assignment fly out, fill in the following options
+    and click **Save**.
+
+    -    **Role:** Storage File Data SMB Share Contributor
+
+    -    **Assign access to:** Azure AD user, group, or service
+        principal
+
+    -    **Select:** AZF FSLogix Contributor
+
+8.  Repeat steps 3-4 for the remaining 2 roles.
+
+    -    Storage File Data SMB Share Elevated Contributor \> AZF FSLogix
+        Elevated Contributor
+
+    -    Storage File Data SMB Share Reader \> AZF FSLogix Reader
+
+### Task 5: Configure NTFS Permissions for the File Share
+
+After you assign share-level permissions with Azure RBAC, you must
+assign proper NTFS permissions at the root, directory, or file level.
+Think of share-level permissions as the high-level gatekeeper that
+determines whether a user can access the share. Whereas NTFS permissions
+act at a more granular level to determine what operations the user can
+do at the directory or file level.
+
+Azure Files supports the full set of NTFS basic and advanced
+permissions. You can view and configure NTFS permissions on directories
+and files in an Azure file share by mounting the share and then using
+Windows File Explorer or running the Windows icacls or Set-ACL command.
+
+The first time you configure NTFS permission, do so using superuser
+permissions. This is accomplished by mounting the file share using your
+storage account key.
+
+1.  In the Azure portal, in the **Search resources** field,
+    type **storage accounts** and select **Storage accounts** from the
+    list.
+
+2.  On the Storage accounts blade, click on the Storage account you
+    created in Task 1.
+
+3.  On the blade for your storage account, under **Settings**,
+    select **Properties**. Locate the **Primary File Service
+    Endpoint** address. This is the path you will use to access your
+    file share. Reformat the path to UNC and copy it to a notepad file.
+    For example:
+
+4.  https://mydomainazfiles.file.core.windows.net/ ==
+    \\\\mydomainazfiles.file.core.windows.net\\\<file-share-name\>
+
+5.  On the blade for your storage account, under **Settings**,
+    select **Access keys**. Copy the value for **key1** to the same
+    notepad file.
+
+6.  From a domain joined computer, open a standard command prompt and
+    mount your file share using the storage account key. **Do not** use
+    an elevated command prompt or the mount point will not be visible in
+    File Explorer. Refer to the following examples to prepare your
+    command:
+
+7.  net use z:
+    \\\\\<storage-account-name\>.file.core.windows.net\\\<share-name\>
+    /user:Azure\\\<storage-account-name\> \<storage-account-key\>
+
+Example with sample values:
+
+net use z: \\\\mydomainazfiles.file.core.windows.net\\fslogix
+/user:Azure\\mydomainazfiles
+uPCvi+gP2qbCQcn3EATgbALE0H8nxhspyLRO2Nf9Hm2gMxfn/389/M33XHh7YEqNJ2GhbJXgStiifPwMBXk38Q==
+
+**Tip:** This is an SMB connection on port 445. Most consumer ISPs block
+this port by default. If you are doing this in your lab and experience
+issues mounting the share from a local computer, try connecting from a
+domain joined VM in Azure.
+
+8.  Open **File Explorer**, right-click on the **X:** drive and
+    select **Properties**.
+
+9.  On the properties window, select the **Security** tab and
+    click **Advanced**.
+
+10. Click **Add** and add each of the AD security groups you created in
+    Task 4 with the appropriate permissions.
+
+11. Click **OK** to save your changes.
+
+12. Disconnect the mount point.
+
+13. net use /delete z:
+
+### Task 6: Configure NTFS Permissions for the Containers
+
+With the NTFS permissions applied at the root file share, you can now
+create the FSLogix folder structure and recommended NTFS permissions.
+There are many ways to create secure and functional storage permissions
+for use with Profile Containers and Office Container. Below is one
+configuration option that provides new-user functionality and doesn\'t
+require users to have administrative permissions.
+
+In this task we will create directories for each of the FSLogix profile
+types and assign the recommended permissions.
+
+1.  From a domain joined computer, browse to your Azure file share using
+    the account you added previously to the **AZF FSLogix Elevated
+    Contributor** security group.
+
+2.  \\\\mydomainazfiles.file.core.windows.net\\\<file-share-name\>
+
+3.  Create 3 new directories in the root share.
+
+    -    **Profiles**
+
+    -    **ODFC**
+
+    -    **MSIX**
+
+4.  Right-click on the **Profiles** directory and select **Properties**.
+
+5.  On the properties window, select the **Security** tab and
+    click **Advanced**.
+
+6.  Click **Disable inheritance** and select **Remove all inherited
+    permissions from this object**.
+
+7.  Click **Add** and add **AZF FSLogix Elevated Contributor**.
+    Grant **Full Control** to **This folder, subfolders and files**.
+    Click **OK**.
+
+8.  Click **Add** and add **CREATOR OWNER**. Grant **Full
+    Control** to **Subfolders and files only**. Click **OK**.
+
+9.  Click **Add** and add **WVD Users**. Grant the following special
+    permissions to **This folder only**. Click **OK**.
+
+    -   Traverse folder / execute file
+
+    -   List folder / read data
+
+    -   Read attributes
+
+    -   Create folders / append data
+
+10. Confirm your permissions match the screenshots below.
+
+11. Click **OK** on both property windows to apply your changes.
+
+12. Repeat steps 3-9 for the **ODFC** directory.
+
+13. Right-click on the **MSIX** directory and select **Properties**.
+
+14. On the properties window, select the **Security** tab and
+    click **Advanced**.
+
+15. Click **Disable inheritance** and select **Remove all inherited
+    permissions from this object**.
+
+16. Click **Add** and add **AZF FSLogix Elevated Contributor**.
+    Grant **Full Control** to **This folder, subfolders and files**.
+    Click **OK**.
+
+17. Click **Add** and add **WVD Users**. Grant **Read &
+    execute** to **This folder, subfolders and files**. Click **OK**.
+
+18. Confirm your permissions match the screenshots below.
+
+19. Click **OK** on both property windows to apply your changes.
+
+Your Azure Files Share is now ready for FSLogix profile containers. Copy
+the UNC path and add it to your FSLogix deployment (image, GPO, etc..).
+
+## Exercise 4: Create a Master Image for WVD
 
 In this exercise we are going to walk through the process of creating a
 master image for your WVD host pools. The basic concept for a master
@@ -734,487 +1225,9 @@ The system will automatically shutdown and disconnect your RDP session.
     select the option for **Managed Image** and fill in the required
     fields.
 
-## Exercise 3: Create an Azure Files Share for FSLogix**
 
-There are multiple solutions available for storing FSLogix profiles
-containers.
 
--   Windows File Server - [Create a profile container for a host pool
-    using a file
-    share](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-host-pools-user-profile) 
-
--   NetApp Files - [Create an FSLogix profile container for a host pool
-    using Azure NetApp
-    Files](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-fslogix-profile-container) 
-
--   Azure Files - [Create an FSLogix profile container with Azure
-    Files](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-profile-container-adds) 
-
-In this exercise you will be creating an Azure Files share and enabling
-SMB access via Active Directory authentication. Azure Files is a
-platform service (PaaS) and is one of the recommended solutions for
-hosting FSLogix containers for WVD users. At the end of this exercise
-you will have the following components:
-
--   A new storage account in your Azure subscription.
-
--   A new Azure file share for your FSLogix profile containers.
-
--   AD authentication enabled for your Azure storage account.
-
--   Permissions applied for user access to the file share.
-
-**Contents**
-
--   [Exercise 3: Create an Azure Files Share for
-    FSLogix](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3635/Exercise-3-Create-an-Azure-Files-Share-for-FSLogix#exercise-3%3A-create-an-azure-files-share-for-fslogix)
-
-    -   [Task 1: Create a Storage
-        Account](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3635/Exercise-3-Create-an-Azure-Files-Share-for-FSLogix#task-1%3A-create-a-storage-account)
-
-    -   [Task 2: Create an Azure file
-        share](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3635/Exercise-3-Create-an-Azure-Files-Share-for-FSLogix#task-2%3A-create-an-azure-file-share)
-
-    -   [Task 3: Enable AD Authentication for your Storage
-        Account](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3635/Exercise-3-Create-an-Azure-Files-Share-for-FSLogix#task-3%3A-enable-ad-authentication-for-your-storage-account)
-
-    -   [Task 4: Configure Share
-        Permissions](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3635/Exercise-3-Create-an-Azure-Files-Share-for-FSLogix#task-4%3A-configure-share-permissions)
-
-    -   [Task 5: Configure NTFS Permissions for the File
-        Share](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3635/Exercise-3-Create-an-Azure-Files-Share-for-FSLogix#task-5%3A-configure-ntfs-permissions-for-the-file-share)
-
-    -   [Task 6: Configure NTFS Permissions for the
-        Containers](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3635/Exercise-3-Create-an-Azure-Files-Share-for-FSLogix#task-6%3A-configure-ntfs-permissions-for-the-containers)
-
-### Task 1: Create a Storage Account**
-
-Before you can work with an Azure file share, you need to create an
-Azure storage account. To create a general-purpose v2 storage account in
-the Azure portal, follow these steps:
-
-1.  Sign in to the [Azure Portal](https://portal.azure.com/) .
-
-2.  At the top of the page, in the **Search resources** field,
-    type **storage accounts**. Select **Storage accounts** from the
-    list.
-
-3.  On the Storage Accounts window that appears, click **+ Add**.
-
-4.  Fill in the required parameters for the storage account. Refer to
-    the following example for more information on the available
-    parameters. Make a note that contains the values you provide
-    for **Resource group** and **Storage account name**. These will be
-    needed later in the exercise.
-
-    ![](images/storacc.png)
-
-5.  Select **Review + Create** to review your storage account settings
-    and create the account.
-
-6.  Click **Create**.
-
-### Task 2: Create an Azure file share**
-
-1.  At the top of the Azure Portal page, in the **Search
-    resources** field, type **storage accounts**. Select **Storage
-    accounts** from the list.
-
-2.  On the Storage accounts blade, click on the storage account you
-    created in Task 1.
-
-3.  On the Overview page for your Storage account, select **File
-    shares**.
-
-4.  On the File shares blade, click **+ File Share**.
-
-5.  Enter a Name the new file share and click **Create**.
-
-**Note:** The file share quota supports a maximum of 5,120 GiB and can
-be managed on the File shares blade.
-
-### Task 3: Enable AD Authentication for your Storage Account**
-
-**Prerequisites**
-
-1.  The steps in this task need to be completed from a domain joined
-    computer. The AzFilesHybrid module use the AD PowerShell module, so
-    running from a server is preferred.
-
-2.  PowerShell version 5.0+ installed.
-
-3.  The account used in this task needs to meet the following
-    requirements:
-
-    -    Synchronized with Azure AD.
-
-    -    Permissions to create user or computer objects in Active
-        Directory.
-
-    -    Owner or Contributor rights on the Storage account.
-
-In this task we will be completing the steps on the Domain Controller in
-Azure using an account that has been assigned Global Administrator and
-Domain Administrator. In a production environment, you can scale this
-back as long as you meet the minimum requirements above.
-
-**Setup**
-
-1.  From a domain joined computer, download and unzip the [AzFilesHybrid
-    module](https://github.com/Azure-Samples/azure-files-samples/releases) .
-
-2.  Open an elevated PowerShell ISE window.
-
-3.  Configure the PowerShell execution policy **Unrestricted** for the
-    current user.
-
-    ```pwsh
-     Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
-    ```
-
-4.  Navigate to where you unzipped the AzFilesHybrid. For example:
-
-    ```pwsh
-    cd C:\\AzFilesHybrid
-    ```
-
-6.  Install the AzFilesHybrid module.
-
-    ```pwsh
-    .\\CopyToPSPath.ps1
-    ```
-
-8.  Import the AzFilesHybrid module
-
-    ```pwsh  
-    Import-Module -Name AzFilesHybrid
-    ```
-
-10. Sign in with an account that meets the prerequisites.
-
-    ```pwsh
-    Connect-AzAccount
-    ```
-
-12. Create the following PowerShell variables.
-
-    ```pwsh
-    $SubscriptionId = "\<subscription-id\>\"
-    $ResourceGroupName = "\<resource-group-name\>\"
-    $StorageAccountName = "\<storage-account-name\>\"
-    ```
-
-**Note:** The Resource Group Name and Storage Account Name were assigned
-in Task 1.
-
-**Note:** You can run **Get-AzSubscription** to lookup the available
-subscription names.
-
-1.  Select the target subscription for the current session.
-
-   ```pwsh
-   Select-AzSubscription -SubscriptionId $SubscriptionId
-   ```
-
-2.  Register the storage account with your Active Directory domain.
-
-   ```pwsh
-   Join-AzStorageAccountForAuth
-  -ResourceGroupName $ResourceGroupName
-  -Name $StorageAccountName
-  -DomainAccountType "ServiceLogonAccount" 
-  -OrganizationalUnitDistinguishedName "\<ou-name\>"
-  ```
-
-**Tip:** You have the option to not provide an OU, in which case the
-object will be created in the root of the domain and can be moved
-manually. You also have the option to
-use **-OrganizationalUnitName** instead of the DN. If you choose to
-provide just the name, the object will be created in the first OU that
-matches that name.
-
-**Tip:** You have the option to set -DomainAccountType
-to **ComputerAccount** (computer object)
-or **ServiceLogonAccount** (user object). Both objects will work but
-watch for password change policies. In this example we are using
-ServiceLogonAccount because the user object is setup automatically
-with **Password never expires**.
-
-25. Confirm the object was created successfully in **Active Directory
-    Users and Computers**.
-
-26. Confirm that the feature is enabled.
-
-    ```pwsh
-    $storageaccount = Get-AzStorageAccount -ResourceGroupName $ResourceGroupName -Name $StorageAccountName
-    ```
-
-27.  List the directory service of the selected service account
- 
-```pwsh
-$storageAccount.AzureFilesIdentityBasedAuth.DirectoryServiceOptions
-```
-
-28. List the directory domain information if the storage account has
-    enabled AD authentication for file shares
-
-```pwsh
-$storageAccount.AzureFilesIdentityBasedAuth.ActiveDirectoryProperties
-```
-
-30. You can also confirm activation with your domain by navigating to
-    the Azure portal, going to the storage account and
-    selecting **Configuration** under **Settings**. Refer to the group
-    on Active Directory (AD), as shown in the example below.
-
-You have now successfully enabled AD authentication over SMB and
-assigned a custom role that provides access to an Azure file share with
-an AD identity.
-
-### Task 4: Configure Share Permissions**
-
-There are three Azure built-in roles for granting share-level
-permissions to users and/or groups:
-
--   **Storage File Data SMB Share Reader:** allows read access in Azure
-    Storage file shares over SMB.
-
--   **Storage File Data SMB Share Contributor:** allows read, write, and
-    delete access in Azure Storage file shares over SMB.
-
--   **Storage File Data SMB Share Elevated Contributor:** allows read,
-    write, delete and modify NTFS permissions in Azure Storage file
-    shares over SMB.
-
-To access Azure Files resources with identity-based authentication, an
-identity (a user, group, or service principal) must have the necessary
-permissions at the share level. This process is similar to specifying
-Windows share permissions, where you specify the type of access that a
-particular user has to a file share. The guidance in this task
-demonstrates how to assign read, write, or delete permissions for a file
-share to an identity.
-
-To simplify administration, create 4 new security groups in Active
-Directory to manage share permissions.
-
-1.  From a domain joined computer, open **Active Directory Users and
-    Computers**.
-
-2.  Create the following Active Directory security groups in an OU that
-    is synchronized with Azure AD:
-
-    -   **AZF FSLogix Contributor**
-
-    -   **AZF FSLogix Elevated Contributor**
-
-    -   **AZF FSLogix Reader**
-
-    -   **WVD Users**
-
-3.  Add an administrative account to the group **AZF FSLogix Elevated
-    Contributor**. This account will have permissions to modify file
-    share permissions.
-
-4.  Add the group **WVD Users** to the group **AZF FSLogix
-    Contributor**.
-
-5.  Add user accounts to the group **WVD Users**. These users will have
-    access to use FSLogix profiles.
-
-6.  Wait for the new groups to synchronize with Azure AD.
-
-With the new security groups available in Azure AD, use the following
-steps to assign them to your storage account in the Azure portal. This
-will enable to manage share permissions using AD security groups.
-
-1.  In the Azure portal, in the **Search resources** field,
-    type **storage accounts** and select **Storage accounts** from the
-    list.
-
-2.  On the Storage accounts blade, click on the Storage account you
-    created in Task 1.
-
-3.  On the blade for your storage account, locate and click on **File
-    shares** .
-
-4.  On the File shares blade, click on your file share.
-
-5.  Click **Access Control (IAM)**.
-
-6.  Click **+ Add** and select **Add role assignment**.
-
-7.  On the Add role assignment fly out, fill in the following options
-    and click **Save**.
-
-    -    **Role:** Storage File Data SMB Share Contributor
-
-    -    **Assign access to:** Azure AD user, group, or service
-        principal
-
-    -    **Select:** AZF FSLogix Contributor
-
-8.  Repeat steps 3-4 for the remaining 2 roles.
-
-    -    Storage File Data SMB Share Elevated Contributor \> AZF FSLogix
-        Elevated Contributor
-
-    -    Storage File Data SMB Share Reader \> AZF FSLogix Reader
-
-### Task 5: Configure NTFS Permissions for the File Share**
-
-After you assign share-level permissions with Azure RBAC, you must
-assign proper NTFS permissions at the root, directory, or file level.
-Think of share-level permissions as the high-level gatekeeper that
-determines whether a user can access the share. Whereas NTFS permissions
-act at a more granular level to determine what operations the user can
-do at the directory or file level.
-
-Azure Files supports the full set of NTFS basic and advanced
-permissions. You can view and configure NTFS permissions on directories
-and files in an Azure file share by mounting the share and then using
-Windows File Explorer or running the Windows icacls or Set-ACL command.
-
-The first time you configure NTFS permission, do so using superuser
-permissions. This is accomplished by mounting the file share using your
-storage account key.
-
-1.  In the Azure portal, in the **Search resources** field,
-    type **storage accounts** and select **Storage accounts** from the
-    list.
-
-2.  On the Storage accounts blade, click on the Storage account you
-    created in Task 1.
-
-3.  On the blade for your storage account, under **Settings**,
-    select **Properties**. Locate the **Primary File Service
-    Endpoint** address. This is the path you will use to access your
-    file share. Reformat the path to UNC and copy it to a notepad file.
-    For example:
-
-4.  https://mydomainazfiles.file.core.windows.net/ ==
-    \\\\mydomainazfiles.file.core.windows.net\\\<file-share-name\>
-
-5.  On the blade for your storage account, under **Settings**,
-    select **Access keys**. Copy the value for **key1** to the same
-    notepad file.
-
-6.  From a domain joined computer, open a standard command prompt and
-    mount your file share using the storage account key. **Do not** use
-    an elevated command prompt or the mount point will not be visible in
-    File Explorer. Refer to the following examples to prepare your
-    command:
-
-7.  net use z:
-    \\\\\<storage-account-name\>.file.core.windows.net\\\<share-name\>
-    /user:Azure\\\<storage-account-name\> \<storage-account-key\>
-
-Example with sample values:
-
-net use z: \\\\mydomainazfiles.file.core.windows.net\\fslogix
-/user:Azure\\mydomainazfiles
-uPCvi+gP2qbCQcn3EATgbALE0H8nxhspyLRO2Nf9Hm2gMxfn/389/M33XHh7YEqNJ2GhbJXgStiifPwMBXk38Q==
-
-**Tip:** This is an SMB connection on port 445. Most consumer ISPs block
-this port by default. If you are doing this in your lab and experience
-issues mounting the share from a local computer, try connecting from a
-domain joined VM in Azure.
-
-8.  Open **File Explorer**, right-click on the **X:** drive and
-    select **Properties**.
-
-9.  On the properties window, select the **Security** tab and
-    click **Advanced**.
-
-10. Click **Add** and add each of the AD security groups you created in
-    Task 4 with the appropriate permissions.
-
-11. Click **OK** to save your changes.
-
-12. Disconnect the mount point.
-
-13. net use /delete z:
-
-### Task 6: Configure NTFS Permissions for the Containers**
-
-With the NTFS permissions applied at the root file share, you can now
-create the FSLogix folder structure and recommended NTFS permissions.
-There are many ways to create secure and functional storage permissions
-for use with Profile Containers and Office Container. Below is one
-configuration option that provides new-user functionality and doesn\'t
-require users to have administrative permissions.
-
-In this task we will create directories for each of the FSLogix profile
-types and assign the recommended permissions.
-
-1.  From a domain joined computer, browse to your Azure file share using
-    the account you added previously to the **AZF FSLogix Elevated
-    Contributor** security group.
-
-2.  \\\\mydomainazfiles.file.core.windows.net\\\<file-share-name\>
-
-3.  Create 3 new directories in the root share.
-
-    -    **Profiles**
-
-    -    **ODFC**
-
-    -    **MSIX**
-
-4.  Right-click on the **Profiles** directory and select **Properties**.
-
-5.  On the properties window, select the **Security** tab and
-    click **Advanced**.
-
-6.  Click **Disable inheritance** and select **Remove all inherited
-    permissions from this object**.
-
-7.  Click **Add** and add **AZF FSLogix Elevated Contributor**.
-    Grant **Full Control** to **This folder, subfolders and files**.
-    Click **OK**.
-
-8.  Click **Add** and add **CREATOR OWNER**. Grant **Full
-    Control** to **Subfolders and files only**. Click **OK**.
-
-9.  Click **Add** and add **WVD Users**. Grant the following special
-    permissions to **This folder only**. Click **OK**.
-
-    -   Traverse folder / execute file
-
-    -   List folder / read data
-
-    -   Read attributes
-
-    -   Create folders / append data
-
-10. Confirm your permissions match the screenshots below.
-
-11. Click **OK** on both property windows to apply your changes.
-
-12. Repeat steps 3-9 for the **ODFC** directory.
-
-13. Right-click on the **MSIX** directory and select **Properties**.
-
-14. On the properties window, select the **Security** tab and
-    click **Advanced**.
-
-15. Click **Disable inheritance** and select **Remove all inherited
-    permissions from this object**.
-
-16. Click **Add** and add **AZF FSLogix Elevated Contributor**.
-    Grant **Full Control** to **This folder, subfolders and files**.
-    Click **OK**.
-
-17. Click **Add** and add **WVD Users**. Grant **Read &
-    execute** to **This folder, subfolders and files**. Click **OK**.
-
-18. Confirm your permissions match the screenshots below.
-
-19. Click **OK** on both property windows to apply your changes.
-
-Your Azure Files Share is now ready for FSLogix profile containers. Copy
-the UNC path and add it to your FSLogix deployment (image, GPO, etc..).
-
-## Exercise 4: Create a Host Pool for Pooled Desktops**
+## Exercise 5: Create a Host Pool for Pooled Desktops
 
 In this exercise we will be creating a Windows Virtual Desktop host pool
 for pooled desktops. This is a set of computers or hosts which operate
@@ -1227,7 +1240,7 @@ lower the total overhead, cost, and number ofremote workstations.
 
 **Contents**
 
--   [Exercise 4: Create a Host Pool for Pooled
+-   [Exercise 5: Create a Host Pool for Pooled
     Desktops](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3654/Exercise-4-Create-a-Host-Pool-for-Pooled-Desktops#exercise-4%3A-create-a-host-pool-for-pooled-desktops)
 
     -   [Additional
@@ -1247,7 +1260,7 @@ lower the total overhead, cost, and number ofremote workstations.
 -   [Tutorial: Create a host pool with the Azure
     portal](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-host-pools-azure-marketplace) 
 
-### Task 1: Create a new Host Pool and Workspace**
+### Task 1: Create a new Host Pool and Workspace
 
 1.  Sign in to the [Azure Portal](https://portal.azure.com/) .
 
@@ -1277,7 +1290,7 @@ lower the total overhead, cost, and number ofremote workstations.
 
 7.  On the Create a host pool page, click **Create**.
 
-### Task 2: Create a Friendly Name for the Workspace**
+### Task 2: Create a Friendly Name for the Workspace
 
 The name of the Workspace is displayed when the user signs in. Available
 resources are organized by Workspace. For a better user experience, we
@@ -1298,7 +1311,7 @@ will provide a friendly name for our new Workspace.
 
 ![workspace properties tab](images/workspaceFriendlyName.png)
 
-### Task 3: Assign an Azure AD Group to an Application Group**
+### Task 3: Assign an Azure AD Group to an Application Group
 
 In the new Windows Virtual Desktop ARM portal, we now have the ability
 to use Azure Active Directory groups to manage access to our host pools.
@@ -1324,7 +1337,7 @@ With the assignment added, you can move on to the next exercise. The
 users in the Azure AD group can be used to validate access to the new
 host pool in a later exercise.
 
-## Exercise 5: Create a Host Pool for Pooled RemoteApps**
+## Exercise 6: Create a Host Pool for Pooled RemoteApps
 
 In this exercise we will be creating a non-persistent host pool for
 publishing RemoteApps. This enables you to assign users access to
@@ -1334,7 +1347,7 @@ has existed in Windows Server Remote Desktop Services for many years.
 
 **Contents**
 
--   [Exercise 5: Create a Host Pool for Pooled
+-   [Exercise 6: Create a Host Pool for Pooled
     RemoteApps](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3655/Exercise-5-Create-a-Host-Pool-for-Pooled-RemoteApps#exercise-5%3A-create-a-host-pool-for-pooled-remoteapps)
 
     -   [Additional
@@ -1357,7 +1370,7 @@ has existed in Windows Server Remote Desktop Services for many years.
 -   [Tutorial: Manage app groups with the Azure
     portal](https://docs.microsoft.com/en-us/azure/virtual-desktop/manage-app-groups) 
 
-### Task 1: Create a new Host Pool and Workspace**
+### Task 1: Create a new Host Pool and Workspace
 
 1.  Sign in to the [Azure Portal](https://portal.azure.com/) .
 
@@ -1379,7 +1392,7 @@ has existed in Windows Server Remote Desktop Services for many years.
 
 7.  On the Create a host pool page, click **Create**.
 
-### Task 2: Create a Friendly Name for the Workspace**
+### Task 2: Create a Friendly Name for the Workspace
 
 The name of the Workspace is displayed when the user signs in. Available
 resources are organized by Workspace. For a better user experience, we
@@ -1448,7 +1461,7 @@ You have successfully created a Remote App non-persistent Host Pool with
 published apps. You can validate this configuration when we connect to
 the environment in a later exercise.
 
-## Exercise 6: Create a Host Pool for Personal Desktops**
+## Exercise 7: Create a Host Pool for Personal Desktops
 
 In the new WVD ARM portal, Workspaces are the equivalent to Tenants in
 the Fall 2019 portal. This means we can create multiple Workspaces for
@@ -1458,7 +1471,7 @@ segmentation of resources.
 
 **Contents**
 
--   [Exercise 6: Create a Host Pool for Personal
+-   [Exercise 7: Create a Host Pool for Personal
     Desktops](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3656/Exercise-6-Create-a-Host-Pool-for-Personal-Desktops#exercise-6%3A-create-a-host-pool-for-personal-desktops)
 
     -   [Task 1: Create a new Host Pool and
@@ -1470,7 +1483,7 @@ segmentation of resources.
     -   [Task 3: Assign Azure AD Group to Application
         Group](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3656/Exercise-6-Create-a-Host-Pool-for-Personal-Desktops#task-3%3A-assign-azure-ad-group-to-application-group)
 
-### Task 1: Create a new Host Pool and Workspace**
+### Task 1: Create a new Host Pool and Workspace
 
 1.  Sign in to the [Azure Portal](https://portal.azure.com/) .
 
@@ -1510,7 +1523,7 @@ will provide a friendly name for our new Workspace.
 
 6.  Click **Save**.
 
-### Task 3: Assign Azure AD Group to Application Group**
+### Task 3: Assign Azure AD Group to Application Group
 
 In the new Windows Virtual Desktop ARM portal, we now have the ability
 to use Azure Active Directory groups to manage access to our host pools.
@@ -1536,7 +1549,7 @@ With the assignment added, you can move on to the next exercise. The
 users in the Azure AD group can be used to validate access to the new
 host pool in a later exercise.
 
-# Exercise 7: Connect to WVD with the Web Client
+# Exercise 8: Connect to WVD with the Web Client
 
 In this exercise we are going to walk through connecting to your WVD
 environment using the HTML5 web client and validating your deployment.
@@ -1562,7 +1575,7 @@ Refer to the following Docs for more information about each client:
 
 **Contents**
 
--   [Exercise 7: Connect to WVD with the Web
+-   [Exercise 8: Connect to WVD with the Web
     Client](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3651/Exercise-7-Connect-to-WVD-with-the-Web-Client#exercise-7%3A-connect-to-wvd-with-the-web-client)
 
     -   [Task 1: Connecting with the HTML5 Web
@@ -1658,7 +1671,7 @@ instructions:
 
 5.  Open your browser in Private mode.
 
-# Exercise 8: Connect to WVD with the Windows Desktop Client
+# Exercise 9: Connect to WVD with the Windows Desktop Client
 
 In this exercise we are going to walk through connecting to your WVD
 environment using the Windows desktop client and validating your
@@ -1691,7 +1704,7 @@ Refer to the following Docs for more information about each client:
 
 **Contents**
 
--   [Exercise 8: Connect to WVD with the Windows Desktop
+-   [Exercise 9: Connect to WVD with the Windows Desktop
     Client](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3652/Exercise-8-Connect-to-WVD-with-the-Windows-Desktop-Client#exercise-8%3A-connect-to-wvd-with-the-windows-desktop-client)
 
     -   [Task 1: Connecting with the Windows Desktop
@@ -1802,7 +1815,7 @@ About page or using a command.
 
 6.  Open the Remote Desktop client and re-subscribe by signing in.
 
-## Exercise 9: Configure Session Hosts with Group Policy**
+## Exercise 10: Configure Session Hosts with Group Policy
 
 After working with the Windows 10 Marketplace builds, we found some
 areas that needed improvement. Our goal is to ensure that we are
@@ -1984,7 +1997,7 @@ contains the following registry preference items
   HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-sxs   MaxYResolution                 2880        
   HKLM\\ SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation                    RealTimeIsUniversal            1           
 
-# Exercise 10: Setup Monitoring for WVD
+## Exercise 11: Setup Monitoring for WVD
 
 In this exercise we will setup monitoring for our WVD host pools. There
 are multiple reasons why monitoring serves a critical role --
@@ -1999,11 +2012,11 @@ following monitoring capabilities enabled:
 
 -   Azure Monitor for the session host VMs
 
--   Sepago Monitoring Agent for the session host VMs
+-   Log Analytics Monitoring Agent for the session host VMs
 
 **Contents**
 
--   [Exercise 10: Setup Monitoring for
+-   [Exercise 11: Setup Monitoring for
     WVD](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3648/Exercise-10-Setup-Monitoring-for-WVD#exercise-10%3A-setup-monitoring-for-wvd)
 
     -   [Additional
@@ -2027,19 +2040,19 @@ following monitoring capabilities enabled:
     -   [Task 3: Enabling Azure Monitor for the Session
         Hosts](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3648/Exercise-10-Setup-Monitoring-for-WVD#task-3%3A-enabling-azure-monitor-for-the-session-hosts)
 
-    -   [Task 4: Enabling Sepago for the Session
+    -   [Task 4: Enabling Log Analytics for the Session
         Hosts](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3648/Exercise-10-Setup-Monitoring-for-WVD#task-4%3A-enabling-sepago-for-the-session-hosts)
 
         -   [Deploying
-            Sepago](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3648/Exercise-10-Setup-Monitoring-for-WVD#deploying-sepago)
+            Log Analytics](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3648/Exercise-10-Setup-Monitoring-for-WVD#deploying-sepago)
 
-        -   [(Optional): Import Sepago OMS
+        -   [(Optional): Import Log Analytics OMS
             Views](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3648/Exercise-10-Setup-Monitoring-for-WVD#(optional)%3A-import-sepago-oms-views)
 
-        -   [Prepare the Sepago Monitoring
+        -   [Prepare the Log Analytics Monitoring
             Agent](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3648/Exercise-10-Setup-Monitoring-for-WVD#prepare-the-sepago-monitoring-agent)
 
-        -   [Install the Sepago Monitoring
+        -   [Install the Log Analytics Monitoring
             Agent](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/3648/Exercise-10-Setup-Monitoring-for-WVD#install-the-sepago-monitoring-agent)
 
         -   [(Optional): Generate Artificial
@@ -2293,7 +2306,10 @@ session host VM. To enable Azure Monitor for additional session hosts,
 rinse and repeat the above steps. For automation, leverage Azure Policy
 or PowerShell to enable monitoring on multiple VMs.
 
-## <a name='Task4:EnablingSepagofortheSessionHosts'></a>Task 4: Enabling Sepago for the Session Hosts
+## <a name='Task4:EnablingLogAnalyticsfortheSessionHosts'></a>Task 4: Enabling Sepago for the Session Hosts
+
+This task currently references utilizing Sepago for the agent-based monitoring solution.  However, there is also the recommended option of utiziling the native Log Analytics agent.
+https://techcommunity.microsoft.com/t5/windows-it-pro-blog/proactively-monitor-arm-based-windows-virtual-desktop-with-azure/ba-p/1508735 
 
 Sepago is a Microsoft partner. They have developed an agent-based
 monitoring solution for WVD, RDS, and Citrix that focuses on user
@@ -2589,15 +2605,10 @@ queries**](https://docs.microsoft.com/en-us/azure/virtual-desktop/diagnostics-lo
 
 **Troubleshooting**
 
-Follow
-
-1
-
-Edit
-
-Adam Nichols
-
-Jan 23
+- Go to your Log Analytics workspace, and then select **Logs**. The example query UI is shown automatically.
+- Change the filter to **Category**.
+- Select **Windows Virtual Desktop** to review available queries.
+- Select **Run** to run the selected query.
 
 Often during the deployment of WVD there may be challenges with either
 having machines join the domain or installing the agent via automation.

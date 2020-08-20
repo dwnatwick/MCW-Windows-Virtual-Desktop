@@ -27,9 +27,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 
 
-**Requirements to setup a WVD tenant**
+**Requirements to setup a WVD workspace**
 
-Before you start setting up your Windows Virtual Desktop tenant, make
+Before you start setting up your Windows Virtual Desktop workspace, make
 sure you have the following items:
 
 -   The Azure Active Directory tenant ID for Windows Virtual Desktop
@@ -39,14 +39,14 @@ sure you have the following items:
     tenant.
 
     -   This also applies to Cloud Solution Provider (CSP) organizations
-        that are creating a Windows Virtual Desktop tenant for their
+        that are creating a Windows Virtual Desktop workspace for their
         customers. If you are in a CSP organization, you must be able to
         sign in as global administrator of the customer\'s Azure Active
         Directory tenant.
 
     -   The administrator account must be sourced from the Azure Active
         Directory tenant in which you are trying to create the Windows
-        Virtual Desktop tenant. This process does not support Azure
+        Virtual Desktop workspace. This process does not support Azure
         Active Directory B2B (guest) accounts.
 
     -   The administrator account must be a work or school account.
