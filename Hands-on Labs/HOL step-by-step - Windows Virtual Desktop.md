@@ -81,6 +81,8 @@ IT costs while empowering today's modern digital workspace.
 
 **Helpful Hints for this Lab**
 
+-   Verify that you have a valid Azure DevOps account to be able to access the following link: https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide/2949/Windows-Virtual-Desktop-on-Azure-Lab
+
 -   Take your time, there is a lot of information to digest and go
     through
 
