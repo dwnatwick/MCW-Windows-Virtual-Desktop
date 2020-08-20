@@ -2,7 +2,7 @@
 ![Microsoft Cloud Workshops](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
-Windows Virtual Desktop
+Implementing Windows Virtual Desktop in the enterprise
 </div>
 
 <div class="MCWHeader2">
@@ -10,7 +10,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-June 2020
+August 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -25,29 +25,30 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 **Contents**
 
+<!-- TOC -->
+
+- [Before the hands-on lab setup guide](#before-the-hands-on-lab-setup-guide)
+  - [Requirements to setup a WVD workspace](#requirements-to-setup-a-wvd-workspace)
+  - [Exercise 1: Deploying Azure Infrastructure and AD DS](#exercise-1-deploying-azure-infrastructure-and-ad-ds)
+    - [Task 1: Deploying the ARM template](#task-1-deploying-the-arm-template)
 
 
-**Requirements to setup a WVD workspace**
+<!-- /TOC -->
 
-Before you start setting up your Windows Virtual Desktop workspace, make
-sure you have the following items:
 
--   The Azure Active Directory tenant ID for Windows Virtual Desktop
-    users.
+# Before the hands-on lab setup guide
 
--   A global administrator account within the Azure Active Directory
-    tenant.
+## Requirements to setup a WVD workspace
 
-    -   This also applies to Cloud Solution Provider (CSP) organizations
-        that are creating a Windows Virtual Desktop workspace for their
-        customers. If you are in a CSP organization, you must be able to
-        sign in as global administrator of the customer\'s Azure Active
-        Directory tenant.
+Before you start setting up your Windows Virtual Desktop workspace, make sure you have the following items:
 
-    -   The administrator account must be sourced from the Azure Active
-        Directory tenant in which you are trying to create the Windows
-        Virtual Desktop workspace. This process does not support Azure
-        Active Directory B2B (guest) accounts.
+-   The Azure Active Directory tenant ID for Windows Virtual Desktop users.
+
+-   A global administrator account within the Azure Active Directory tenant.
+
+    -   This also applies to Cloud Solution Provider (CSP) organizations that are creating a Windows Virtual Desktop workspace for their customers. If you are in a CSP organization, you must be able to sign in as global administrator of the customer\'s Azure Active Directory tenant.
+
+    -   The administrator account must be sourced from the Azure Active Directory tenant in which you are trying to create the Windows Virtual Desktop workspace. This process does not support Azure Active Directory B2B (guest) accounts.
 
     -   The administrator account must be a work or school account.
 
@@ -55,8 +56,7 @@ sure you have the following items:
 
     -   Enough Quota Cores to build four 4-core servers.
 
-    -   Access to the Azure Active Directory Global Admin account for
-        your new or existing Azure Active Directory Tenant.
+    -   Access to the Azure Active Directory Global Admin account for your new or existing Azure Active Directory Tenant.
 
     -   Owner rights on all Azure subscription(s).
 
@@ -64,15 +64,9 @@ sure you have the following items:
 
 ## Exercise 1: Deploying Azure Infrastructure and AD DS
 
-In this exercise you will leverage a custom Azure Resource Manager (ARM)
-template to deploy the required Active Directory Domain Services
-infrastructure for WVD. If you already have an AD DS environment and AD
-Connect configured, you can move on to [Exercise 4: Configuring Azure AD
-Connect with AD
-DS](https://servicescode.visualstudio.com/WVD%20Bootcamp%20Labs/_wiki/wikis/WVD%20Deployment%20Guide?wikiVersion=GBmaster&pagePath=%2FWindows%20Virtual%20Desktop%20on%20Azure%20Lab%2FPrerequisites%2FExercise%204%3A%20Configuring%20Azure%20AD%20Connect%20with%20AD%20DS).
+In this exercise you will leverage a custom Azure Resource Manager (ARM) template to deploy the required Active Directory Domain Services infrastructure for WVD. If you already have an AD DS environment and AD Connect configured, you can move on to **HOL step-by-step, Exercise 4: Configuring Azure AD Connect with AD DS**.
 
-Link to the ARM template: [AAD hybrid lab ARM template from
-GitHub](https://github.com/PeterR-msft/M365WVDWS/tree/master/AAD-Hybrid-Lab) .
+Link to the ARM template: [AAD hybrid lab ARM template from GitHub](https://github.com/PeterR-msft/M365WVDWS/tree/master/AAD-Hybrid-Lab).
 
 This ARM Template will provision the following resources:
 
@@ -82,8 +76,7 @@ This ARM Template will provision the following resources:
 
     -   1 Network Security Group (NSG)
 
-        -   Permits AD traffic, permits RDP incoming traffic, restricts
-            DMZ access.
+        -   Permits AD traffic, permits RDP incoming traffic, restricts DMZ access.
 
     -   DNS configured to point to the domain controller.
 
@@ -100,43 +93,27 @@ This ARM Template will provision the following resources:
 
 ### Task 1: Deploying the ARM template
 
-*Tip:* Internally at MSFT we have different tenant directories
-available. Because of this, it is not\
-uncommon for ARM templates hosted on GitHub to get stuck during
-deployment. To avoid confusion and deployment errors, **open an
-InPrivate browser window** when deploying ARM templates from GitHub.
+>**Tip**: Internally at MSFT we have different tenant directories available. Because of this, it is not uncommon for ARM templates hosted on GitHub to get stuck during
+deployment. To avoid confusion and deployment errors, **open an InPrivate browser window** when deploying ARM templates from GitHub.
 
-1.  Open a browser using "InPrivate" or "Incognito" mode, and navigate to the ARM template:
-    (<https://github.com/PeterR-msft/M365WVDWS/tree/master/AAD-Hybrid-Lab> ).
+1.  Open a browser using "InPrivate" or "Incognito" mode, and navigate to the ARM template: [AAD hybrid lab ARM template from GitHub](https://github.com/PeterR-msft/M365WVDWS/tree/master/AAD-Hybrid-Lab).
 
-Note: This ARM template was developed by Peter Riedelsdorf. Extra kudos
-to him for simplifying the lab!
+2.  Review the notes on the GitHub page for the ARM template prior to deployment.
 
-2.  Review the notes on the GitHub page for the ARM template prior to
-    deployment.
-
-3.  Under Quick Start, click **Deploy to Azure**. This will open a new
-    browser tab to the Azure Portal for custom deployments.
+3.  Under Quick Start, click **Deploy to Azure**. This will open a new browser tab to the Azure Portal for custom deployments.
+    
     ![Deploy to Azure button within Github](images/1.png)
-4.  If prompted, make sure to sign in with an account that is an owner
-    for the Azure subscription.
 
-5.  Fill in the required ARM template parameters. Refer to the following
-    example for more information on the parameters.
+4.  If prompted, make sure to sign in with an account that is an owner for the Azure subscription.
+
+5.  Fill in the required ARM template parameters. Refer to the following example for more information on the parameters.
 
 6.  Agree to the Terms and conditions and click **Purchase**.
 
-The deployment is now underway. On average this process can take 30
-minutes to complete. It is important that you monitor the deployment
-progress to ensure there are no problems. You can monitor progress by
-clicking the **notification** bell in the upper right corner and
-clicking **Deployment in progress\...**.
+    The deployment is now underway. On average this process can take 30 minutes to complete. It is important that you monitor the deployment progress to ensure there are no problems. You can monitor progress by clicking the **notification** bell in the upper right corner and clicking **Deployment in progress\...**.
 
-*Note:* While automation can make things simpler and repeatable,
-sometimes it can fail. If at any time during the ARM template deployment
-there is a failure, review the failure, delete the Resource Group and
-try the ARM template again, adjusting for any possible errors.
+    >**Note**: While automation can make things simpler and repeatable, sometimes it can fail. If at any time during the ARM template deployment there is a failure, review the failure, delete the Resource Group and try the ARM template again, adjusting for any possible errors.
 
-Once the ARM template is done being deployed, the status will change to
-complete. At this point the domain controller is ready for RDP
-connectivity.
+    Once the ARM template is done being deployed, the status will change to complete. At this point the domain controller is ready for RDP connectivity.
+
+You should follow **all** steps provided before performing the **Hands-on lab**.
