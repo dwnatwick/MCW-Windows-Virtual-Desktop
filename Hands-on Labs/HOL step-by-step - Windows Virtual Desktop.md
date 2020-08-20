@@ -32,7 +32,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Overview](#overview)
 - [Exercise 1: Configuring Azure AD Connect with AD DS](#exercise-1-configuring-azure-ad-connect-with-ad-ds)
 - [Exercise 2: Create Azure AD Groups for WVD](#exercise-2-create-azure-ad-groups-for-wvd)
-- [Exercise 3: Create an Azure Files Share for FSLogix](#exercise-3-create-azure-files-share-for-fslogix)
+- [Exercise 3: Create an Azure Files Share for FSLogix](#exercise-3-create-an-azure-files-share-for-fslogix)
 - [Exercise 4: Create a Master Image for WVD](#exercise-4-create-a-master-image-for-wvd)
 - [Exercise 5: Create a Host Pool for Pooled Desktops](#exercise-5-create-a-host-pool-for-pooled-desktops)
 - [Exercise 6: Create a Host Pool for Pooled Remote Apps](#exercise-6-create-a-host-pool-for-pooled-remoteapps) 
