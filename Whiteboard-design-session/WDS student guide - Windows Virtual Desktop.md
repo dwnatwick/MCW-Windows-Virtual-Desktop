@@ -47,9 +47,9 @@ Microsoft and the trademarks listed at https://www.microsoft.com/en-us/legal/int
 
 ## Abstract
 
-In the Whiteboard Design Session (WDS), you will work in groups to design a Windows Virtual Desktop solution using Microsoft 365 and Azure technologies.  Your solution will consider the necessary Microsoft 365 subscription required for Windows 10 multi-user licensing, as well as the Azure Active Directory and security needs for a healthcare provider. You will need to determine how to connect Azure to the current VMware and Citrix on-premises infrastructure and the connections needed to connect this infrastructure to Azure for application access. Finally, you will need to design the Windows Virtual Desktop solution utilizing Azure virtual machines with availability and scalability to handle 24x7x365 operations without performance degradation.
+In this whiteboard design session, you will work in a group to design a solution using Azure business continuity and disaster recovery (BCDR) technologies. Your solution will consider three different types of environments. The first will consist of on-premises VMs running applications that will be migrated to Azure IaaS. Next, Azure IaaS applications that need to be failed over from either on-premises to Azure, or between two Azure Regions. Finally, the use of automated failover technologies built into Azure PaaS services, App Service, and SQL Database will be used for PaaS applications.
 
-At the end of the whiteboard design session, you will be better able to design a solution that leverages Microsoft 365 and Azure technologies together to build a secure and robust Windows Virtual Desktop infrastructure.
+At the end of this whiteboard design session, you will be better able to design a solution that leverages various Azure technologies together to build a complex and robust IaaS BCDR plan.
 
 ## Step 1: Review the customer case study
 
@@ -99,7 +99,7 @@ Contoso Healthcare has completed an initial cloud assessment of their current in
 
 6. CH requires the ability to create and deploy a standardized desktop image to all users without the need to update and manage local devices.
 
-7. CH needs to leverage the current application infrastructure in their current Detroit and Dallas datacenters.
+7. CH needs to leverage the current application infrastructure in their current California and Northern Virginia datacenters.
 
 ### Customer objections
 
@@ -111,9 +111,10 @@ Contoso Healthcare has completed an initial cloud assessment of their current in
 
 4. Connections between the cloud and existing data centers must be secure and reliable to support their requirements.  How will this be addressed and monitored?
 
-5. Contoso has made a substantial capital investment in their current data centers that they do not want to decommission. How can the infrastructure be architected to utilize the current Citrix virtual desktop infrastructure and control plane?
+5. Contoso has made a substantial capital investment in their current data centers that they do not want to decommission. So would like to leverage existing infrastructure where possible.
 
 ### Infographic for common scenarios
+
 
 ### Security Scenarios
 ![The security scenario applies to the potential security, monitoring, and compliance auditing options needed to design the solution. ](images/security.png "Security Scenarios")
@@ -125,7 +126,6 @@ Contoso Healthcare has completed an initial cloud assessment of their current in
 
 ### Windows Virtual Desktop standard architecuture
 ![This diagram outlines a simple Windows Virtual Desktop architecture with Azure and Microsoft 365. This includes the Windows Virtual Desktop user connection and the Windows Virtual Desktop host pools.](images/wvdarchitecture.png "Windows Virtual Desktop standard architecture")
-
 
 
 ## Step 2: Design a proof of concept solution
@@ -188,7 +188,7 @@ Design a Windows Virtual Desktop infrastructure that addresses the needs and req
 
     - How will you connect to Contoso Healthcare's data centers to minimize latency and maximize security?
 
-    - How will you manage and balance network traffic to virtual desktops images?
+    - What inbound ports, if any, need to be open to the session hosts for users to connect securely? 
 
     - What will you use to identify and monitor threats on the network?
 
