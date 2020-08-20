@@ -30,9 +30,17 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 - [Windows Virtual Desktop Hands-on Lab](#windows-virtual-desktop-whiteboard-design-session-student-guide)
   - [Abstract](#abstract)
   - [Overview](#overview)
-  
 - [Exercise 1: Configuring Azure AD Connect with AD DS](#exercise-1-configuring-azure-ad-connect-with-ad-ds)
-
+- [Exercise 2: Create Azure AD Groups for WVD](#exercise-2-create-azure-ad-groups-for-wvd)
+- [Exercise 3: Create an Azure Files Share for FSLogix](#exercise-3-create-azure-files-share-for-fslogix)
+- [Exercise 4: Create a Master Image for WVD](#exercise-4-create-a-master-image-for-wvd)
+- [Exercise 5: Create a Host Pool for Pooled Desktops](#exercise-5-create-a-host-pool-for-pooled-desktops)
+- [Exercise 6: Create a Host Pool for Pooled Remote Apps](#exercise-6-create-a-host-pool-for-pooled-remoteapps) 
+- [Exercise 7: Create a Host Pool for Personal Desktops](#exercise-7-create-a-host-pool-for-personal-desktops)
+- [Exercise 8: Connect to WVD with the Web Client](#exercise-8-connect-to-wvd-with-the-web-client)
+- [Exercise 9: Connect to WVD with the Windows Desktop Client](#exercise-9-connect-to-wvd-with-the-windows-desktop-client)
+- [Exercise 10: Configure Session Hosts with Group Policy](#exercise-10-configure-session-hosts-with-group-policy)
+- [Exercise 11: Setup Monitoring for WVD](#exercise-11-setup-monitoring-for-wvd)
 
 <!-- /TOC -->
 
