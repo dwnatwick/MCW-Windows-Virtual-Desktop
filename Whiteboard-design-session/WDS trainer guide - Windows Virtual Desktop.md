@@ -231,7 +231,7 @@ Contoso Healthcare has completed an initial cloud assessment of their current in
 
 1. The CTO at Contoso does not want to invest in new workstations and mobile devices to support the standardized desktop image. This includes non-OS, Macs, Android, and thin clients.  Can these devices support the new image?
 
-2. The CISO at Contoso needs to be convinced that data will not be exposed. How would Microsoft handle data protection?
+2. The CISO at Contoso needs to be convinced that data will not be exposed. How would Microsoft support the data protection needs for CH?
 
 3. Contoso must be able to log and audit all activity on the desktop image.  How will this be handled within the cloud and on-premises environments?
 
@@ -570,7 +570,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 2. The CTO at Contoso does not want to invest in new workstations and mobile devices to support the standardized desktop image. Can these devices support the new image?
     - Windows Virtual Desktop is flexible in the way that users can access their virtual desktop.  The design will utilize web browser access to the virtual desktop on workstations, and the remote desktop app on mobile devices.  
 
-3. The CISO at Contoso needs to be convinced that data will not be exposed. How would Microsoft handle data protection?
+3. The CISO at Contoso needs to be convinced that data will not be exposed. How would Microsoft support the data protection needs for CH?
     - The designed solution for Contoso Healthcare includes Microsoft 365 E5 with Enterprise Mobility + Security (EMS) E5.  This provides a full suite of data and information protection to classify sensitive data and audit activity.  Cloud App Security can also be used to block access to unauthorized file sharing services to avoid users from copying files to unprotected locations.  Data protection controls can be monitored through Microsoft 365 security adviser, and Azure Security Center.
 
 4. Contoso must be able to log and audit all activity on the desktop image.  How will this be handled within the cloud and on-premises environments?

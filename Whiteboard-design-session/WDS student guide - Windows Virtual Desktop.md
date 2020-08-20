@@ -105,7 +105,7 @@ Contoso Healthcare has completed an initial cloud assessment of their current in
 
 1. The CTO at Contoso does not want to invest in new workstations and mobile devices to support the standardized desktop image. This includes non-OS, Macs, Android, and thin clients.  Can these devices support the new image?
 
-2. The CISO at Contoso needs to be convinced that data will not be exposed. How would Microsoft handle data protection?
+2. The CISO at Contoso needs to be convinced that data will not be exposed. How would Microsoft support the data protection needs for CH?
 
 3. Contoso must be able to log and audit all activity on the desktop image.  How will this be handled within the cloud and on-premises environments?
 
