@@ -335,7 +335,7 @@ There are multiple solutions available for storing FSLogix profiles containers.
 
 -   Windows File Server - [Create a profile container for a host pool using a file share](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-host-pools-user-profile) 
 
--   NetApp Files - [Create an FSLogix profile container for a host pool using Azure NetApp Files](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-fslogix-profile-container) 
+-   NetApp Files - [Create an FSLogix profile container for a host pool using Azure NetApp Files](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-FSLogix-profile-container) 
 
 -   Azure Files - [Create an FSLogix profile container with Azure Files](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-profile-container-adds) 
 
@@ -584,7 +584,7 @@ The first time you configure NTFS permission, do so using superuser permissions.
 7.  net use z:\\\\\<storage-account-name\>.file.core.windows.net\\\<share-name\>/user:Azure\\\<storage-account-name\> \<storage-account-key\>
 
     Example with sample values:
-    net use z: \\\\mydomainazfiles.file.core.windows.net\\fslogix/user:Azure\\mydomainazfilesuPCvi+gP2qbCQcn3EATgbALE0H8nxhspyLRO2Nf9Hm2gMxfn/389/M33XHh7YEqNJ2GhbJXgStiifPwMBXk38Q==
+    net use z: \\\\mydomainazfiles.file.core.windows.net\\FSLogix/user:Azure\\mydomainazfilesuPCvi+gP2qbCQcn3EATgbALE0H8nxhspyLRO2Nf9Hm2gMxfn/389/M33XHh7YEqNJ2GhbJXgStiifPwMBXk38Q==
 
     >**Note**: This is an SMB connection on port 445. Most consumer ISPs block this port by default. If you are doing this in your lab and experience issues mounting the share from a local computer, try connecting from a domain joined VM in Azure.
 
@@ -763,7 +763,7 @@ The Ui form offers the following actions:
 
 -   Apply recommended settings.
 
--   Source documentation: [Download and Install FSLogix](https://docs.microsoft.com/en-us/fslogix/install-ht).
+-   Source documentation: [Download and Install FSLogix](https://docs.microsoft.com/en-us/FSLogix/install-ht).
 
 **OS Settings**
 
@@ -906,7 +906,7 @@ The system will automatically shutdown and disconnect your RDP session.
 
 ## Exercise 5: Create a Host Pool for pooled desktops
 
-In this exercise we will be creating a Windows Virtual Desktop host pool for pooled desktops. This is a set of computers or hosts which operate on an as-needed basis. In a pooled configuration we will be hosting multiple non-persistent sessions, with no user profile information stored locally. This is where FSlogix Profile Containers provide the users profile to the host dynamically. This provides the ability for an organization to fully utilize the compute resources on a single host and lower the total overhead, cost, and number of remote workstations.
+In this exercise we will be creating a Windows Virtual Desktop host pool for pooled desktops. This is a set of computers or hosts which operate on an as-needed basis. In a pooled configuration we will be hosting multiple non-persistent sessions, with no user profile information stored locally. This is where FSLogix Profile Containers provide the users profile to the host dynamically. This provides the ability for an organization to fully utilize the compute resources on a single host and lower the total overhead, cost, and number of remote workstations.
 
 
 **Additional Resources**
@@ -1367,14 +1367,16 @@ References:
 -   [[https://docs.microsoft.com/en-us/azure/virtual-desktop/install-office-on-wvd-master-image]](https://docs.microsoft.com/en-us/azure/virtual-desktop/install-office-on-wvd-master-image) 
 
 -   [[https://support.microsoft.com/en-us/help/2768656/outlook-performance-issues-when-there-are-too-many-items-or-folders-in]](https://support.microsoft.com/en-us/help/2768656/outlook-performance-issues-when-there-are-too-many-items-or-folders-in) 
-
-  **Policy**                                                       **Value**               **Reason**
-  ---------------------------------------------------------------- ----------------------- -------------------------------------------------------------------------
-  Show the option for Office Insider                               Disabled                Hides the option to join office insider
-  Cached Exchange Mode Sync Settings                               One Month               Prevents bloating of outlook profiles on non-persistent machines.
-  Use Cached Exchange Mode for new and existing outlook profiles   Enabled                 Ensures all profiles are running cached.
-  CalendarSyncWindowSetting                                        Primary Calendar Only   Sync only the primary Calendar Folder, preventing bloat in the profile.
-  CalendarSyncWindowSettingMonths                                  1 Month                 Setting to control the number of months in the Calendar Sync window
+-   
+|              |            |               |
+|----------|:-------------:|:-------------:|
+ | **Policy**  | **Value**   |  **Reason** |
+ ------------------------------------------------------ ---------------- -------------------------------------------------------------------------------
+  |  Show the option for Office Insider    |                       Disabled       |         Hides the option to join office insider |
+  |Cached Exchange Mode Sync Settings          |                     One Month           |    Prevents bloating of outlook profiles on non-persistent machines.|
+  |Use Cached Exchange Mode for new and existing outlook profiles   | Enabled                | Ensures all profiles are running cached. |
+  | CalendarSyncWindowSetting       |                                 Primary Calendar Only  | Sync only the primary Calendar Folder, preventing bloat in the profile.|
+ | CalendarSyncWindowSettingMonths                           |       1 Month                 | Setting to control the number of months in the Calendar Sync window |
 
 **WVD Pooled - Microsoft 365 Apps - Computer Settings**
 
@@ -1382,13 +1384,15 @@ References:
 
 -   [[https://docs.microsoft.com/en-us/azure/virtual-desktop/install-office-on-wvd-master-image]](https://docs.microsoft.com/en-us/azure/virtual-desktop/install-office-on-wvd-master-image) 
 
-  **Policy**                                             **Value**        **Reason**
+|              |            |               |
+|----------|:-------------:|:-------------:|
+ | **Policy**      |                                   |    **Value**    |    **Reason** |
   ------------------------------------------------------ ---------------- -------------------------------------------------------------------------------
-  Use Shared Computer Activation                         Enabled          Shared Computer Activation for shared desktops
-  Enable Automatic Updates                               Disabled         Prevents office version drift between Hosts
-  Hide option to enable or disable updates               Enabled          Prevents users for modifying settings
-  Hide Update Notifications                              Enabled          Prevents notification to end user about available updates.
-  Configure user Group Policy loopback processing mode   Enabled: Merge   Allows the Microsoft 365 User Policy to apply to users on these Session Hosts
+ | Use Shared Computer Activation                    |     Enabled        |  Shared Computer Activation for shared desktops |
+ | Enable Automatic Updates                          |     Disabled     |    Prevents office version drift between Hosts |
+ | Hide option to enable or disable updates          |    Enabled      |    Prevents users for modifying settings |
+ | Hide Update Notifications                         |     Enabled      |    Prevents notification to end user about available updates. |
+ | Configure user Group Policy loopback processing mode  | Enabled: Merge |  Allows the Microsoft 365 User Policy to apply to users on these Session Hosts |
 
 **WVD Pooled - Microsoft Edge Enterprise - Computer Settings**
 
@@ -1404,11 +1408,11 @@ References:
 
 References:
 
--   [[https://docs.microsoft.com/en-us/fslogix/use-group-policy-templates-ht]](https://docs.microsoft.com/en-us/fslogix/use-group-policy-templates-ht) 
+-   [[https://docs.microsoft.com/en-us/FSLogix/use-group-policy-templates-ht]](https://docs.microsoft.com/en-us/FSLogix/use-group-policy-templates-ht) 
 
--   [[https://docs.microsoft.com/en-us/fslogix/profile-container-configuration-reference]](https://docs.microsoft.com/en-us/fslogix/profile-container-configuration-reference) 
+-   [[https://docs.microsoft.com/en-us/FSLogix/profile-container-configuration-reference]](https://docs.microsoft.com/en-us/FSLogix/profile-container-configuration-reference) 
 
--   [[https://docs.microsoft.com/en-us/fslogix/office-container-configuration-reference]](https://docs.microsoft.com/en-us/fslogix/office-container-configuration-reference) 
+-   [[https://docs.microsoft.com/en-us/FSLogix/office-container-configuration-reference]](https://docs.microsoft.com/en-us/FSLogix/office-container-configuration-reference) 
 
   **Policy**                                               **Value**                                **Reason**
   -------------------------------------------------------- ---------------------------------------- -------------------------------------------------------------------------------------------------------
