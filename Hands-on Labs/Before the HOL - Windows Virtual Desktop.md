@@ -107,6 +107,15 @@ deployment. To avoid confusion and deployment errors, **open an InPrivate browse
 4.  If prompted, make sure to sign in with an account that is an owner for the Azure subscription.
 
 5.  Fill in the required ARM template parameters. Refer to the following example for more information on the parameters.
+    - Create a new **Resource group**
+    - Select a **Region**
+    - Create an **Admin password**
+    - Create an **AD Domain name**, such as **(mycompany).local**
+    - Create a **Customupnsuffix** for WVD, such as **"mywvd"**
+    - Create a **Default user password**
+    - Select **Review + create**
+
+    ![WVD Domain custom deployment template](images\wvdcustomdeployment.png "Windows Virtual Desktop custom deployment template")
 
 6.  Agree to the Terms and conditions and click **Purchase**.
 
