@@ -38,7 +38,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 3: Creating a Domain Admin account](#task-3-creating-a-domain-admin-account)
     - [Task 4: Configuring Azure AD Connect](#task-4-configuring-azure-ad-connect)
   - [Exercise 2: Create Azure AD Groups for WVD](#exercise-2-create-azure-ad-groups-for-wvd)
-  - [Additional Resources](#additional-resources)
+    - [Additional Resources](#additional-resources)
     - [Task 1: Creating Azure AD Groups](#task-1-creating-azure-ad-groups)
     - [Task 2: Assign Users to Groups](#task-2-assign-users-to-groups)
   - [Exercise 3: Create an Azure Files Share for FSLogix](#exercise-3-create-an-azure-files-share-for-fslogix)
@@ -49,23 +49,21 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 5: Configure NTFS Permissions for the File Share](#task-5-configure-ntfs-permissions-for-the-file-share)
     - [Task 6: Configure NTFS Permissions for the Containers](#task-6-configure-ntfs-permissions-for-the-containers)
   - [Exercise 4: Create a Master Image for WVD](#exercise-4-create-a-master-image-for-wvd)
-  - [Additional Resources](#additional-resources-1)
+    - [Additional Resources](#additional-resources-1)
     - [Task 1: Create a new Virtual Machine (VM) in Azure](#task-1-create-a-new-virtual-machine-vm-in-azure)
-  - [Additional Resources](#additional-resources-2)
+    - [Additional Resources](#additional-resources-2)
     - [Task 2: Run Windows Update](#task-2-run-windows-update)
     - [Task 3: Prepare WVD Image](#task-3-prepare-wvd-image)
-    - [Introduction to the script](#introduction-to-the-script)
-    - [Running the script](#running-the-script)
     - [Task 4: Run Sysprep](#task-4-run-sysprep)
     - [Task 5: Create a managed image from the Master Image VM](#task-5-create-a-managed-image-from-the-master-image-vm)
     - [Task 6: Provision a Host Pool with a custom image](#task-6-provision-a-host-pool-with-a-custom-image)
   - [Exercise 5: Create a Host Pool for pooled desktops](#exercise-5-create-a-host-pool-for-pooled-desktops)
-  - [Additional Resources](#additional-resources-3)
+    - [Additional Resources](#additional-resources-3)
     - [Task 1: Create a new Host Pool and Workspace](#task-1-create-a-new-host-pool-and-workspace)
     - [Task 2: Create a Friendly Name for the Workspace](#task-2-create-a-friendly-name-for-the-workspace)
     - [Task 3: Assign an Azure AD Group to an Application Group](#task-3-assign-an-azure-ad-group-to-an-application-group)
   - [Exercise 6: Create a Host Pool for Pooled RemoteApps](#exercise-6-create-a-host-pool-for-pooled-remoteapps)
-  - [Additional Resources](#additional-resources-4)
+    - [Additional Resources](#additional-resources-4)
     - [Task 1: Create a new Host Pool and Workspace](#task-1-create-a-new-host-pool-and-workspace-1)
     - [Task 2: Create a Friendly Name for the Workspace](#task-2-create-a-friendly-name-for-the-workspace-1)
     - [Task 3: Add Remote Apps to your Host Pool**](#task-3-add-remote-apps-to-your-host-pool)
@@ -74,16 +72,18 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 2: Create a Friendly Name for the Workspace**](#task-2-create-a-friendly-name-for-the-workspace-2)
     - [Task 3: Assign Azure AD Group to Application Group](#task-3-assign-azure-ad-group-to-application-group)
   - [Exercise 8: Connect to WVD with the Web Client](#exercise-8-connect-to-wvd-with-the-web-client)
-  - [Additional Resources](#additional-resources-5)
+    - [Additional Resources](#additional-resources-5)
     - [Task 1: Connecting with the HTML5 Web Client](#task-1-connecting-with-the-html5-web-client)
     - [Troubleshooting](#troubleshooting)
     - [>Web client keeps prompting for credentials](#blockquoteweb-client-keeps-prompting-for-credentialsblockquote)
   - [Exercise 9: Connect to WVD with the Windows Desktop Client](#exercise-9-connect-to-wvd-with-the-windows-desktop-client)
-  - [Additional Resources](#additional-resources-6)
+    - [Additional Resources](#additional-resources-6)
     - [Task 1: Connecting with the Windows Desktop Client](#task-1-connecting-with-the-windows-desktop-client)
     - [Troubleshooting](#troubleshooting-1)
   - [Exercise 10: Configure Session Hosts with Group Policy](#exercise-10-configure-session-hosts-with-group-policy)
-  - [Additional Resources](#additional-resources-7)
+    - [Task 1: Create a Group Policy backup](#task-1-create-a-group-policy-backup)
+    - [Task 2: Configure the Group Policy settings](#task-2-configure-the-group-policy-settings)
+    - [Additional Resources](#additional-resources-7)
   - [Exercise 11: Setup Monitoring for WVD](#exercise-11-setup-monitoring-for-wvd)
     - [Additional Resources](#additional-resources-8)
     - [Task 1: Create a Log Analytics workspace](#task-1-create-a-log-analytics-workspace)
@@ -93,19 +93,10 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 5: Enable logging for Workspaces](#task-5-enable-logging-for-workspaces)
     - [Task 6: Enabling Azure Monitor for the Session Hosts](#task-6-enabling-azure-monitor-for-the-session-hosts)
     - [Additional Resources](#additional-resources-9)
-    - [Agent Registration issues](#agent-registration-issues)
-    - [Cases](#cases)
-    - [WVD Connection: No resources available](#wvd-connection-no-resources-available)
-    - [Problem](#problem)
-    - [Possible reasons](#possible-reasons)
-    - [Solution](#solution)
-    - [WVD Connection: No resources available](#wvd-connection-no-resources-available-1)
-    - [Problem](#problem-1)
-    - [Possible reasons](#possible-reasons-1)
-    - [Solution](#solution-1)
+  - [Troubleshooting](#troubleshooting-2)
+    - [Domain troubleshooting](#domain-troubleshooting)
     - [WVD Agent troubleshooting](#wvd-agent-troubleshooting)
-    - [Troubleshooting WVD Agent issues](#troubleshooting-wvd-agent-issues)
-    - [Agent Registration issues](#agent-registration-issues-1)
+    - [Agent Registration issues](#agent-registration-issues)
   - [Exercise 12: Lab environment clean up after completion](#exercise-12-lab-environment-clean-up-after-completion)
     - [Task 1: Delete Resource groups to remove lab environment](#task-1-delete-resource-groups-to-remove-lab-environment)
 
@@ -262,7 +253,7 @@ You will be creating 3 Azure AD groups to manage access to the different applica
 
 It is also important to keep in mind that these groups can also originate from the Windows Active Directory environment and synchronize via Azure AD Connect. This will be another common scenario for customers that already have processes defined on-prem for group management.
 
-## Additional Resources
+### Additional Resources
 
   |              |            |  
 |----------|:-------------:|
@@ -665,7 +656,7 @@ Your Azure Files Share is now ready for FSLogix profile containers. Copy the UNC
 
 In this exercise we are going to walk through the process of creating a master image for your WVD host pools. The basic concept for a master image is to start with a clean base install of Windows and layer on mandatory updates, applications and configurations. There are many ways to create and manage images for WVD. The steps covered in this exercise are going to walk you through a basic build and capture process that includes core applications and recommended configuration options for WVD.
 
-## Additional Resources
+### Additional Resources
 
   |              |            |  
 |----------|:-------------:|
@@ -692,7 +683,7 @@ In this exercise we are going to walk through the process of creating a master i
 
     ![The "Create a virtual machine" page within the Azure portal for the Windows 10 VM](images/windows10VMcreate.png "The 'Create a virtual machine' page within the Azure portal for the Windows 10 VM")
 
-## Additional Resources
+### Additional Resources
 
   |              |            |  
 |----------|:-------------:|
@@ -719,7 +710,7 @@ Despite the Azure support teams best efforts, the Marketplace images are not alw
 
 ### Task 3: Prepare WVD Image
 
-### Introduction to the script
+**Introduction to the script**
 
 The authors for this content have developed a scripted solution to assist in automating some common baseline image build tasks. The script includes a UI form, enabling you to quickly select which actions to perform. The end result will be a custom master image that incorporates Microsoft's main business applications, along with the necessary
 policies and settings for an optimized user experience.
@@ -784,7 +775,7 @@ The Ui form offers the following actions:
 
 -   Source documentation: [cleanmgr](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/cleanmgr) 
 
-### Running the script
+**Running the script**
 
 1.  [**Download**](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/shawntmeyer/WVD/tree/master/Image-Build/Customizations) the .zip file to your local workstation.
 
@@ -913,7 +904,7 @@ The system will automatically shutdown and disconnect your RDP session.
 
 In this exercise we will be creating a Windows Virtual Desktop host pool for pooled desktops. This is a set of computers or hosts which operate on an as-needed basis. In a pooled configuration we will be hosting multiple non-persistent sessions, with no user profile information stored locally. This is where FSLogix Profile Containers provide the users profile to the host dynamically. This provides the ability for an organization to fully utilize the compute resources on a single host and lower the total overhead, cost, and number of remote workstations.
 
-## Additional Resources
+### Additional Resources
 
   |              |            |  
 |----------|:-------------:|
@@ -987,7 +978,7 @@ With the assignment added, you can move on to the next exercise. The users in th
 
 In this exercise we will be creating a non-persistent host pool for publishing RemoteApps. This enables you to assign users access to specific applications rather than an entire desktop. This type of application deployment serves many purposes and is not new to WVD, but has existed in Windows Server Remote Desktop Services for many years.
 
-## Additional Resources
+### Additional Resources
 
   |              |            |  
 |----------|:-------------:|
@@ -1132,7 +1123,7 @@ With the assignment added, you can move on to the next exercise. The users in th
 
 In this exercise we are going to walk through connecting to your WVD environment using the HTML5 web client and validating your deployment. The following operating systems and browsers are supported:
 
-## Additional Resources
+### Additional Resources
 
 There are multiple clients available for you to access WVD resources. Refer to the following Docs for more information about each client:
   |              |            |  
@@ -1226,7 +1217,7 @@ In this exercise we are going to walk through connecting to your WVD environment
 
 
 
-## Additional Resources
+### Additional Resources
 
 There are multiple clients available for you to access WVD resources. Refer to the following Docs for more information about each client:
   |              |            |  
@@ -1330,6 +1321,8 @@ After working with the Windows 10 Marketplace builds, we found some areas that n
 
 To perform the tasks of configuring group policy, we will require you to have access to your domain controller or to a Admin jump box where you can configure domain group policies. Perform the following steps on this system.
 
+### Task 1: Create a Group Policy backup
+
 1.  **Download** the Group Policy Backup from this guide. [[WVD-GPO-Backups.zip]](https://raw.githubusercontent.com/shawntmeyer/WVD/master/GPOBackups/WVD-GPO-Backups.zip) 
 
 2.  **Extract** the contents of Zip file.
@@ -1369,10 +1362,13 @@ standard naming conventions.
 
 15. Now link these policies to the OU where your WVD resource
 
+
+### Task 2: Configure the Group Policy settings 
+
 Provided below is a summary of the group policy settings that Microsoft recommends applying to Pooled desktops. Each policy is detailed with the policy setting and reasoning. For more information, open the HTML files in the extracted GPBackup folder you downloaded earlier.
 
-**WVD Pooled - Microsoft 365 Apps - User Settings**
 
+**WVD Pooled - Microsoft 365 Apps - User Settings**
   
 |              |            |               |
 |----------|:-------------:|:-------------:|
@@ -1458,7 +1454,7 @@ Provided below is a summary of the group policy settings that Microsoft recommen
 | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-sxs   MaxYResolution   |              2880   |     
  | HKLM\\ SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation                    RealTimeIsUniversal   |         1      |     
 
-## Additional Resources
+### Additional Resources
 
   |              |            |  
 |----------|:-------------:|
@@ -1671,8 +1667,8 @@ At this point you should have Azure Monitor enabled on at least 1 session host V
 For a list of example queries, refer to the following Docs article:
 
 [**Use Log Analytics for the diagnostics feature \| Example queries**](https://docs.microsoft.com/en-us/azure/virtual-desktop/diagnostics-log-analytics#example-queries) 
-
-**Troubleshooting**
+```
+## Troubleshooting
 
 - Go to your Log Analytics workspace, and then select **Logs**. The example query UI is shown automatically.
 - Change the filter to **Category**.
@@ -1681,12 +1677,12 @@ For a list of example queries, refer to the following Docs article:
 
 Often during the deployment of WVD there may be challenges with either having machines join the domain or installing the agent via automation.
 
-#### Domain troubleshooting
+### Domain troubleshooting
 
 1.  Verify that the AD account has the correct permissions for domain joining machines based on the [blog domain join blog](https://www.prajwaldesai.com/allow-domain-user-to-add-computer-to-domain/).
 
 When deploying WVD machines to the OU path below. This is the OU where the AD account AdAdmin has create and delete rights for machine objects. I've validated that he can manually create and delete AD objects in this OU.
-
+```
 MachineAccountOU: OU=AZWVD,DC=DS,DC=CUSTOMERDOMAIN,DC=COM
 
 Verify using PowerShell that the AD account can create AD object in the OU
@@ -1836,7 +1832,8 @@ type 3
 07/29/2019 20:51:32:133 NetpJoinDomainOnDs: NetpResetIDNEncoding on \'[DS.CUSTOMERDOMAIN.COM](http://ds.customerdomain.com/) \': 0x0
 
 07/29/2019 20:51:32:133 NetpDoDomainJoin: status: 0x5
-
+```
+```
 **07/29/2019 20:51:47:212**
 
 **Resolution: Try the following steps to resolve domain join issues.**
@@ -1883,10 +1880,10 @@ ERROR 2 -- DSC Failure to install agents, but domain join is successful.
 
 {\"code\":\"DeploymentFailed\",\"message\":\"At least one resource deployment operation failed. Please list deployment operations for details. Please see <https://aka.ms/arm-debug>  for usage details.\",\"details\":\[{\"code\":\"Conflict\",\"message\":\"{\\r\\n \\\"status\\\": \\\"Failed\\\",\\r\\n \\\"error\\\": {\\r\\n \\\"code\\\": \\\"ResourceDeploymentFailure\\\",\\r\\n \\\"message\\\": \\\"The resource operation completed with terminal provisioning state \'Failed\'.\\\",\\r\\n \\\"details\\\": \[\\r\\n {\\r\\n \\\"code\\\": \\\"VMExtensionProvisioningError\\\",\\r\\n \\\"message\\\": \\\"VM has reported a failure when processing extension \'dscextension\'. Error
 message: \\\\\\\"DSC Configuration \'FirstSessionHost\' completed with error(s). Following are the first few: PowerShell DSC resource MSFT\_ScriptResource failed to execute Set-TargetResource functionality with error message: One or more errors occurred. The **SendConfigurationApply function did not succeed**.\\\\\\\".\\\"\\r\\n }\\r\\n \]\\r\\n }\\r\\n}\"}\]}
+```
+**WVD Agent troubleshooting**
 
-### WVD Agent troubleshooting
-
-#### Troubleshooting WVD Agent issues
+**Troubleshooting WVD Agent issues**
 
 Agent Installation and Update process:
 
@@ -1931,7 +1928,7 @@ Manually install Windows Virtual Desktop agent and register it using the steps d
 1.  Once the agent is manually installed, you should see the Get-RDSSessionHost -TenantName \<tenantname\> HostPoolName \<hostpoolname\> output as below:
 
 ```
-```
+
 1.  In case the manual installation fails, review
 
 -   Contents of "UpdateErrorMessage" in Get-RDSSessionHost -TenantName
@@ -1947,6 +1944,7 @@ o Event Viewer - \> Windows Logs -\> Application. Look for events with the sourc
 
 -   WVD-Agent-Updater
 ```
+
 |              |            |  
 |----------|:-------------:|
 |  **Error Code** |  **Description**   |                      
@@ -1987,7 +1985,7 @@ Role,Env, Level, Ring, Cluster, Ver, Pid
 
 \| take 10000
 ```
-### Agent Registration issues
+**Agent Registration issues**
 
 External Logging:
 
@@ -2010,15 +2008,15 @@ Demo of Management UX
 
 The installation of the [Management UX](https://github.com/Azure/RDS-Templates/tree/master/wvd-templates/wvd-management-ux) can be found here.
 
-### Cases
+**Cases**
 
-### WVD Connection: No resources available
+**WVD Connection: No resources available**
 
-### Problem
+**Problem**
 
 When connecting to a Host Pool you may come across an error such as:
 
-### Possible reasons
+**Possible reasons**
 
 This problem can occur for multiple reasons:
 
@@ -2028,7 +2026,7 @@ This problem can occur for multiple reasons:
 
 -   The Host pool configuration is deprecated
 
-### Solution
+**Solution**
 
 Please first check if the VM is actually available and running in the Azure Portal. If that is the case, run:
 
@@ -2094,13 +2092,13 @@ Remove-RdsSessionHost \@hostPoolLevelInput -Name \$\_.SessionHostName }
 ```
 to subsequently remove the VM from the tenant. Currently the only way the re-register the machine is to redeploy it.
 
-### WVD Connection: No resources available
+**WVD Connection: No resources available**
 
-### Problem
+**Problem**
 
 When connecting to a Host Pool you may come across an error such as:
 
-### Possible reasons
+**Possible reasons**
 
 This problem can occur for multiple reasons:
 
@@ -2110,7 +2108,7 @@ This problem can occur for multiple reasons:
 
 -   The Host pool configuration is deprecated
 
-### Solution
+**Solution**
 
 Please first check if the VM is actually available and running in the Azure Portal. If that is the case, run:
 
@@ -2181,7 +2179,7 @@ to subsequently remove the VM from the tenant. Currently the only way the re-reg
 
 ### WVD Agent troubleshooting
 
-### Troubleshooting WVD Agent issues
+**Troubleshooting WVD Agent issues**
 
 Agent Installation and Update process:
 
