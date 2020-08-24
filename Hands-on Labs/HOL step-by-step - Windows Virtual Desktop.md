@@ -38,6 +38,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 3: Creating a Domain Admin account](#task-3-creating-a-domain-admin-account)
     - [Task 4: Configuring Azure AD Connect](#task-4-configuring-azure-ad-connect)
   - [Exercise 2: Create Azure AD Groups for WVD](#exercise-2-create-azure-ad-groups-for-wvd)
+  - [Additional Resources](#additional-resources)
     - [Task 1: Creating Azure AD Groups](#task-1-creating-azure-ad-groups)
     - [Task 2: Assign Users to Groups](#task-2-assign-users-to-groups)
   - [Exercise 3: Create an Azure Files Share for FSLogix](#exercise-3-create-an-azure-files-share-for-fslogix)
@@ -48,20 +49,23 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 5: Configure NTFS Permissions for the File Share](#task-5-configure-ntfs-permissions-for-the-file-share)
     - [Task 6: Configure NTFS Permissions for the Containers](#task-6-configure-ntfs-permissions-for-the-containers)
   - [Exercise 4: Create a Master Image for WVD](#exercise-4-create-a-master-image-for-wvd)
-  - [Additional Resources](#additional-resources)
+  - [Additional Resources](#additional-resources-1)
     - [Task 1: Create a new Virtual Machine (VM) in Azure](#task-1-create-a-new-virtual-machine-vm-in-azure)
+  - [Additional Resources](#additional-resources-2)
     - [Task 2: Run Windows Update](#task-2-run-windows-update)
-  - [Task 3: Prepare WVD Image](#task-3-prepare-wvd-image)
+    - [Task 3: Prepare WVD Image](#task-3-prepare-wvd-image)
     - [Introduction to the script](#introduction-to-the-script)
     - [Running the script](#running-the-script)
-  - [Task 4: Run Sysprep](#task-4-run-sysprep)
-  - [Task 5: Create a managed image from the Master Image VM](#task-5-create-a-managed-image-from-the-master-image-vm)
-  - [Task 6: Provision a Host Pool with a custom image](#task-6-provision-a-host-pool-with-a-custom-image)
+    - [Task 4: Run Sysprep](#task-4-run-sysprep)
+    - [Task 5: Create a managed image from the Master Image VM](#task-5-create-a-managed-image-from-the-master-image-vm)
+    - [Task 6: Provision a Host Pool with a custom image](#task-6-provision-a-host-pool-with-a-custom-image)
   - [Exercise 5: Create a Host Pool for pooled desktops](#exercise-5-create-a-host-pool-for-pooled-desktops)
+  - [Additional Resources](#additional-resources-3)
     - [Task 1: Create a new Host Pool and Workspace](#task-1-create-a-new-host-pool-and-workspace)
     - [Task 2: Create a Friendly Name for the Workspace](#task-2-create-a-friendly-name-for-the-workspace)
     - [Task 3: Assign an Azure AD Group to an Application Group](#task-3-assign-an-azure-ad-group-to-an-application-group)
   - [Exercise 6: Create a Host Pool for Pooled RemoteApps](#exercise-6-create-a-host-pool-for-pooled-remoteapps)
+  - [Additional Resources](#additional-resources-4)
     - [Task 1: Create a new Host Pool and Workspace](#task-1-create-a-new-host-pool-and-workspace-1)
     - [Task 2: Create a Friendly Name for the Workspace](#task-2-create-a-friendly-name-for-the-workspace-1)
     - [Task 3: Add Remote Apps to your Host Pool**](#task-3-add-remote-apps-to-your-host-pool)
@@ -70,33 +74,27 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 2: Create a Friendly Name for the Workspace**](#task-2-create-a-friendly-name-for-the-workspace-2)
     - [Task 3: Assign Azure AD Group to Application Group](#task-3-assign-azure-ad-group-to-application-group)
   - [Exercise 8: Connect to WVD with the Web Client](#exercise-8-connect-to-wvd-with-the-web-client)
+  - [Additional Resources](#additional-resources-5)
     - [Task 1: Connecting with the HTML5 Web Client](#task-1-connecting-with-the-html5-web-client)
     - [Troubleshooting](#troubleshooting)
     - [>Web client keeps prompting for credentials](#blockquoteweb-client-keeps-prompting-for-credentialsblockquote)
   - [Exercise 9: Connect to WVD with the Windows Desktop Client](#exercise-9-connect-to-wvd-with-the-windows-desktop-client)
+  - [Additional Resources](#additional-resources-6)
     - [Task 1: Connecting with the Windows Desktop Client](#task-1-connecting-with-the-windows-desktop-client)
     - [Troubleshooting](#troubleshooting-1)
   - [Exercise 10: Configure Session Hosts with Group Policy](#exercise-10-configure-session-hosts-with-group-policy)
+  - [Additional Resources](#additional-resources-7)
   - [Exercise 11: Setup Monitoring for WVD](#exercise-11-setup-monitoring-for-wvd)
-    - [Additional Resources](#additional-resources-1)
+    - [Additional Resources](#additional-resources-8)
     - [Task 1: Create a Log Analytics workspace](#task-1-create-a-log-analytics-workspace)
     - [Task 2: Enabling Diagnostic Logging for WVD](#task-2-enabling-diagnostic-logging-for-wvd)
-    - [Enable logging for Host Pools](#enable-logging-for-host-pools)
-    - [Enable logging for Application Groups](#enable-logging-for-application-groups)
-    - [Enable logging for Workspaces](#enable-logging-for-workspaces)
-    - [Task 3: Enabling Azure Monitor for the Session Hosts](#task-3-enabling-azure-monitor-for-the-session-hosts)
-    - [Task 4: Enabling Sepago for the Session Hosts](#task-4-enabling-sepago-for-the-session-hosts)
-    - [Deploying Sepago](#deploying-sepago)
-    - [(Optional): Import Sepago OMS Views](#optional-import-sepago-oms-views)
-    - [Prepare the Sepago Monitoring Agent](#prepare-the-sepago-monitoring-agent)
-    - [Install the Sepago Monitoring Agent](#install-the-sepago-monitoring-agent)
-    - [(Optional): Generate Artificial Events](#optional-generate-artificial-events)
-    - [Example Kusto Queries](#example-kusto-queries)
-      - [Domain troubleshooting](#domain-troubleshooting)
-    - [WVD Agent troubleshooting](#wvd-agent-troubleshooting)
-      - [Troubleshooting WVD Agent issues](#troubleshooting-wvd-agent-issues)
+    - [Task 3: Enable logging for Host Pools](#task-3-enable-logging-for-host-pools)
+    - [Task 4: Enable logging for Application Groups](#task-4-enable-logging-for-application-groups)
+    - [Task 5: Enable logging for Workspaces](#task-5-enable-logging-for-workspaces)
+    - [Task 6: Enabling Azure Monitor for the Session Hosts](#task-6-enabling-azure-monitor-for-the-session-hosts)
+    - [Additional Resources](#additional-resources-9)
     - [Agent Registration issues](#agent-registration-issues)
-  - [Cases](#cases)
+    - [Cases](#cases)
     - [WVD Connection: No resources available](#wvd-connection-no-resources-available)
     - [Problem](#problem)
     - [Possible reasons](#possible-reasons)
@@ -105,8 +103,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Problem](#problem-1)
     - [Possible reasons](#possible-reasons-1)
     - [Solution](#solution-1)
-    - [WVD Agent troubleshooting](#wvd-agent-troubleshooting-1)
-    - [Troubleshooting WVD Agent issues](#troubleshooting-wvd-agent-issues-1)
+    - [WVD Agent troubleshooting](#wvd-agent-troubleshooting)
+    - [Troubleshooting WVD Agent issues](#troubleshooting-wvd-agent-issues)
     - [Agent Registration issues](#agent-registration-issues-1)
   - [Exercise 12: Lab environment clean up after completion](#exercise-12-lab-environment-clean-up-after-completion)
     - [Task 1: Delete Resource groups to remove lab environment](#task-1-delete-resource-groups-to-remove-lab-environment)
@@ -264,12 +262,13 @@ You will be creating 3 Azure AD groups to manage access to the different applica
 
 It is also important to keep in mind that these groups can also originate from the Windows Active Directory environment and synchronize via Azure AD Connect. This will be another common scenario for customers that already have processes defined on-prem for group management.
 
+## Additional Resources
 
-**Additional Resources**
-
--   [Create a basic group and add members using Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-groups-create-azure-portal) 
-
--   [Azure AD Connect sync: Understanding Users, Groups, and Contacts](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/concept-azure-ad-connect-sync-user-and-contacts) 
+  |              |            |  
+|----------|:-------------:|
+| Description | Links |
+| Create a basic group and add members in Azure AD | [Create a basic group and add members using Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-groups-create-azure-portal) |
+| Azure AD Connect sync |  [Azure AD Connect sync: Understanding Users, Groups, and Contacts](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/concept-azure-ad-connect-sync-user-and-contacts) |
 
 ### Task 1: Creating Azure AD Groups
 
@@ -668,7 +667,10 @@ In this exercise we are going to walk through the process of creating a master i
 
 ## Additional Resources
 
--   [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/capture-image-resource) 
+  |              |            |  
+|----------|:-------------:|
+| Description | Links |
+| Create a managed image of a generalized VM in Azure | [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/capture-image-resource) |
 
 ### Task 1: Create a new Virtual Machine (VM) in Azure
 
@@ -686,15 +688,18 @@ In this exercise we are going to walk through the process of creating a master i
 
     >**Note**: Make a note of the **Username** and **Password** used to create the VM. This information will be required to access the VM after creation.
 
-    >**Nore**: This guide does not walk through the process of creating a VM in Azure. However, for **Inbound port rules**, be sure to allow **RDP (3389)** , or have a bastion host deployed for remote access.
+    >**Note**: This guide does not walk through the process of creating a VM in Azure. However, for **Inbound port rules**, be sure to allow **RDP (3389)** , or have a bastion host deployed for remote access.
 
     ![The "Create a virtual machine" page within the Azure portal for the Windows 10 VM](images/windows10VMcreate.png "The 'Create a virtual machine' page within the Azure portal for the Windows 10 VM")
 
-    >**More Information**:
-    For more information on how to deploy a virtual machine in Azure, refer to: [Quickstart: Create a Windows virtual machine in the Azure portal](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-portal).
+## Additional Resources
 
-    >**More Information**:
-    For more information on how to setup a Bastion host in Azure, refer to: [Create an Azure Bastion host using the portal](https://docs.microsoft.com/en-us/azure/bastion/bastion-create-host-portal).
+  |              |            |  
+|----------|:-------------:|
+| Description | Links |
+|   For more information on how to deploy a virtual machine in Azure |[Quickstart: Create a Windows virtual machine in the Azure portal](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-portal) |
+|   For more information on how to setup a Bastion host in Azure|[Create an Azure Bastion host using the portal](https://docs.microsoft.com/en-us/azure/bastion/bastion-create-host-portal)|
+
 
 5.  Once the VM is successfully deployed, connect using RDP. Sign in using the credentials you supplied when creating the VM.
 
@@ -712,7 +717,7 @@ Despite the Azure support teams best efforts, the Marketplace images are not alw
 
     ![The settings window showing that Windows update is up to date](images/w10vmSettingsUpToDate.png "The settings window showing that Windows update is up to date")
 
-## Task 3: Prepare WVD Image
+### Task 3: Prepare WVD Image
 
 ### Introduction to the script
 
@@ -855,7 +860,7 @@ This will trigger the PowerShell form to launch. Select the appropriate options 
 
 -    Reboot the VM.
 
-## Task 4: Run Sysprep
+### Task 4: Run Sysprep
 
 1.  After the VM has rebooted, reconnect your RDP session and sign in.
 
@@ -875,7 +880,7 @@ This will trigger the PowerShell form to launch. Select the appropriate options 
 
 The system will automatically shutdown and disconnect your RDP session.
 
-## Task 5: Create a managed image from the Master Image VM
+### Task 5: Create a managed image from the Master Image VM
 
 1.  Sign in to the [Azure Portal](https://portal.azure.com/).
 
@@ -897,7 +902,7 @@ The system will automatically shutdown and disconnect your RDP session.
 
 9.  On the Overview blade for your image, make note of the **Name** field and **Resource group** field. These attributes are needed when you provision your host pools.
 
-## Task 6: Provision a Host Pool with a custom image
+### Task 6: Provision a Host Pool with a custom image
 
 1.  To start provisioning a host pool with your custom image, follow the instructions in [Exercise 5](#exercise-5-create-a-host-pool-for-pooled-desktops).
 
@@ -908,10 +913,12 @@ The system will automatically shutdown and disconnect your RDP session.
 
 In this exercise we will be creating a Windows Virtual Desktop host pool for pooled desktops. This is a set of computers or hosts which operate on an as-needed basis. In a pooled configuration we will be hosting multiple non-persistent sessions, with no user profile information stored locally. This is where FSLogix Profile Containers provide the users profile to the host dynamically. This provides the ability for an organization to fully utilize the compute resources on a single host and lower the total overhead, cost, and number of remote workstations.
 
+## Additional Resources
 
-**Additional Resources**
-
--   [Tutorial: Create a host pool with the Azure portal](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-host-pools-azure-marketplace) 
+  |              |            |  
+|----------|:-------------:|
+| Description | Links |
+| Create a host pool with the Azure portal | [Tutorial: Create a host pool with the Azure portal](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-host-pools-azure-marketplace) |
 
 ### Task 1: Create a new Host Pool and Workspace
 
@@ -980,12 +987,13 @@ With the assignment added, you can move on to the next exercise. The users in th
 
 In this exercise we will be creating a non-persistent host pool for publishing RemoteApps. This enables you to assign users access to specific applications rather than an entire desktop. This type of application deployment serves many purposes and is not new to WVD, but has existed in Windows Server Remote Desktop Services for many years.
 
+## Additional Resources
 
-**Additional Resources**
-
--   [Publish built-in apps in Windows Virtual Desktop](https://docs.microsoft.com/en-us/azure/virtual-desktop/publish-apps) 
-
--   [Tutorial: Manage app groups with the Azure portal](https://docs.microsoft.com/en-us/azure/virtual-desktop/manage-app-groups) 
+  |              |            |  
+|----------|:-------------:|
+| Description | Links |
+| Publish built-in apps in Windows Virtual Desktop | [Publish built-in apps in Windows Virtual Desktop](https://docs.microsoft.com/en-us/azure/virtual-desktop/publish-apps) |
+| Manage app groups with the Azure portal | [Tutorial: Manage app groups with the Azure portal](https://docs.microsoft.com/en-us/azure/virtual-desktop/manage-app-groups) |
 
 ### Task 1: Create a new Host Pool and Workspace
 
@@ -1124,17 +1132,18 @@ With the assignment added, you can move on to the next exercise. The users in th
 
 In this exercise we are going to walk through connecting to your WVD environment using the HTML5 web client and validating your deployment. The following operating systems and browsers are supported:
 
+## Additional Resources
+
 There are multiple clients available for you to access WVD resources. Refer to the following Docs for more information about each client:
+  |              |            |  
+|----------|:-------------:|
+| Description | Links |
+|Connect with the Windows Desktop Client |  [Connect with the Windows Desktop Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-windows-7-and-10) |
+| Connect with the HTML5 web client |  [Connect with the HTML5 Web Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-web) |
+| Connect with the Android client | [Connect with the Android Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-android) |
+| Connect with the macOS client |  [Connect with the macOS Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-macos) |
+| Connect with the iOS client | [Connect with the iOS Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-ios) |
 
--   [Connect with the Windows Desktop Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-windows-7-and-10) 
-
--   [Connect with the HTML5 Web Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-web) 
-
--   [Connect with the Android Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-android) 
-
--   [Connect with the macOS Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-macos) 
-
--   [Connect with the iOS Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-ios) 
 
 
 ### Task 1: Connecting with the HTML5 Web Client
@@ -1215,17 +1224,19 @@ In this exercise we are going to walk through connecting to your WVD environment
 
 -   [Windows ARM64](https://go.microsoft.com/fwlink/?linkid=2098961) 
 
+
+
+## Additional Resources
+
 There are multiple clients available for you to access WVD resources. Refer to the following Docs for more information about each client:
-
--   [Connect with the Windows Desktop Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-windows-7-and-10) 
-
--   [Connect with the HTML5 Web Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-web) 
-
--   [Connect with the Android Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-android) 
-
--   [Connect with the macOS Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-macos) 
-
--   [Connect with the iOS Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-ios) 
+  |              |            |  
+|----------|:-------------:|
+| Description | Links |
+|Connect with the Windows Desktop Client |  [Connect with the Windows Desktop Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-windows-7-and-10) |
+| Connect with the HTML5 web client |  [Connect with the HTML5 Web Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-web) |
+| Connect with the Android client | [Connect with the Android Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-android) |
+| Connect with the macOS client |  [Connect with the macOS Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-macos) |
+| Connect with the iOS client | [Connect with the iOS Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-ios) |
 
 
 ### Task 1: Connecting with the Windows Desktop Client
@@ -1362,17 +1373,11 @@ Provided below is a summary of the group policy settings that Microsoft recommen
 
 **WVD Pooled - Microsoft 365 Apps - User Settings**
 
-References:
-
--   [[https://docs.microsoft.com/en-us/azure/virtual-desktop/install-office-on-wvd-master-image]](https://docs.microsoft.com/en-us/azure/virtual-desktop/install-office-on-wvd-master-image) 
-
--   [[https://support.microsoft.com/en-us/help/2768656/outlook-performance-issues-when-there-are-too-many-items-or-folders-in]](https://support.microsoft.com/en-us/help/2768656/outlook-performance-issues-when-there-are-too-many-items-or-folders-in) 
--   
+  
 |              |            |               |
 |----------|:-------------:|:-------------:|
- | **Policy**  | **Value**   |  **Reason** |
- ------------------------------------------------------ ---------------- -------------------------------------------------------------------------------
-  |  Show the option for Office Insider    |                       Disabled       |         Hides the option to join office insider |
+ | **Policy**| **Value** |**Reason** |
+ |  Show the option for Office Insider    |                       Disabled       |         Hides the option to join office insider |
   |Cached Exchange Mode Sync Settings          |                     One Month           |    Prevents bloating of outlook profiles on non-persistent machines.|
   |Use Cached Exchange Mode for new and existing outlook profiles   | Enabled                | Ensures all profiles are running cached. |
   | CalendarSyncWindowSetting       |                                 Primary Calendar Only  | Sync only the primary Calendar Folder, preventing bloat in the profile.|
@@ -1380,100 +1385,99 @@ References:
 
 **WVD Pooled - Microsoft 365 Apps - Computer Settings**
 
-References:
-
--   [[https://docs.microsoft.com/en-us/azure/virtual-desktop/install-office-on-wvd-master-image]](https://docs.microsoft.com/en-us/azure/virtual-desktop/install-office-on-wvd-master-image) 
 
 |              |            |               |
 |----------|:-------------:|:-------------:|
- | **Policy**      |                                   |    **Value**    |    **Reason** |
-  ------------------------------------------------------ ---------------- -------------------------------------------------------------------------------
+ | **Policy**      |   **Value**    |    **Reason** |
  | Use Shared Computer Activation                    |     Enabled        |  Shared Computer Activation for shared desktops |
  | Enable Automatic Updates                          |     Disabled     |    Prevents office version drift between Hosts |
  | Hide option to enable or disable updates          |    Enabled      |    Prevents users for modifying settings |
  | Hide Update Notifications                         |     Enabled      |    Prevents notification to end user about available updates. |
  | Configure user Group Policy loopback processing mode  | Enabled: Merge |  Allows the Microsoft 365 User Policy to apply to users on these Session Hosts |
 
+
 **WVD Pooled - Microsoft Edge Enterprise - Computer Settings**
 
-References:
 
--   [[https://docs.microsoft.com/en-us/deployedge/microsoft-edge-update-policies]](https://docs.microsoft.com/en-us/deployedge/microsoft-edge-update-policies) 
-
-  **Policy**                       **Value**          **Reason**
-  -------------------------------- ------------------ -------------------------------------
-  Update policy override default   Updates Disabled   Disables automatic updates for Edge
+|              |            |               |
+|----------|:-------------:|:-------------:|
+ | **Policy** |  **Value**   |  **Reason** |
+|  Update policy override default  | Updates Disabled |  Disables automatic updates for Edge |
 
 **WVD Pooled - Microsoft FSLogix - Computer Settings**
 
-References:
 
--   [[https://docs.microsoft.com/en-us/FSLogix/use-group-policy-templates-ht]](https://docs.microsoft.com/en-us/FSLogix/use-group-policy-templates-ht) 
-
--   [[https://docs.microsoft.com/en-us/FSLogix/profile-container-configuration-reference]](https://docs.microsoft.com/en-us/FSLogix/profile-container-configuration-reference) 
-
--   [[https://docs.microsoft.com/en-us/FSLogix/office-container-configuration-reference]](https://docs.microsoft.com/en-us/FSLogix/office-container-configuration-reference) 
-
-  **Policy**                                               **Value**                                **Reason**
-  -------------------------------------------------------- ---------------------------------------- -------------------------------------------------------------------------------------------------------
-  Include Office Activation data in container              Enabled                                  Maintains user's office activation token in FSLogix profile
-  Delete local profile when FSLogix Profile should apply   Enabled                                  Prevents remnants of local profiles on session hosts
-  Enabled                                                  Enabled                                  Enables the FSLogix Profile Container which is required for user state management on pooled desktops.
-  Profile Type                                             Normal direct-access profile             This is the simplest configuration and allows only 1 connection to profile container
-  VHD Location                                             Enabled: \\\<servername\>\<sharename\>   The location of the stored VHD Profile. *Update for customer environment*
-  Swap Directory name components                           Enabled                                  Sorts by User name rather than SID in profile folder.
+|              |            |               |
+|----------|:-------------:|:-------------:|
+|  **Policy** | **Value**  |  **Reason** |
+ | Include Office Activation data in container  |Enabled |  Maintains user's office activation token in FSLogix profile |
+ | Delete local profile when FSLogix Profile should apply | Enabled  |Prevents remnants of local profiles on session hosts |
+  Enabled  |   Enabled  |   Enables the FSLogix Profile Container which is required for user state management on pooled desktops. |
+  | Profile Type Normal direct-access profile This is the simplest configuration and allows only 1 connection to profile container VHD Location | Enabled \<servername>\<sharename> |  The location of the stored VHD Profile. Update for customer environment Swap Directory name components Enabled Sorts by User name rather than SID in profile folder |
 
 **WVD Pooled - Microsoft OneDrive - Computer Settings**
 
-References:
-
--   [[https://docs.microsoft.com/en-us/onedrive/redirect-known-folders]](https://docs.microsoft.com/en-us/onedrive/redirect-known-folders) 
-
--   [[https://docs.microsoft.com/en-us/onedrive/use-silent-account-configuration]](https://docs.microsoft.com/en-us/onedrive/use-silent-account-configuration) 
-
--   [[https://support.office.com/en-us/article/Save-disk-space-with-OneDrive-Files-On-Demand-for-Windows-10-0e6860d3-d9f3-4971-b321-7092438fb38e]](https://support.office.com/en-us/article/Save-disk-space-with-OneDrive-Files-On-Demand-for-Windows-10-0e6860d3-d9f3-4971-b321-7092438fb38e) 
-
-  **Policy**                                                               **Value**       **Reason**
-  ------------------------------------------------------------------------ --------------- --------------------------------------------------------------------------------------------------------------------------
-  Silently move windows known folders to OneDrive                          Set Tenant ID   This policy will silently move the users Documents, Desktop, and Photos to one drive, *requires the orgs AAD Tenant ID*.
-  Silently sign into OneDrive sync client with their windows credentials   Enabled         Automatically configured one drive on sign in.
-  Use OneDrive Files On-Demand                                             Enabled         Uses Files on Demand to prevent Profile bloat.
+|              |            |               |
+|----------|:-------------:|:-------------:|
+|  **Policy**   |  **Value**    |   **Reason** |
+ | Silently move windows known folders to OneDrive   | Set Tenant ID  | This policy will silently move the users Documents, Desktop, and Photos to one drive, *requires the orgs AAD Tenant ID*.
+ | Silently sign into OneDrive sync client with their windows credentials |  Enabled  |       Automatically configured one drive on sign in.
+ | Use OneDrive Files On-Demand  | Enabled    |     Uses Files on Demand to prevent Profile bloat.
 
 **WVD Pooled - Microsoft Windows - Computer Settings**
 
-References:
+|              |            |               |
+|----------|:-------------:|:-------------:|
+ | **Policy**  |   **Value** |   **Reason** |
+ | Allow Storage Sense | Disabled   |  Disables Storage Sense in Pooled VMs
+ | Allow users to connect remotely by using remote desktop services |  Enabled   |   Enabled RDP in Host
+|  Configure Keep-Alive connection intervals |  Enabled: 1 |  Time to keep session alive post disconnect to time out. This is to help make the session available to another host as soon as possible.
+|  Configure Automatic Updates    | Disabled  |   Prevents hosts from updating on their own.
 
--   [[https://docs.microsoft.com/en-us/azure/virtual-desktop/set-up-customize-master-image]](https://docs.microsoft.com/en-us/azure/virtual-desktop/set-up-customize-master-image) 
+    In addition to the Administrative templates settings specified in the table above, the WVD Pooled - Microsoft Windows - Computer Settings Group Policy Object (GPO) contains the following registry preference items
 
-  **Policy**                                                         **Value**    **Reason**
-  ------------------------------------------------------------------ ------------ -----------------------------------------------------------------------------------------------------------------------------------------
-  Allow Storage Sense                                                Disabled     Disables Storage Sense in Pooled VMs
-  Allow users to connect remotely by using remote desktop services   Enabled      Enabled RDP in Host
-  Configure Keep-Alive connection intervals                          Enabled: 1   Time to keep session alive post disconnect to time out. This is to help make the session available to another host as soon as possible.
-  Configure Automatic Updates                                        Disabled     Prevents hosts from updating on their own.
 
-In addition to the Administrative templates settings specified in the
-table above, the WVD Pooled - Microsoft Windows - Computer Settings gpo
-contains the following registry preference items
+  **Registry Path**  
+  |              |            |               |
+|----------|:-------------:|:-------------:|                                                          
+|**Registry Key** | **Value** |  **Reason** |
+ | HKLM\\Software\\Policies\\Microsoft\\Windows\\WorkplaceJoin                       BlockWorkplaceJoin  |           1  |         Block domain joined machines from inadvertently getting Azure AD registered by users |
+ | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   MaxMonitors  |  4   |        
+|  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   MaxXResolution   |              5120 |        
+ | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   MaxYResolution   |              2880  |      
+ | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   PortNumber    |                 3389   |     
+ | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   LanAdapter      |               0  |         
+ | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   UserAuthentication   |          1     |      
+ | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   SecurityLayer    |              1    |       
+ | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   fAllowSecProtocolNegotiation |  1     |      
+|  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   KeepAliveTimeout    |           1    |       
+ | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   fInheritReconnectSame    |      1     |     
+ | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   fReconnectSame     |            1   |        
+ | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-sxs   MaxMonitors    |                4    |       
+ | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-sxs   MaxXResolution   |              5120  |      
+| HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-sxs   MaxYResolution   |              2880   |     
+ | HKLM\\ SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation                    RealTimeIsUniversal   |         1      |     
 
-  **Registry Path**                                                                 **Registry Key**               **Value**   **Reason**
-  --------------------------------------------------------------------------------- ------------------------------ ----------- --------------------------------------------------------------------------------------
-  HKLM\\Software\\Policies\\Microsoft\\Windows\\WorkplaceJoin                       BlockWorkplaceJoin             1           Block domain joined machines from inadvertently getting Azure AD registered by users
-  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   MaxMonitors                    4           
-  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   MaxXResolution                 5120        
-  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   MaxYResolution                 2880        
-  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   PortNumber                     3389        
-  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   LanAdapter                     0           
-  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   UserAuthentication             1           
-  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   SecurityLayer                  1           
-  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   fAllowSecProtocolNegotiation   1           
-  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   KeepAliveTimeout               1           
-  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   fInheritReconnectSame          1           
-  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   fReconnectSame                 1           
-  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-sxs   MaxMonitors                    4           
-  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-sxs   MaxXResolution                 5120        
-  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-sxs   MaxYResolution                 2880        
-  HKLM\\ SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation                    RealTimeIsUniversal            1           
+## Additional Resources
+
+  |              |            |  
+|----------|:-------------:|
+| Description | Links |
+| WVD Pooled - Microsoft 365 Apps | |
+| Install Office on WVD master image | [[https://docs.microsoft.com/en-us/azure/virtual-desktop/install-office-on-wvd-master-image]](https://docs.microsoft.com/en-us/azure/virtual-desktop/install-office-on-wvd-master-image) |
+| Outlook performance issues when there are too many items or folders | [[https://support.microsoft.com/en-us/help/2768656/ |outlook-performance-issues-when-there-are-too-many-items-or-folders-in]](https://support.microsoft.com/en-us/help/2768656/outlook-performance-issues-when-there-are-too-many-items-or-folders-in) |
+| WVD Pooled - Microsoft Edge Enterprise - Computer Settings | |
+| Microsoft Edge update policies | [[https://docs.microsoft.com/en-us/deployedge/microsoft-edge-update-policies]](https://docs.microsoft.com/en-us/deployedge/microsoft-edge-update-policies) |
+| WVD Pooled - Microsoft FSLogix - Computer Settings | |
+| FSLogix group policy templates |  [[https://docs.microsoft.com/en-us/FSLogix/use-group-policy-templates-ht]](https://docs.microsoft.com/en-us/FSLogix/use-group-policy-templates-ht) |
+| FSLogix profile container configuration |   [[https://docs.microsoft.com/en-us/FSLogix/profile-container-configuration-reference]](https://docs.microsoft.com/en-us/FSLogix/profile-container-configuration-reference) |
+| FSLogix Office container configuration |  [[https://docs.microsoft.com/en-us/FSLogix/office-container-configuration-reference]](https://docs.microsoft.com/en-us/FSLogix/office-container-configuration-reference) |
+| WVD Pooled - Microsoft OneDrive - Computer Settings | |
+| OneDrive redirect known folders | [[https://docs.microsoft.com/en-us/onedrive/redirect-known-folders]](https://docs.microsoft.com/en-us/onedrive/redirect-known-folders) |
+| OneDrive silent account configuration | [[https://docs.microsoft.com/en-us/onedrive/use-silent-account-configuration]](https://docs.microsoft.com/en-us/onedrive/use-silent-account-configuration) |
+| Save disk space with OneDrive files on demand for Windows 10 |  [[https://support.office.com/en-us/article/Save-disk-space-with-OneDrive-Files-On-Demand-for-Windows-10-0e6860d3-d9f3-4971-b321-7092438fb38e]](https://support.office.com/en-us/article/Save-disk-space-with-OneDrive-Files-On-Demand-for-Windows-10-0e6860d3-d9f3-4971-b321-7092438fb38e) |
+| WVD Pooled - Microsoft Windows - Computer Settings | |
+| Set-up customized master image |  [[https://docs.microsoft.com/en-us/azure/virtual-desktop/set-up-customize-master-image]](https://docs.microsoft.com/en-us/azure/virtual-desktop/set-up-customize-master-image) |
 
 ## Exercise 11: Setup Monitoring for WVD
 
@@ -1488,9 +1492,12 @@ In this exercise we will setup monitoring for our WVD host pools. There are mult
 
 ### Additional Resources
 
--   [Use Log Analytics for the diagnostics feature](https://docs.microsoft.com/en-us/azure/virtual-desktop/diagnostics-log-analytics) 
-
--   [Create diagnostic setting to collect resource logs and metrics in Azure](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings) 
+  |              |            |  
+|----------|:-------------:|
+| Description | Links |
+| Use Log Analytics for diagnostic features | [Use Log Analytics for the diagnostics feature](https://docs.microsoft.com/en-us/azure/virtual-desktop/diagnostics-log-analytics) |
+| Create diagnostic settings to collect resource logs and metrics in Azure |  [Create diagnostic setting to collect resource logs and metrics in Azure](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings) |
+| PG Blog for Log Analytics Dashboard and Azure Monitor | https://techcommunity.microsoft.com/t5/windows-it-pro-blog/proactively-monitor-arm-based-windows-virtual-desktop-with-azure/ba-p/1508735 |
 
 ### Task 1: Create a Log Analytics workspace
 
@@ -1525,16 +1532,17 @@ Like many other Azure services, WVD uses Azure Monitor for monitoring and alerts
 
 Each WVD ARM object has different diagnostic data categories available. For example, host pool objects will have a different set of options then Workspaces. Refer to the following table for a summary of each data category and their associated objects.
 
-  **Category**        **Description**                                                                                                                                                                                              **ARM Object(s)**
-  ------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --------------------------------------------
-  Checkpoint          Specific steps in the lifetime of an activity that were reached. For example, during a session, a user was load balanced to a particular host, then the user was signed on during a connection, and so on.   Host pools, Application groups, Workspaces
-  Connection          When users initiate and complete connections to the service.                                                                                                                                                 Host pools
-  Error               Are users encountering any issues with specific activities? This feature can generate a table that tracks activity data for you as long as the information is joined with the activities.                    Host pools, Application groups, Workspaces
-  Feed                Can users successfully subscribe to workspaces? Do users see all resources published in the Remote Desktop client?                                                                                           Workspaces
-  Host Registration   Was the session host successfully registered with the service upon connecting?                                                                                                                               Host pools
-  Management          Track whether attempts to change Windows Virtual Desktop objects using APIs or PowerShell are successful. For example, can someone successfully create a host pool using PowerShell?                         Host pools, Application groups, Workspaces
+  |              |            |     |
+|----------|:-------------:|:-------------:|
+| **Category**  |**Description**  |                                                                 **ARM Object(s)** |
+  Checkpoint   |       Specific steps in the lifetime of an activity that were reached. For example, during a session, a user was load balanced to a particular host, then the user was signed on during a connection, and so on. |  Host pools, Application groups, Workspaces
+  Connection    |      When users initiate and complete connections to the service.    |                                                                                                                                             Host pools
+  Error       |        Are users encountering any issues with specific activities? This feature can generate a table that tracks activity data for you as long as the information is joined with the activities.     |               Host pools, Application groups, Workspaces |
+  Feed   |             Can users successfully subscribe to workspaces? Do users see all resources published in the Remote Desktop client?      |                                                                                     Workspaces |
+  Host Registration  | Was the session host successfully registered with the service upon connecting?       |                                                                                 Host pools| 
+  Management     |     Track whether attempts to change Windows Virtual Desktop objects using APIs or PowerShell are successful. For example, can someone successfully create a host pool using PowerShell?       |                  Host pools, Application groups, Workspaces
 
-### Enable logging for Host Pools
+### Task 3: Enable logging for Host Pools
 
 1.  Sign in to the [Azure Portal](https://portal.azure.com/) .
 
@@ -1560,7 +1568,7 @@ Each WVD ARM object has different diagnostic data categories available. For exam
 
         -    **Log Analytics workspace:** Select the desired workspace.
 
-### Enable logging for Application Groups
+### Task 4: Enable logging for Application Groups
 
 1.  Sign in to the [Azure Portal](https://portal.azure.com/).
 
@@ -1586,7 +1594,7 @@ Each WVD ARM object has different diagnostic data categories available. For exam
 
              -    **Log Analytics workspace:** Select the desired workspace.
 
-### Enable logging for Workspaces
+### Task 5: Enable logging for Workspaces
 
 1.  Sign in to the [Azure Portal](https://portal.azure.com/) .
 
@@ -1614,15 +1622,18 @@ Each WVD ARM object has different diagnostic data categories available. For exam
 
 At this point you should have diagnostic data enabled on at least 1 WVD ARM object of each type. To enable monitoring for additional objects, rinse and repeat the above steps.
 
-### Task 3: Enabling Azure Monitor for the Session Hosts
+### Task 6: Enabling Azure Monitor for the Session Hosts
 
 Azure Monitor is leveraged with WVD to monitor the performance and health of your session host VMs. This feature can be enabled for Azure VMs in a number of ways. In this exercise we will walk through enabling Azure Monitor on VMs using the Azure portal. Refer to the following links for guidance on automation.
 
--   [Enable monitoring for a single Azure VM](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/vminsights-enable-single-vm#enable-monitoring-for-a-single-azure-vm) 
+### Additional Resources
 
--   [Enable Azure Monitor for VMs by using Azure Policy](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/vminsights-enable-at-scale-policy) 
-
--   [Enable Azure Monitor for VMs using Azure PowerShell or Resource Manager templates](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/vminsights-enable-at-scale-powershell) 
+  |              |            |  
+|----------|:-------------:|
+| Description | Links |
+|Enable monioring for a single Azure VM |  [Enable monitoring for a single Azure VM](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/vminsights-enable-single-vm#enable-monitoring-for-a-single-azure-vm) |
+|Enable Azure Monitor for VMs by using Azure Policy |   [Enable Azure Monitor for VMs by using Azure Policy](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/vminsights-enable-at-scale-policy) |
+|Enable Azure Monitor for VMs using Azure templates |  [Enable Azure Monitor for VMs using Azure PowerShell or Resource Manager templates](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/vminsights-enable-at-scale-powershell) |
 
 1.  Sign in to the [Azure Portal](https://portal.azure.com/).
 
@@ -1652,227 +1663,7 @@ Monitor the notification bell in the upper-right corner and wait for the deploym
 
 At this point you should have Azure Monitor enabled on at least 1 session host VM. To enable Azure Monitor for additional session hosts, rinse and repeat the above steps. For automation, leverage Azure Policy or PowerShell to enable monitoring on multiple VMs.
 
-### Task 4: Enabling Sepago for the Session Hosts
 
-This task currently references utilizing Sepago for the agent-based monitoring solution.  However, there is also the recommended option of utiziling the native Log Analytics agent. https://techcommunity.microsoft.com/t5/windows-it-pro-blog/proactively-monitor-arm-based-windows-virtual-desktop-with-azure/ba-p/1508735 
-
-Sepago is a Microsoft partner. They have developed an agent-based monitoring solution for WVD, RDS, and Citrix that focuses on user experience. The Sepago offering is available in the Azure Gallery and is reffered to as a \"Microsoft Preferred Solution\". A Microsoft preferred solution is a cloud application selected for its quality, performance, and ability to address customer needs in certain areas. These solutions are validated by a team of Microsoft experts. The Sepago Agent monitors each session host in your WVD environment. The agent is focused on events, performance consumption, network activities and other metrics that determine a user's IT experiences.
-
-### Deploying Sepago
-
->**Note**: Deploying the Sepago solution will require you to setup a new Log Analytics workspace. If you already have a Log Analytics workspace deployed for WVD monitoring, skip to the next section.
-
-1.  Sign in to the [Azure Portal](https://portal.azure.com/) .
-
-2.  At the top of the page, Select **+Create resource**.
-
-3.  On the Azure Marketplace blade, type **azure monitor for rds**. Select **Azure Monitor for RDS and Windows Virtual Desktop** from the list.
-
-4.  On the Sepago solution page, Select **Create**.
-
-5.  On the Create Azure Monitor for RDS and Windows Virtual Desktop page, fill in the following information and Select **Review + Create**.
-
-    -    **Subscription:** Select the desired subsciption for the Log Analytics workspace.
-
-    -    **Resource group:**
-
-    -    **Region:**
-
-    -    **Name of the Azure Monitor workspace:**
-
-6.  On the verification page, Select **Create**.
-
-Monitor the notification bell in the upper-right corner and wait for the deployment to complete. This can take 2-3 minutes. Once complete, you will have a new resource group and log analytics workspace. The custom Sepago views have also been imported as part of this operation.
-
-### (Optional): Import Sepago OMS Views
-
-Follow these steps if you have an existing Log Analytics workspace and would like to import the Sepago OMS views.
-
-1.  Open a brower and navigate to the developer\'s GitHub page: <https://github.com/MarcelMeurer/LogAnalytics-for-Citrix-and-RDS> .
-
-2.  Download and extract the source files to a temporary folder.
-
-3.  Sign in to the [Azure Portal](https://portal.azure.com/) .
-
-4.  At the top of the page, in the **Search resources** field, type \"**log analytics**\". Select **Log Analytics workspaces** from the list.
-
-5.  On the Log Analytics workspaces blade, locate your workspace and Select on the name.
-
-6.  On the blade for your workspace, under General, select **View Designer**.
-
-7.  Proceed with importing the **.omsview** files to your workspace.
-
-### Prepare the Sepago Monitoring Agent
-
-Once you have the workspace created above (or are using a workspace already built) you need to deploy the Sepago agent to all your session hosts and/or add the agent to a master image.
-
-Your first step prior to downloading and installing the agent will be to obtain the Workspace ID and SharedKey from your Log Analytics workspace.
-
-1.  Sign in to the [Azure Portal](https://portal.azure.com/) .
-
-2.  At the top of the page, in the **Search resources** field, type \"**log analytics**\". Select **Log Analytics workspaces** from the list.
-
-3.  On the Log Analytics workspaces blade, locate your workspace and Select on the name.
-
-4.  On the blade for your workspace, under Settings, select **Advanced settings**.
-
-5.  Locate and copy the following items to Notepad:
-
-    -    **Workspace ID**
-
-    -    **Primary key**
-
-6.  Download the latest version of the Sepago agent from the product page: <http://loganalytics.sepago.com/download.html> 
-
-7.  Extract the contents of the file to a temporary folder.
-
-8.  Open the directory and rename the folder **Azure Monitor for WVD** to **Sepago Monitoring Agent**.
-
-9.  Move the **Sepago Monitoring Agent** folder to **C:\\Program Files** on the session host or the VM used to creat your master
-    image.
-
-10. Edit the following file in Notepad:
-
-
-    ``
-    C:\\Program Files\\Sepago Monitoring Agent\\ITPC-LogAnalyticsAgent.exe.config
-    ``
-
-11. Replace the placeholder value for **CustomerId** with the **Workspace Id** that you recordered in Step 5.
-
-12. Replace the placeholder value for **SharedKey** with the **Primary Key** that you recorded in Step 5.
-
-13. **Save** your changes.
-
-### Install the Sepago Monitoring Agent
-
-1.  From the device where the Sepago Monitoring Agent has been staged, open an elevated command prompt.
-
-2.  Change directories to the Sepago Monitoring Agent.
-
-3.  cd \"C:\\Program Files\\Sepago Monitoring Agent\"
-
-4.  Run the following command to valide the Sepago Monitoring Agent can communicate with your Log Analytics workspace.
-
-5.  ITPC-LogAnalyticsAgent.exe -test
-
-6.  Confirm the returning output shows \"**Sending test data**\",
-    followed by \"**Done**\".
-
-    >**Note**: If you receive an error, there could be a potential communication problem. Confirm you have entered The correct Workspace Id and Primary key values. If the connection test still fails, confirm network connectivity with the Log Analytics workspace.
-
-7.  Run the following command to install the Sepago Monitoring Agent.
-
-8.  ITPC-LogAnalyticsAgent.exe -install
-
-9.  Confirm the returning output is successful.
-
-10. Reboot the device.
-
-    >**Note**: If you are doing this on the session host, rinse and repeat these steps for the entire host pool.
-
-11. Sign in to the device where you installed the Sepago Monitoring Agent.
-
-12. Open ### Task Scheduler** and confirm that **ITPC-LogAnalyticsAgent for RDS** appears under **Active Tasks**.
-
-### (Optional): Generate Artificial Events
-
-In a lab environment it may be necessary to generate artificial activity on the session host. One way to generate monitoring events is to put a simulated load on the CPU.
-
-To create a simulated load, you can perform the following:
-
--   RDP into a session host as one of your WVD test users
-
--   Download ListDLLs from Sysinternals
-
--   Use PowerShell to repeatedly run ListDLLs
-
-Sample PowerShell (replace proper path below):
-
-```
-\$intCounter = 1
-
-while (\$intCounter -lt 100) 
-{
-
-start-process \"C:\\users\\\<useraccount\>\\Downloads\\ListDlls\\ListDlls.exe\"
-
-start-sleep 10 \$intCounter++
-
-}
-```
-
-You may need to run ListDlls.exe once and accept the EULA before running the script above.
-
-Let the script execute for several minutes. Wait some more time for the metrics to be reported into the Log Analytics workspace.
-
-Navigate to the Log Analytics workspace.
-
-Performance counters and performance metrics are captured in ITPC\_CTX\_PerfData\_CL. To display a table of performance data results, use the following Kusto Query:
-
-```
-ITPC\_CTX\_PerfData\_CL
-
-\| where TimeGenerated \> ago(1h)
-
-\| where Category == \"Processor Information\"
-```
-
-The results will include a table similar to the one shown below. You will see that one of your Session Hosts has a significant amount of CPU utilization (running ListDlls) while the others do not.
-
-If you change the view to a timechart you can see the utilization over a time period (for instance, as shown below, a 24 hour period). We can see the two most active processes are the ListDLL64.exe and MsMpEng.exe (Defender AV scanning). Use the following Kusto query to generate a timechart:
-
-```
-ITPC\_CTX\_Process\_CL
-
-\| summarize avg(PercentProcessorTime\_d) by Name\_s, TimeGenerated
-
-\| where Name\_s != \"System Idle Process\"
-
-\| order by avg\_PercentProcessorTime\_d desc
-
-\| take 20
-
-\| render timechart
-```
-Set the time range to 24 hours.
-
-By setting the time range to **last hour** you can get a \"zoom in\" on the last hour of performance.
-
-We can look at individual process time with the following query:
-
-```Kusto
-ITPC\_CTX\_Process\_CL
-
-\| where TimeGenerated \> ago(1h)
-
-\| where Name\_s != \"System Idle Process\"
-
-\| order by PercentProcessorTime\_d desc
-
-\| take 20
-
-\| render timechart
-```
-A common ask is to identify the different VM sizes being used in your host pools. In the lab environment, this will be a single-color pie chart because you generally use a single VM size.
-
-```Kusto
-ITPC\_CTX\_Worker\_CL
-
-\| summarize count() by VmSize\_s
-
-\| render piechart
-```
-
-The following Kusto query will indicate the session information for active sessions:
-
-```Kusto
-ITPC\_CTX\_Session\_CL
-
-\| where TimeGenerated \> ago(1h)
-
-\| project ConnectTime\_t, LoginTime\_t, UserName\_s,
-ConnectionState\_s, Worker\_s, DesktopGroup\_s
 ```
 
 ### Example Kusto Queries
@@ -1908,7 +1699,7 @@ Deployment failure for domain joining
 
 {\"code\":\"DeploymentFailed\",\"message\":\"At least one resource deployment operation failed. Please list deployment operations for details. Please see <https://aka.ms/arm-debug>  for usage details.\",\"details\":\[{\"code\":\"Conflict\",\"message\":\"{\\r\\n\\\"status\\\": \\\"Failed\\\",\\r\\n \\\"error\\\": {\\r\\n\\\"code\\\":\\\"ResourceDeploymentFailure\\\",\\r\\n \\\"message\\\":\\\"The resource operation completed with terminal provisioning state\'Failed\'.\\\",\\r\\n \\\"details\\\": \[\\r\\n {\\r\\n\\\"code\\\": **\\\"VMExtensionProvisioningError\\\",\\r\\n\\\"message\\\": \\\"VM has reported a failure when processing extension**
 
-**\'joindomain\'. Error message: \\\\\\\"Exception(s) occured while joining Domain**
+**\'joindomain\'. Error message: \\\\\\\"Exception(s) occurred while joining Domain**
 
 **\'[ds.CUSTOMERDOMAIN.com](http://ds.customerdomain.com/) \'\\\\\\\".\\\"\\r\\n}\\r\\n \]\\r\\n }\\r\\n}\"}\]}**
 
@@ -2052,15 +1843,15 @@ type 3
 
 When using an ARM template you man encounter domain join errors. Use the following tips to verify what information is being displayed.
 
-1. Verify the AD permissions for the domain account. In some enterprises the account being used to join the domain is not a domain admin and only has limited rights to a specific OU for create and delete of objects.
+1. Verify the AD permissions for the domain account. In some enterprises the account being used to join the domain is not a domain admin and only has limited rights to a specific Organizational Unit (OU) for create and delete of objects.
 
 2. If you receive a domain join failure ensure that credentials are correct.
 
 3. Attempt to provision a new windows machine with just the Azure portal and manually domain join the machine in the exact OU that the admin states he/she has permissions to.
 
-    - Also if there may be enforced permissions to the OU you can try other Ous.
+    - Also if there may be enforced permissions to the OU you can try other OUs.
 
-4. Attempt to use another elevated account from an IT person that has rights with other Ous.
+4. Attempt to use another elevated account from an IT person that has rights with other OUs.
 
 5. If there is a failure for the domain join, RDP into the WVD machine that is created with the local account created that mirrors the domain account entered in the field. Open event viewer and in
 
@@ -2140,7 +1931,6 @@ Manually install Windows Virtual Desktop agent and register it using the steps d
 1.  Once the agent is manually installed, you should see the Get-RDSSessionHost -TenantName \<tenantname\> HostPoolName \<hostpoolname\> output as below:
 
 ```
-<!-- -->
 ```
 1.  In case the manual installation fails, review
 
@@ -2156,16 +1946,18 @@ o Event Viewer - \> Windows Logs -\> Application. Look for events with the sourc
 -   MsiInstaller  ? RDAgentBootLoader
 
 -   WVD-Agent-Updater
+```
+|              |            |  
+|----------|:-------------:|
+|  **Error Code** |  **Description**   |                      
+|  112       |       There is not enough space on the disk   |
+|  1603      |       Fatal error during installation         
+|  1605        |     This action is only valid for products that are currently installed |
+| 1618   | Another installation is already in progress. Complete that installation before proceeding with this install |
+|  1638    |        Another version of this product is already installed. Installation of this version cannot continue. To configure or remove the existing version of this product, use Add/Remove Programs on the Control Panel |
+|  2277      |   RD
 
-  **Error Code**   **Description**                         
-  ---------------- --------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  112              There is not enough space on the disk   
-  1603             Fatal error during installation         
-  1605                                                     This action is only valid for products that are currently installed
-  1618                                                     Another installation is already in progress. Complete that installation before proceeding with this install
-  1638                                                     Another version of this product is already installed. Installation of this version cannot continue. To configure or remove the existing version of this product, use Add/Remove Programs on the Control Panel
-                   2277                                    RD
-
+```
 -   Enable Verbose MSI logging , reattempt install and review the output logs
 
 Internal Logging:
@@ -2173,9 +1965,10 @@ Internal Logging:
 In case Geneva Monitoring Agent is installed on the VM , we should be able to see data about agent upgrade failures in our Kusto database.
 
 Below is an example Kusto query
+```
 
-**Kusto**
-```Kusto RDInfraTrace
+```
+Kusto RDInfraTrace
 
 \| where PreciseTimeStamp \>= datetime(2019-07-01 00:00:37)
 
@@ -2204,10 +1997,10 @@ WVDEventLogger (3019, \"WVD-Agent-Transport\");
 
   **Error**   **Description**                                                                                                                                       
   ----------- ----------------------------------------------------------------------------------------------------------------------------------------------------- --
-              WVD-Agent service is being stopped: ENDPOINT\_NOT\_FOUND , This VM needs to be properly                                                               
-              registered in order to participate in the deployment                                                                                                  
-              WVD-Agent service is being stopped: INVALID\_REGISTRATION\_TOKEN, This VM needs to be properly registered in order to participate in the deployment   
-              WVD-Agent service is being stopped: NAME\_ALREADY\_REGISTERED, This VM needs to be properly registered in order to participate in the deployment      
+    WVD-Agent service is being stopped: ENDPOINT\_NOT\_FOUND , This VM needs to be properly                                                               
+    registered in order to participate in the deployment                                                                                                  
+    WVD-Agent service is being stopped: INVALID\_REGISTRATION\_TOKEN, This VM needs to be properly registered in order to participate in the deployment   
+    WVD-Agent service is being stopped: NAME\_ALREADY\_REGISTERED, This VM needs to be properly registered in order to participate in the deployment      
 
 Internal logging
 
@@ -2217,7 +2010,7 @@ Demo of Management UX
 
 The installation of the [Management UX](https://github.com/Azure/RDS-Templates/tree/master/wvd-templates/wvd-management-ux) can be found here.
 
-## Cases
+### Cases
 
 ### WVD Connection: No resources available
 
@@ -2526,7 +2319,7 @@ Deployment failure for domain joining
 
 {\"code\":\"DeploymentFailed\",\"message\":\"At least one resource deployment operation failed. Please list deployment operations for details. Please see [[https://aka.ms/arm-debug]](https://aka.ms/arm-debug) for usage details.\",\"details\":\[{\"code\":\"Conflict\",\"message\":\"{\\r\\n \"status\": \"Failed\",\\r\\n \"error\": {\\r\\n \"code\": \"ResourceDeploymentFailure\",\\r\\n \"message\": \"The resource operation completed with terminal provisioning state \'Failed\'.\",\\r\\n \"details\": \[\\r\\n {\\r\\n \"code\": \"VMExtensionProvisioningError\",\\r\\n \"message\": \"VM has reported a failure when processing extension
 
-\'joindomain\'. Error message: \\\"Exception(s) occured while joining Domain
+\'joindomain\'. Error message: \\\"Exception(s) occurred while joining Domain
 
 \'[[ds.CUSTOMERDOMAIN.com]](http://ds.customerdomain.com/)  \'\\\".\"\\r\\n }\\r\\n \]\\r\\n }\\r\\n}\"}\]}
 
@@ -2669,9 +2462,9 @@ When using an ARM template you man encounter domain join errors. Use the followi
 
 3.  Attempt to provision a new windows machine with just the Azure portal and manually domain join the machine in the exact OU that the admin states he/she has permissions to.
 
-- Also if there may be enforced permissions to the OU you can try other Ous.
+- Also if there may be enforced permissions to the OU you can try other OUs.
 
-4. Attempt to use another elevated account from an IT person that has rights with other Ous.
+4. Attempt to use another elevated account from an IT person that has rights with other OUs.
 
 5. If there is a failure for the domain join, RDP into the WVD machine that is created with the local account created that mirrors the domain account entered in the field. Open event viewer and in
 
