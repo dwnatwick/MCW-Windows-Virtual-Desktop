@@ -2496,7 +2496,7 @@ C:WindowsdebugNetSetup.log
 ## Exercise 12: Lab environment clean up after completion
 
 | WARNING: Prior to continuing you should remove all resources used for this lab.  To do this in the **Azure Portal** click **Resource groups**.  Select any resources groups you have created.  On the resource group blade click **Delete Resource group**, enter the Resource Group Name and click **Delete**.  Repeat the process for any additional Resource Groups you may have created. **Failure to do this may cause issues with other labs.** |
-     | --- |  
+   
 
 ### Task 1: Delete Resource groups to remove lab environment
 
