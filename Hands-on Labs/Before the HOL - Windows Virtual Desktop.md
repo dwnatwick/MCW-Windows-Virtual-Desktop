@@ -115,6 +115,9 @@ deployment. To avoid confusion and deployment errors, **open an InPrivate browse
     - Create a **Default user password**
     - Select **Review + create**
 
+    >**Note**: Make sure that you save these inputs, they will be needed for reference when you go through the HOL Step-by-Step
+
+    
     ![WVD Domain custom deployment template](images\wvdcustomdeployment.png "Windows Virtual Desktop custom deployment template")
 
 6.  Agree to the Terms and conditions and click **Purchase**.

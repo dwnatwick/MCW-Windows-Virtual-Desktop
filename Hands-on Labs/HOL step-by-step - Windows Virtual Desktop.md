@@ -75,7 +75,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Additional Resources](#additional-resources-5)
     - [Task 1: Connecting with the HTML5 Web Client](#task-1-connecting-with-the-html5-web-client)
     - [Troubleshooting](#troubleshooting)
-    - [>Web client keeps prompting for credentials](#blockquoteweb-client-keeps-prompting-for-credentialsblockquote)
+    - [Web client keeps prompting for credentials](#web-client-keeps-prompting-for-credentials)
   - [Exercise 9: Connect to WVD with the Windows Desktop Client](#exercise-9-connect-to-wvd-with-the-windows-desktop-client)
     - [Additional Resources](#additional-resources-6)
     - [Task 1: Connecting with the Windows Desktop Client](#task-1-connecting-with-the-windows-desktop-client)
@@ -139,9 +139,11 @@ In this exercise you will be configuring [Azure AD Connect](https://docs.microso
 
 2.  Type **Resource groups** in the search field and select it from the list.
 
-3.  On the Resource groups blade, Select on the **Infra** resource group.
+3.  On the Resource groups blade, Select on the resource group name that you created in the **Before the HOL** template deployment.
 
 4.  On the Infra Resource group blade, review the list of available resources. Locate the resource named **AdPubIP1** and Select on it. Note that the resource type should be **Public IP address**.
+
+    ![](images/publicip.png "Public IP address for Domain Controller VM")
 
 5.  On the Overview page for AdPubIP1, locate the **IP address** field. Copy the IP address to a safe location.
 
@@ -171,6 +173,8 @@ In an effort to simplify tasks in this lab, we will start by disabling [IE Enhan
 
 4.  On the Internet Explorer Enhanced Security Configuration window, under **Administrators**, select the **Off** radio button and Select **OK**.
 
+    ![](images/disablesecurity.png "Disable enhanced security configuration")
+
 ### Task 3: Creating a Domain Admin account
 
 By default, Azure AD Connect does not synchronize the built-in domain administrator account [ADAdmin\@MyADDomain.com](mailto:ADAdmin@MyADDomain.com). This system account has the attribute isCriticalSystemObject set to *true*, preventing it from being synchronized. While it is possible to modify this, it is not a best practice to do so.
@@ -179,29 +183,36 @@ By default, Azure AD Connect does not synchronize the built-in domain administra
 
     ![Server Manager Tools](images/serverMangerTools.png "Server Manager Tools") 
 
-2.  In Active Directory Users and Computers, right-Select the **Users** organization unit and select **New \> User** from the menu.
+2.  In Active Directory Users and Computers, right-click the **Users** organization unit and select **New \> User** from the menu.
 
     ![Folder path for new user](images/newUser.png "Folder path for new user") 
 
 3.  Complete the New User wizard.
 
+    ![](images/newuserobject.png "Create a new user")
+
+
     ![New User Wizard window](images/newUserWizard.png "New User Wizard window") 
+
+    ![](images/finishnewuser.png "Finish new user setup")
 
     >**Note**: This account will be important in future tasks. Make a note of the username and password you create. When setting the password, uncheck the box **User must change password at next logon**.
 
-4.  In Active Directory Users and Computers, right-Select on the new user account object and select **Add to a group**.
+4.  In Active Directory Users and Computers, right-click on the new user account object and select **Add to a group**.
+
+    ![](images/addusertogroup.png "Add new user to a group")
 
 5.  On the Select Groups dialog window, type **Domain Admins** and Select **OK**.
-
+   
     >**Note**: This account will be used during the host pool creation process for joining the hosts to the domain. Granting Domain Admin permissions will simplify the lab.However, any Active Directory account that has the following permissions will suffice. This can be done using [Active Directory Delegate Control](https://danielengberg.com/domain-join-permissions-delegate-active-directory/). 
 
--   Create computer objects
-
--   Delete computer object
+    ![](images/addusertodomainadmins.png "Add user to Domain Admins group")
 
 ### Task 4: Configuring Azure AD Connect
 
 1.  On the desktop of the domain controller, locate the icon for **Azure AD Connect** and double-Select on it.
+
+    ![](images/azureadconnect.png "Azure AD Connect desktop icon")
 
 2.  Accept the license terms and privacy notice, then select continue. On the next screen select **Use express settings**. The required components will install.
 
@@ -209,13 +220,19 @@ By default, Azure AD Connect does not synchronize the built-in domain administra
 
 3.  On the Connect to Azure AD page, enter in the Azure AD Global Admin credentials. For example: [azadmin\@MyAADdomain.onmicrosoft.com](mailto:azadmin@MyAADdomain.onmicrosoft.com) and the correct password. Select **Next**.
 
+    ![](images/adconnectazuresub.png "Azure AD Connect - Azure AD login")
     >**Note**: This is the account associated with your Azure subscription.
 
 4.  On the Connect to AD DS page, enter in the Active Directory credentials for a Domain Admin account. For example, if you used the ARM template deployment for the domain controller, the credentials will be something along the lines of: **[[MyADDomain.com]](http://myaddomain.com/) \\ADadmin** with the password: **WVD\@zureL\@b2019!**. Select **Next**
 
+    ![](images/azureadconnectdclogin.png "Azure AD Connect - Domain login")
     >**Note**: If you copy and paste the password, please ensure that there are no trailing spaces, as that will cause the verification to fail.
 
 5.  Select **Install** to start the configuration and synchronization.
+
+    ![](images/azureadsigninconfig.png "Azure AD sign-in configuration")
+
+    ![](images/azureadready.png "Azure AD Connect Ready to configure")
 
 6.  After a few minutes the Azure AD Connect installation will complete.
     Select **Exit**.
@@ -229,7 +246,7 @@ By default, Azure AD Connect does not synchronize the built-in domain administra
 
 10. On the Azure Active Directory blade, under **Manage**, select **Users**.
 
-11. Review the list of user account objects and confirm the test accounts have synchronized, as shown below.
+11. Review the list of user account objects and confirm the test accounts have synchronized.
 
     >**Note**: It can take up to 15 minutes for the Active Directory objects to be synchronized to the Azure AD tenant.
 
@@ -313,7 +330,7 @@ Now that the Azure AD groups are in place, we will assign users for testing. Onc
 
 ![Azure AD blade](images/newMember.png)
 
-5.  In the search field, enter the name of a User to add Select **Select** to add them to the group.
+5.  In the search field, enter the name of a User to add **Select** to add them to the group.
 
 6.  Repeat steps 4-6 for the other 2 groups.
 
@@ -329,7 +346,7 @@ There are multiple solutions available for storing FSLogix profiles containers.
 
 -   Azure Files - [Create an FSLogix profile container with Azure Files](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-profile-container-adds) 
 
-In this exercise you will be creating an Azure Files share and enabling SMB access via Active Directory authentication. Azure Files is a platform service (PaaS) and is one of the recommended solutions for hosting FSLogix containers for WVD users. At the end of this exercise you will have the following components:
+In this exercise you will be creating an Azure File share and enabling SMB access via Active Directory authentication. Azure Files is a platform service (PaaS) and is one of the recommended solutions for hosting FSLogix containers for WVD users. At the end of this exercise you will have the following components:
 
 -   A new storage account in your Azure subscription.
 
@@ -349,11 +366,15 @@ Before you can work with an Azure file share, you need to create an Azure storag
 
 2.  At the top of the page, in the **Search resources** field, type **storage accounts**. Select **Storage accounts** from the list.
 
+    ![](images/storageaccount.png "Search for storage accounts")
+
 3.  On the Storage Accounts window that appears, Select **+ Add**.
 
 4.  Fill in the required parameters for the storage account. Refer to the following example for more information on the available parameters. Make a note that contains the values you provide for **Resource group** and **Storage account name**. These will be needed later in the exercise.
 
-    ![](images/storacc.png)
+    ![](images/addstorageaccount.png "Add a storage account")
+
+    ![](images/createstorageaccount.png "Create a storage account")
 
 5.  Select **Review + Create** to review your storage account settings and create the account.
 
@@ -367,17 +388,24 @@ Before you can work with an Azure file share, you need to create an Azure storag
 
 3.  On the Overview page for your Storage account, select **File shares**.
 
+    ![](images/storagefileshare.png "Create a File share")
+
 4.  On the File shares blade, Select **+ File Share**.
+
+    ![](images/addfileshare.png "Add file share")
 
 5.  Enter a Name the new file share and Select **Create**.
 
+    ![](images/newfileshare.png "New File share")
     >**Note**: The file share quota supports a maximum of 5,120 GiB and can be managed on the File shares blade.
 
 ### Task 3: Enable AD Authentication for your Storage Account
 
 **Prerequisites**
 
-1.  The steps in this task need to be completed from a domain joined computer. The AzFilesHybrid module use the AD PowerShell module, so running from a server is preferred.
+1.  The steps in this task need to be completed from a domain joined computer. The **AzFilesHybrid** module use the AD PowerShell module, so running from a server is preferred.
+
+    ![](images/openpowersellise.png "Open PowerShell ISE")
 
 2.  PowerShell version 5.0+ installed.
 
@@ -395,6 +423,14 @@ In this task we will be completing the steps on the Domain Controller in Azure u
 
 1.  From a domain joined computer, download and unzip the [AzFilesHybrid module](https://github.com/Azure-Samples/azure-files-samples/releases) .
 
+    ![](images/azfileshybridzip.png "AzFilesHybrid module zip file")
+
+2. Extract this file to the **Documents** folder on the local Domain controller.
+
+    ![](images/extractzipfile.png "Extract zip file to documents")
+
+    ![](images/extractlocation.png "Extract to documents")
+
 2.  Open an elevated PowerShell ISE window.
 
 3.  Configure the PowerShell execution policy **Unrestricted** for the current user.
@@ -409,25 +445,36 @@ In this task we will be completing the steps on the Domain Controller in Azure u
     cd C:\\AzFilesHybrid
     ```
 
+5.  Install the Az PowerShell module
+
+    ```  
+    if ($PSVersionTable.PSEdition -eq 'Desktop' -and (Get-Module -Name AzureRM -ListAvailable)) {
+    Write-Warning -Message ('Az module not installed. Having both the AzureRM and ' +
+      'Az modules installed at the same time is not supported.')
+    } else {
+    Install-Module -Name Az -AllowClobber -Scope CurrentUser
+    }
+    ```
+
 6.  Install the AzFilesHybrid module.
 
     ```
     .\\CopyToPSPath.ps1
     ```
 
-8.  Import the AzFilesHybrid module
+7.  Import the AzFilesHybrid module
 
     ```  
     Import-Module -Name AzFilesHybrid
     ```
 
-10. Sign in with an account that meets the prerequisites.
+8.  Sign in with an account that meets the prerequisites.
 
     ```
     Connect-AzAccount
     ```
 
-12. Create the following PowerShell variables.
+9.  Create the following PowerShell variables.
     
 
     ```
@@ -441,14 +488,14 @@ In this task we will be completing the steps on the Domain Controller in Azure u
     >**Note**: You can run **Get-AzSubscription** to lookup the available subscription names.
 
 
-13.  Select the target subscription for the current session.
+10.  Select the target subscription for the current session.
   
 
         ```
         Select-AzSubscription -SubscriptionId $SubscriptionId
         ```
 
-10. Register the storage account with your Active Directory domain.
+11. Register the storage account with your Active Directory domain.
 
     ```
     Join-AzStorageAccountForAuth
@@ -463,27 +510,27 @@ In this task we will be completing the steps on the Domain Controller in Azure u
     >**Note**: You have the option to set -DomainAccountType to **ComputerAccount** (computer object)
     or **ServiceLogonAccount** (user object). Both objects will work but watch for password change policies. In this example we are using ServiceLogonAccount because the user object is setup automatically with **Password never expires**.
 
-1.  Confirm the object was created successfully in **Active Directory Users and Computers**.
+12. Confirm the object was created successfully in **Active Directory Users and Computers**.
 
-2.  Confirm that the feature is enabled.
+13. Confirm that the feature is enabled.
 
         ```
         $storageaccount = Get-AzStorageAccount -ResourceGroupName $ResourceGroupName -Name $StorageAccountName
         ```
 
-3.   List the directory service of the selected service account
+14.  List the directory service of the selected service account
  
         ```
         $storageAccount.AzureFilesIdentityBasedAuth.DirectoryServiceOptions
         ```
 
-1.  List the directory domain information if the storage account has enabled AD authentication for file shares
+15. List the directory domain information if the storage account has enabled AD authentication for file shares
 
     ```
     $storageAccount.AzureFilesIdentityBasedAuth.ActiveDirectoryProperties
     ```
 
-30. You can also confirm activation with your domain by navigating to the Azure portal, going to the storage account and selecting **Configuration** under **Settings**. Refer to the group on Active Directory (AD), as shown in the example below.
+16. You can also confirm activation with your domain by navigating to the Azure portal, going to the storage account and selecting **Configuration** under **Settings**. Refer to the group on Active Directory (AD), as shown in the example below.
 
 You have now successfully enabled AD authentication over SMB and assigned a custom role that provides access to an Azure file share with an AD identity.
 
@@ -503,15 +550,25 @@ To simplify administration, create 4 new security groups in Active Directory to 
 
 1.  From a domain joined computer, open **Active Directory Users and Computers**.
 
+    ![](images/adgroups.png "Create new groups")
+
 2.  Create the following Active Directory security groups in an OU that is synchronized with Azure AD:
 
     -   **AZF FSLogix Contributor**
 
+        ![](images/azfcontributor.png "AZF FSLogix Contributor")
+
     -   **AZF FSLogix Elevated Contributor**
+
+        ![](images/azfelevcontributor.png "AZF FSLogix Elevated Contributor")
 
     -   **AZF FSLogix Reader**
 
+        ![](images/azfreader.png "AZF FSLogix Reader")
+
     -   **WVD Users**
+
+        ![](images/wvduser.png "WVD User")
 
 3.  Add an administrative account to the group **AZF FSLogix Elevated Contributor**. This account will have permissions to modify file share permissions.
 
@@ -519,11 +576,15 @@ To simplify administration, create 4 new security groups in Active Directory to 
 
 5.  Add user accounts to the group **WVD Users**. These users will have access to use FSLogix profiles.
 
+    ![](images/wvdaddusers.png "Add users to the WVD users group")
+
 6.  Wait for the new groups to synchronize with Azure AD.
 
 With the new security groups available in Azure AD, use the following steps to assign them to your storage account in the Azure portal. This will enable to manage share permissions using AD security groups.
 
 1.  In the Azure portal, in the **Search resources** field, type **storage accounts** and select **Storage accounts** from the list.
+
+    ![](images/storageaccount.png "Search for storage accounts")
 
 2.  On the Storage accounts blade, Select on the Storage account you created in Task 1.
 
@@ -534,6 +595,8 @@ With the new security groups available in Azure AD, use the following steps to a
 5.  Select **Access Control (IAM)**.
 
 6.  Select **+ Add** and select **Add role assignment**.
+
+    ![](images/addroleassign.png "Add Azure AD Role assignment")
 
 7.  On the Add role assignment fly out, fill in the following options and Select **Save**.
 
@@ -548,6 +611,8 @@ With the new security groups available in Azure AD, use the following steps to a
     -    Storage File Data SMB Share Elevated Contributor \> AZF FSLogix Elevated Contributor
 
     -    Storage File Data SMB Share Reader \> AZF FSLogix Reader
+
+    ![](images/azureadroleassign.png "Add FSLogix roles to Azure AD File share")
 
 ### Task 5: Configure NTFS Permissions for the File Share
 
@@ -569,26 +634,31 @@ The first time you configure NTFS permission, do so using superuser permissions.
 
 5.  On the blade for your storage account, under **Settings**, select **Access keys**. Copy the value for **key1** to the same notepad file.
 
-6.  From a domain joined computer, open a standard command prompt and mount your file share using the storage account key. **Do not** use an elevated command prompt or the mount point will not be visible in File Explorer. Refer to the following examples to prepare your command:
+6.  From a domain joined computer, open a standard command prompt and mount your file share using the storage account key. **Do not** use an elevated command prompt or the mount point will not be visible in File Explorer. 
+   
+    >**Note**: Refer to the following examples to prepare your command:
+    net use z:\\\\\<storage-account-name\>.file.core.windows.net\\\<share-name\>/user:Azure\\\<storage-account-name\> \<storage-account-key\>
 
-7.  net use z:\\\\\<storage-account-name\>.file.core.windows.net\\\<share-name\>/user:Azure\\\<storage-account-name\> \<storage-account-key\>
+        Example with sample values:
+        ```
+        net use z: \\\\mydomainazfiles.file.core.windows.net\\FSLogix/user:Azure\\mydomainazfilesuPCvi+gP2qbCQcn3EATgbALE0H8nxhspyLRO2Nf9Hm2gMxfn/389/M33XHh7YEqNJ2GhbJXgStiifPwMBXk38Q==
+        ```
 
-    Example with sample values:
-    net use z: \\\\mydomainazfiles.file.core.windows.net\\FSLogix/user:Azure\\mydomainazfilesuPCvi+gP2qbCQcn3EATgbALE0H8nxhspyLRO2Nf9Hm2gMxfn/389/M33XHh7YEqNJ2GhbJXgStiifPwMBXk38Q==
+    ![](images/cmdprompt.png "Command Prompt script for mapping drive")
 
     >**Note**: This is an SMB connection on port 445. Most consumer ISPs block this port by default. If you are doing this in your lab and experience issues mounting the share from a local computer, try connecting from a domain joined VM in Azure.
 
-8.  Open **File Explorer**, right-Select on the **X:** drive and select **Properties**.
+7.  Open **File Explorer**, right-click on the **X:** drive and select **Properties**.
 
-9.  On the properties window, select the **Security** tab and Select **Advanced**.
+8.  On the properties window, select the **Security** tab and Select **Advanced**.
 
-10. Select **Add** and add each of the AD security groups you created in Task 4 with the appropriate permissions.
+9.  Select **Add** and add each of the AD security groups you created in Task 4 with the appropriate permissions.
 
-11. Select **OK** to save your changes.
+10. Select **OK** to save your changes.
 
-12. Disconnect the mount point.
+11. Disconnect the mount point.
 
-13. net use /delete z:
+12. net use /delete z:
 
 ### Task 6: Configure NTFS Permissions for the Containers
 
@@ -610,7 +680,7 @@ In this task we will create directories for each of the FSLogix profile types an
 
     -    **MSIX**
 
-4.  Right-Select on the **Profiles** directory and select **Properties**.
+4.  right-click on the **Profiles** directory and select **Properties**.
 
 5.  On the properties window, select the **Security** tab and Select **Advanced**.
 
@@ -630,25 +700,23 @@ In this task we will create directories for each of the FSLogix profile types an
 
     -   Create folders / append data
 
-10. Confirm your permissions match the screenshots below.
+10. Select **OK** on both property windows to apply your changes.
 
-11. Select **OK** on both property windows to apply your changes.
+11. Repeat steps 3-9 for the **ODFC** directory.
 
-12. Repeat steps 3-9 for the **ODFC** directory.
+12. right-click on the **MSIX** directory and select **Properties**.
 
-13. Right-Select on the **MSIX** directory and select **Properties**.
+13. On the properties window, select the **Security** tab and Select **Advanced**.
 
-14. On the properties window, select the **Security** tab and Select **Advanced**.
+14. Select **Disable inheritance** and select **Remove all inherited permissions from this object**.
 
-15. Select **Disable inheritance** and select **Remove all inherited permissions from this object**.
+15. Select **Add** and add **AZF FSLogix Elevated Contributor**. Grant **Full Control** to **This folder, subfolders and files**. Select **OK**.
 
-16. Select **Add** and add **AZF FSLogix Elevated Contributor**. Grant **Full Control** to **This folder, subfolders and files**. Select **OK**.
+16. Select **Add** and add **WVD Users**. Grant **Read & execute** to **This folder, subfolders and files**. Select **OK**.
 
-17. Select **Add** and add **WVD Users**. Grant **Read & execute** to **This folder, subfolders and files**. Select **OK**.
+17. Confirm your permissions match the screenshots below.
 
-18. Confirm your permissions match the screenshots below.
-
-19. Select **OK** on both property windows to apply your changes.
+18. Select **OK** on both property windows to apply your changes.
 
 Your Azure Files Share is now ready for FSLogix profile containers. Copy the UNC path and add it to your FSLogix deployment (image, GPO, etc..).
 
@@ -723,11 +791,11 @@ For troubleshooting script execution, refer to the following log directory on th
 
 This script leverages the [Local Group Policy Object (LGPO)](https://docs.microsoft.com/en-us/windows/security/threat-protection/security-compliance-toolkit-10#what-is-the-local-group-policy-object-lgpo-tool) tool in the [Microsoft Security Compliance Toolkit (SCT)](https://docs.microsoft.com/en-us/windows/security/threat-protection/security-compliance-toolkit-10) to apply settings in the image. The settings are documented and exported on the target machine under **C:\\Windows\\Logs\\ImagePrep\\LGPO**. This approach was taken to simplify troubleshooting, enabling you to leverage Group Policy Results.
 
-The Ui form offers the following actions:
+The UI form offers the following actions:
 
 **Office 365 ProPlus**
 
--   Install the *latest* version of Office 365 ProPlus monthly channel.
+-   Install the **latest** version of Office 365 ProPlus monthly channel.
 
 -   Apply recommended settings.
 
@@ -735,13 +803,13 @@ The Ui form offers the following actions:
 
 **OneDrive for Business**
 
--   Install the *latest* version of OneDrive for Business *per-machine*.
+-   Install the **latest** version of OneDrive for Business *per-machine*.
 
 -   Source documentation: [Install Office on a master VHD image](https://docs.microsoft.com/en-us/azure/virtual-desktop/install-office-on-wvd-master-image).
 
 **Microsoft Teams**
 
--   Install the *latest* version of Microsoft Teams *per-machine*.
+-   Install the **latest** version of Microsoft Teams *per-machine*.
 
 -   Source documentation: [Use Microsoft Teams on Windows Virtual desktop](https://docs.microsoft.com/en-us/azure/virtual-desktop/teams-on-wvd).
 
@@ -781,7 +849,7 @@ The Ui form offers the following actions:
 
 2.  **Copy** the .zip file on your local workstation. Open the RDP window to your master image VM. **Paste** the .zip file to the desktop.
 
-3.  On the master image VM, right-Select on the .zip file on your desktop and select **Extract All\...**.
+3.  On the master image VM, right-click on the .zip file on your desktop and select **Extract All\...**.
 
 4.  Extract the files to **C:\\BuildArtifacts**.
 
@@ -877,6 +945,8 @@ The system will automatically shutdown and disconnect your RDP session.
 
 2.  At the top of the page, in the **Search resources** field, type **virtual machines**. Select **Virtual machines** from the list.
 
+    ![](images/searchvm.png "Search Virtual Machines")
+
 3.  On the Virtual machines blade, locate the VM you used for your master image and **Select** on the name.
 
 4.  On the Overview blade for your VM, confirm the **Status** shows **Stopped**. Select **Stop** in the menu bar to move it to a deallocated state.
@@ -917,6 +987,8 @@ In this exercise we will be creating a Windows Virtual Desktop host pool for poo
 
 2.  Search for **Windows Virtual Desktop** and select it from the list.
 
+    ![](images/searchwvd.png "Search for Windows Virtual Desktop")    
+
 3.  Under Manage, select **Host pools** and Select **+ Add**.
    
     ![Windows Virtual Desktop blade](images/wvdHostPool.png "Windows Virtual Desktop blade")
@@ -944,6 +1016,8 @@ The name of the Workspace is displayed when the user signs in. Available resourc
 
 2.  Search for **Windows Virtual Desktop** and select it from the list.
 
+    ![](images/searchwvd.png "Search for Windows Virtual Desktop")
+
 3.  Under Manage, select **Workspaces**. Locate the Workspace you want to update and Select on the name.
 
 4.  Under Settings, select **Properties**.
@@ -962,8 +1036,10 @@ In the new Windows Virtual Desktop ARM portal, we now have the ability to use Az
 
 2.  Search for **Windows Virtual Desktop** and select it from the list.
 
-3.  Under Manage, select **Application groups**.
+    ![](images/searchwvd.png "Search for Windows Virtual Desktop")
 
+3.  Under Manage, select **Application groups**.
+    
 4.  Locate the Application group that was created as part of Task 1. In this exercise it is named "**WVD\_Pooled\_Desktop-DAG**". Select on the name.
 
 5.  Under Manage, select **Assignments** and Select **+ Add**.
@@ -971,6 +1047,8 @@ In the new Windows Virtual Desktop ARM portal, we now have the ability to use Az
 6.  In the fly out, enter the name of your Azure AD group. In this exercise we will select **WVD Pooled Desktop Users**.
 
 7.  Select **Select** to save your changes.
+
+    ![](images/hostpoolusers.png "Host pool users for WVD")
 
 With the assignment added, you can move on to the next exercise. The users in the Azure AD group can be used to validate access to the new host pool in a later exercise.
 
@@ -992,6 +1070,8 @@ In this exercise we will be creating a non-persistent host pool for publishing R
 
 2.  Search for **Windows Virtual Desktop** and select it from the list.
 
+    ![](images/searchwvd.png "Search for Windows Virtual Desktop")
+
 3.  Under Manage, select **Host pools** and Select **+ Add**.
 
 4.  On the Basics page, refer to the following screenshot to fill in the required fields. Once complete, Select **Next: Virtual Machine**.
@@ -1012,6 +1092,8 @@ The name of the Workspace is displayed when the user signs in. Available resourc
 
 2.  Search for **Windows Virtual Desktop** and select it from the list.
 
+    ![](images/searchwvd.png "Search for Windows Virtual Desktop")
+
 3.  Under Manage, select **Workspaces**. Locate the Workspace you want to update and Select on the name.
 
 4.  Under Settings, select **Properties**.
@@ -1027,6 +1109,8 @@ The name of the Workspace is displayed when the user signs in. Available resourc
 2.  Search for **Windows Virtual Desktop** and select it from the list.
 
 3.  Under Manage, select **Application groups** and Select **+ Add**.
+   
+    ![](images/manageappgroup.png "Manage Application groups")
 
 4.  On the Basics page, select your resource group and host pool. Once complete, Select **Next: Assignments**.
 
@@ -1073,7 +1157,11 @@ In the new WVD ARM portal, Workspaces are the equivalent to Tenants in the Fall 
 
 2.  Search for **Windows Virtual Desktop** and select it from the list.
 
+    ![](images/searchwvd.png "Search for Windows Virtual Desktop")
+
 3.  Under Manage, select **Host pools** and Select **+ Add**.
+
+    ![](images/createahostpool.png "Create a WVD Host pool")
 
 4.  On the Basics page, refer to the following screenshot to fill in the required fields. Once complete, Select **Next: Virtual Machine**.
 
@@ -1099,6 +1187,8 @@ The name of the Workspace is displayed when the user signs in. Available resourc
 
 6.  Select **Save**.
 
+    ![](images/hostpooloverview.png "WVD Host pool overview dashboard")
+
 ### Task 3: Assign Azure AD Group to Application Group
 
 In the new Windows Virtual Desktop ARM portal, we now have the ability to use Azure Active Directory groups to manage access to our host pools.
@@ -1107,15 +1197,21 @@ In the new Windows Virtual Desktop ARM portal, we now have the ability to use Az
 
 2.  Search for **Windows Virtual Desktop** and select it from the list.
 
+    ![](images/searchwvd.png "Search for Windows Virtual Desktop")
+
 3.  Under Manage, select **Application groups**.
 
 4.  Locate the Application group that was created as part of Task 1. In this exercise it is named "**WVD\_Pooled\_Desktop-DAG**". Select on the name.
 
 5.  Under Manage, select **Assignments** and Select **+ Add**.
 
+    ![](images/manageappgroup.png "Add an Application group")
+
 6.  In the fly out, enter the name of your Azure AD group. In this exercise we will select **WVD Persistent Desktop Users**.
 
-7.  Select **Select** to save your changes.
+7.  Select **Review + Create** to save your changes.
+
+    ![](images/createappgroup.png "Create an application group")
 
 With the assignment added, you can move on to the next exercise. The users in the Azure AD group can be used to validate access to the new host pool in a later exercise.
 
@@ -1191,7 +1287,7 @@ Try connecting using another browser or client.
 
 If issues continue even after you\'ve switched browsers, the problem may not be with your browser, but with your network. We recommend you contact network support.
 
-### >Web client keeps prompting for credentials
+### Web client keeps prompting for credentials
 
 If the Web client keeps prompting for credentials, follow these instructions:
 
@@ -1244,7 +1340,7 @@ There are multiple clients available for you to access WVD resources. Refer to t
 
 4.  Select an available resource from the Remote Desktop client. In this example we will connect to a host pool containing pooled desktop.
 
-    >**Note**: You can right-Select on desktop resources (non-app) and modify the default connection settings. For example, setting the default display configuration.
+    >**Note**: You can right-click on desktop resources (non-app) and modify the default connection settings. For example, setting the default display configuration.
 
 5.  On the **Enter your credentials** prompt, sign in using the same account from Step 3 and Select **OK**.
 
@@ -1252,29 +1348,26 @@ There are multiple clients available for you to access WVD resources. Refer to t
 
     -    **FSLogix Profile Container**
 
-             -   Did the profile direct get created on the file share?
-
-             -   Is the profile appearing in Disk Management?
-
-             -   Do your profile settings persist when connecting to different hosts?
+         - Did the profile direct get created on the file share?
+         - Is the profile appearing in Disk Management?
+         - Do your profile settings persist when connecting to different hosts?
 
     -    **Business Applications**
 
-             -   Are the business applications in your image working as expected?
+         - Are the business applications in your image working as expected?
 
     -    **OneDrive**
 
-             -   Did OneDrive for Business automatically sign you in?
-
-             -   Is Folders on Demand and Known Folder Move enabled?
+         - Did OneDrive for Business automatically sign you in?
+         - Is Folders on Demand and Known Folder Move enabled?
 
     -    **Teams**
 
-             -   Did Teams automatically sign you in?
-
+         - Did Teams automatically sign you in?
+  
     -    **Log Analytics Monitoring Agent**
 
-             -   Are there connection events logged for the session in your Logs Analytics workspace?
+         - Are there connection events logged for the session in your Logs Analytics workspace?
 
 ### Troubleshooting
 
@@ -1286,7 +1379,7 @@ Starting with version 1.2.790, you can reset the user data from the **About** pa
 
 1.  Open the Remote Desktop app.
 
-2.  Select **More options ( ?  ?  ?)** in the upper right corner and select **About**.
+2.  Select **More options** in the upper right corner and select **About**.
 
 3.  Select **Reset** and **Continue**.
 
@@ -1416,7 +1509,7 @@ Provided below is a summary of the group policy settings that Microsoft recommen
 |              |            |               |
 |----------|:-------------:|:-------------:|
 |  **Policy**   |  **Value**    |   **Reason** |
- | Silently move windows known folders to OneDrive   | Set Tenant ID  | This policy will silently move the users Documents, Desktop, and Photos to one drive, *requires the orgs AAD Tenant ID*.
+ | Silently move windows known folders to OneDrive   | Set Tenant ID  | This policy will silently move the users Documents, Desktop, and Photos to one drive, **requires the orgs AAD Tenant ID**.
  | Silently sign into OneDrive sync client with their windows credentials |  Enabled  |       Automatically configured one drive on sign in.
  | Use OneDrive Files On-Demand  | Enabled    |     Uses Files on Demand to prevent Profile bloat.
 
@@ -1506,7 +1599,11 @@ In this exercise we will create a dedicated workspace for our Spring 2020 enviro
 
 2.  At the top of the page, in the **Search resources** field, type \"**log analytics**\". Select **Log Analytics workspaces** from the list.
 
+    ![](images/searchloganalytics.png "Search for Log Analytics")
+
 3.  On the Log Analytics workspaces blade, Select **+Add**.
+
+    ![](images/createlogworkspace.png "Add a Log Analytics workspace")
 
 4.  On the Create Log Analytics workspace blade, fill in the following information and Select **Review + Create**.
 
@@ -1519,6 +1616,8 @@ In this exercise we will create a dedicated workspace for our Spring 2020 enviro
     -    **Region:** Select a region for the workspace.
 
 5.  Select **Create**.
+
+    ![](images/configlogworkspace.png "Configure the Log Analytics workspace")
 
 Monitor the notification bell in the upper-right corner and wait for the deployment to complete. Once complete, move on to task 2.
 
@@ -1544,6 +1643,8 @@ Each WVD ARM object has different diagnostic data categories available. For exam
 
 2.  At the top of the page, in the **Search resources** field, type \"**windows virtual desktop**\". Select **Windows Virtual Desktop** from the list.
 
+    ![](images/searchwvd.png "Search for Windows Virtual Desktop")
+
 3.  On the Windows Virtual Desktop blade, under **Manage**, select **Host pools**.
 
 4.  On the Windows Virtual Desktop \| Host pools blade, locate a host pool and Select on the name.
@@ -1551,6 +1652,8 @@ Each WVD ARM object has different diagnostic data categories available. For exam
 5.  On the blade for your host pool, under **Monitoring**, select **Diagnostic settings**.
 
 6.  On the Diagnostics settings blade, Select **+Add diagnostic setting**.
+
+    ![](images/hostpooldiag.png "Add Host Pool Diagnostic settings")
 
 7.  On the Diagnostic settings page, fill in the following information and Select **Save**.
 
@@ -1564,11 +1667,16 @@ Each WVD ARM object has different diagnostic data categories available. For exam
 
         -    **Log Analytics workspace:** Select the desired workspace.
 
+
+    ![](images/hostpooldiagsettings.png "Host Pool diagnostic settings")
+
 ### Task 4: Enable logging for Application Groups
 
 1.  Sign in to the [Azure Portal](https://portal.azure.com/).
 
 2.  At the top of the page, in the **Search resources** field, type \"**windows virtual desktop**\". Select **Windows Virtual Desktop** from the list.
+
+    ![](images/searchwvd.png "Search for Windows Virtual Desktop")
 
 3.  On the Windows Virtual Desktop blade, under **Manage**, select **Application groups**.
 
@@ -1578,6 +1686,8 @@ Each WVD ARM object has different diagnostic data categories available. For exam
 
 6.  On the Diagnostics settings blade, Select **+Add diagnostic setting**.
 
+    ![](images/appgroupadddiag.png "Add Application Group diagnostic settings")
+
 7.  On the Diagnostic settings page, fill in the following information and Select **Save**.
 
     -    **Diagnostic settings name:** Enter a name for these settings. ARM objects can have multiple diagnostic settings applied.
@@ -1590,11 +1700,15 @@ Each WVD ARM object has different diagnostic data categories available. For exam
 
              -    **Log Analytics workspace:** Select the desired workspace.
 
+    ![](images/appgroupdiagsettings.png "Application Group diagnostic settings")
+
 ### Task 5: Enable logging for Workspaces
 
 1.  Sign in to the [Azure Portal](https://portal.azure.com/) .
 
 2.  At the top of the page, in the **Search resources** field, type \"**windows virtual desktop**\". Select **Windows Virtual Desktop** from the list.
+
+    ![](images/searchwvd.png "Search for Windows Virtual Desktop")
 
 3.  On the Windows Virtual Desktop blade, under **Manage**, select **Workspaces**.
 
@@ -1604,6 +1718,8 @@ Each WVD ARM object has different diagnostic data categories available. For exam
 
 6.  On the Diagnostics settings blade, Select **+Add diagnostic setting**.
 
+    ![](images/workspaceadddiag.png "Add Workspace diagnostic logging")
+
 7.  On the Diagnostic settings page, fill in the following information and Select **Save**.
 
     -    **Diagnostic settings name:** Enter a name for these settings. ARM objects can have multiple diagnostic settings applied.
@@ -1615,6 +1731,8 @@ Each WVD ARM object has different diagnostic data categories available. For exam
              -    **Subscription:** Select the desired subscription.
 
              -    **Log Analytics workspace:** Select the desired workspace.
+
+    ![](images/appgroupdiagsettings.png "Workspace diagnostic settings")
 
 At this point you should have diagnostic data enabled on at least 1 WVD ARM object of each type. To enable monitoring for additional objects, rinse and repeat the above steps.
 
@@ -1627,7 +1745,7 @@ Azure Monitor is leveraged with WVD to monitor the performance and health of you
   |              |            |  
 |----------|:-------------:|
 | Description | Links |
-|Enable monioring for a single Azure VM |  [Enable monitoring for a single Azure VM](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/vminsights-enable-single-vm#enable-monitoring-for-a-single-azure-vm) |
+|Enable monitoring for a single Azure VM |  [Enable monitoring for a single Azure VM](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/vminsights-enable-single-vm#enable-monitoring-for-a-single-azure-vm) |
 |Enable Azure Monitor for VMs by using Azure Policy |   [Enable Azure Monitor for VMs by using Azure Policy](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/vminsights-enable-at-scale-policy) |
 |Enable Azure Monitor for VMs using Azure templates |  [Enable Azure Monitor for VMs using Azure PowerShell or Resource Manager templates](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/vminsights-enable-at-scale-powershell) |
 
@@ -1635,11 +1753,17 @@ Azure Monitor is leveraged with WVD to monitor the performance and health of you
 
 2.  At the top of the page, in the **Search resources** field, type \"**virtual machines**\". Select **Virtual Machines** from the list.
 
+    ![](images/searchvm.png "Search for Virtual machines")
+
 3.  On the Virtual Machines blade, locate a session host VM and Select on the name.
 
 4.  On the blade for the virtual machine, under **Monitoring**, select **Insights**.
 
+    ![](images/vminsights.png "Virtual Machine Insights")
+
 5.  On the Insights blade, Select **Enable**. This will initiate a validation check.
+
+    ![](images/enableinsights.png "Enable VM Insights")
 
     >**Note**: The virtual machine must be running to enable Azure Monitor.
 
@@ -1648,6 +1772,8 @@ Azure Monitor is leveraged with WVD to monitor the performance and health of you
     -    **Workspace Subscription:** Select the desired subscription.
 
     -    **Choose a Log Analytics Workspace:** Select the workspace used in the previous task.
+
+    ![](images/vminsightsconfig.png "Log Analytics workspace configuration for VM Insights")
 
 Monitor the notification bell in the upper-right corner and wait for the deployment to complete. This can take 5-10 minutes. Once complete, you will see the following items configured on the VM:
 
@@ -1887,15 +2013,15 @@ message: \\\\\\\"DSC Configuration \'FirstSessionHost\' completed with error(s).
 
 Agent Installation and Update process:
 
--   Initial Version of the Windows Virtual Desktop Agent is downloaded and installed from an externally accessible download location (either [manually](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-host-pools-powershell#register-the-virtual-machines-to-the-windows-virtual-desktop-preview-host-pool) or via Azure Marketplace)
+1. Initial Version of the Windows Virtual Desktop Agent is downloaded and installed from an externally accessible download location (either [manually](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-host-pools-powershell#register-the-virtual-machines-to-the-windows-virtual-desktop-preview-host-pool) or via Azure Marketplace)
 
--   Once the Initial version of Windows Virtual Desktop Agent is installed, it queries the WVD service to determine the desired version of the WVD agent, Remote Desktop Services Infrastructure Geneva Agent and SXS stack
+2. Once the Initial version of Windows Virtual Desktop Agent is installed, it queries the WVD service to determine the desired version of the WVD agent, Remote Desktop Services Infrastructure Geneva Agent and SXS stack
 
--   Desired version of the Agent, Remote Desktop Services Infrastructure Geneva Agent and SXS stack (in the same order) are then pulled from an Azure blob location and installed on the Virtual Machine.
+3. Desired version of the Agent, Remote Desktop Services Infrastructure Geneva Agent and SXS stack (in the same order) are then pulled from an Azure blob location and installed on the Virtual Machine.
 
--   This upgrade operation normally lasts about few minutes
+4. This upgrade operation normally lasts about few minutes
 
--   There may be few scenarios where upgrade of the WVD agent may fail. When this scenario occurs output of the Get-RDSSessionnHost -TenantName \<tenantname\> -HostPoolName \<hostpoolname\> will be like below:
+5. There may be few scenarios where upgrade of the WVD agent may fail. When this scenario occurs output of the Get-RDSSessionnHost -TenantName \<tenantname\> -HostPoolName \<hostpoolname\> will be like below:
 
 When this issue occurs, follow below steps to troubleshoot:
 
@@ -1903,47 +2029,40 @@ When this issue occurs, follow below steps to troubleshoot:
 
 2.  Review version of WVD Agent already installed on your VM.
 
- ? Go to Control Panel\\Programs\\Programs and Features. Look for latest version of "Remote Desktop Services Infrastructure Agent" installed on the Virtual Machine and note the same.
+    - Go to Control Panel\\Programs\\Programs and Features. Look for latest version of "Remote Desktop Services Infrastructure Agent" installed on the Virtual Machine and note the same.
 
-1.  Review if there is a later version of this agent downloaded onto the Virtual machine. Go to C:\\program files\\Microsoft RdInfra and look for versions later than one installed.
+3. Review if there is a later version of this agent downloaded onto the Virtual machine. Go to C:\\program files\\Microsoft RdInfra and look for versions later than one installed.
+   
+4. The Agentinstall.txt log files has data regarding the agent installation. It may be helpful to open that log and verify that there are no errors that may related permissions used to install the agent.
 
-- The Agentinstall.txt log files has data regarding the agent installation. It may be helpful to open that log and verify that there are no errors that may related permissions used to install the agent.
-
--   In case there is a newer version:
+5. In case there is a newer version:
 
     -   Attempt to manually install the MSI. Note this requires you to acquire and supply a new registration token. o Run the below cmdlet to create a registration token to authorize a session host to join the host pool and save it to a new file on your local computer. You can specify how long the registration token is valid by using the -ExpirationHours parameter.
 
     -   New-RdsRegistrationInfo -TenantName \<tenantname\> -HostPoolName \<hostpoolname\> -
 
-ExpirationHours \<number of hours\> \| Select-Object -ExpandProperty Token \> \<PathToRegFile\>
+    - ExpirationHours \<number of hours\> \| Select-Object -ExpandProperty Token \> \<PathToRegFile\>
 
--   In case there is no newer version:
+6. In case there is no newer version:
 
-o Uninstall all the versions of the agents from Control Panel\\Programs\\Programs and Features o Remove the session host from the host pool also before reinstalling the agent. Leaving the session host in the host pool can result in errors like the event ID 2277
+   - Uninstall all the versions of the agents from Control Panel\\Programs\\Programs and Features o Remove the session host from the host pool also before reinstalling the agent. Leaving the session host in the host pool can result in errors like the event ID 2277
 
-NAME\_ALREADY\_REGISTERED image below. Remove-RdsSessionHost \[-TenantName\] \<String\> \[HostPoolName\] \<String\> \[-Name\] \<string\> \[-Force\]
+   - NAME\_ALREADY\_REGISTERED image below. Remove-RdsSessionHost \[-TenantName\] \<String\> \[HostPoolName\] \<String\> \[-Name\] \<string\> \[-Force\]
 
-Manually install Windows Virtual Desktop agent and register it using the steps described [here.](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-host-pools-powershell) 
+   - Manually install Windows Virtual Desktop agent and register it using the steps described [here.](https://docs.microsoft.com/en-us/azure/virtual-desktop/create-host-pools-powershell) 
 
 1.  Once the agent is manually installed, you should see the Get-RDSSessionHost -TenantName \<tenantname\> HostPoolName \<hostpoolname\> output as below:
 
-```
+       - In case the manual installation fails, review
+       - Contents of "UpdateErrorMessage" in Get-RDSSessionHost -TenantName
+            \<tenantname\> 
+       - HostPoolName \<hostpoolname\>    
+       - Application Event logs in Event Viewer:
+         - Event Viewer - \> Windows Logs -\> Application. Look for events with the source
+         - MsiInstaller - RDAgentBootLoader
+         - WVD-Agent-Updater
 
-1.  In case the manual installation fails, review
 
--   Contents of "UpdateErrorMessage" in Get-RDSSessionHost -TenantName
-    \<tenantname\> -
-
-HostPoolName \<hostpoolname\>
-
--   Application Event logs in Event Viewer:
-
-o Event Viewer - \> Windows Logs -\> Application. Look for events with the source
-
--   MsiInstaller  ? RDAgentBootLoader
-
--   WVD-Agent-Updater
-```
 
 |              |            |  
 |----------|:-------------:|
@@ -2020,7 +2139,7 @@ When connecting to a Host Pool you may come across an error such as:
 
 This problem can occur for multiple reasons:
 
--   if the VM running the host pool is shut off
+-   If the VM running the host pool is shut off
 
 -   If the VM running the host pool is deleted
 
@@ -2199,21 +2318,20 @@ When this issue occurs, follow below steps to troubleshoot:
 
 2.  Review version of WVD Agent already installed on your VM.
 
- ? Go to Control Panel\\Programs\\Programs and Features. Look for latest version of "Remote Desktop Services Infrastructure Agent" installed on the Virtual Machine and note the same.
+     - Go to Control Panel\\Programs\\Programs and Features. Look for latest version of "Remote Desktop Services Infrastructure Agent" installed on the Virtual Machine and note the same.
 
 
 1.  Review if there is a later version of this agent downloaded onto the Virtual machine. Go to C:\\program files\\Microsoft RdInfra and look for versions later than one installed.
 
-- The Agentinstall.txt log files has data regarding the agent installation. It may be helpful to open that log and verify that there are no errors that may related permissions used to install the agent.
+    - The Agentinstall.txt log files has data regarding the agent installation. It may be helpful to open that log and verify that there are no errors that may related permissions used to install the agent.
 
--   In case there is a newer version:
+    -   In case there is a newer version:
 
-    -   Attempt to manually install the MSI. Note this requires you to acquire and supply a new registration token. Run the below cmdlet to create a registration token to authorize a session host to join the host pool and save it to a new file on your local computer. You can specify how long the registration token is valid by using the -ExpirationHours parameter.
-
-    -   
-    ```
-    New-RdsRegistrationInfo -TenantName \<tenantname\> -HostPoolName \<hostpoolname\> -
-    ```
+        -   Attempt to manually install the MSI. Note this requires you to acquire and supply a new registration token. Run the below cmdlet to create a registration token to authorize a session host to join the host pool and save it to a new file on your local computer. You can specify how long the registration token is valid by using the -ExpirationHours parameter.
+       
+            ```
+            New-RdsRegistrationInfo -TenantName \<tenantname\> -HostPoolName \<hostpoolname\> -
+            ```
 
 ExpirationHours \<number of hours\> \| Select-Object -ExpandProperty Token \> \<PathToRegFile\>
 
@@ -2504,6 +2622,8 @@ C:WindowsdebugNetSetup.log
 
 2. Go to your **Resource groups**
 
+    ![](images/searchresourcegroup.png "Search for Resource groups")
+
 3. Select the **Resource group** that you created your resources
 
 4. Select **Delete Resource group**
@@ -2512,7 +2632,7 @@ C:WindowsdebugNetSetup.log
    
 5. Enter the name of the **Resource group** and select **Delete**
 
-    ![](images\deleteresourcegroup.png "Delete Resource group")
+    ![](images\deleterg.png "Delete Resource group")
    
 6. Repeat these steps for all **Resource groups** created for this lab, including those for **Azure Monitor** and **Log Analytics**
    
