@@ -2628,11 +2628,13 @@ C:WindowsdebugNetSetup.log
 
 4. Select **Delete Resource group**
 
+    ![](images/searchresourcegroup.png "Search for Resource groups")
     ![](images\resourcegroup1.png "Select Resource group to delete")
    
 5. Enter the name of the **Resource group** and select **Delete**
 
-    ![](images\deleteresourcegroup1.png "Delete Resource group")
+    ![](images/searchresourcegroup.png "Search for Resource groups")
+    ![](images\deleterg.png "Delete Resource group")
    
 6. Repeat these steps for all **Resource groups** created for this lab, including those for **Azure Monitor** and **Log Analytics**
    
