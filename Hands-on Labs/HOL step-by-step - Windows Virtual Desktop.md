@@ -294,7 +294,7 @@ It is also important to keep in mind that these groups can also originate from t
 
     -    **Membership type:** Assigned
 
-    ![](images/newgroup2.png "New Group Window")
+    ![](images/newGroup1.png "New Group Window")
 
 5.  Select **+ New group** again, fill in the following options and Select **Create**.
 
@@ -304,7 +304,7 @@ It is also important to keep in mind that these groups can also originate from t
 
     -    **Membership type:** Assigned
 
-    ![New Group window](images/newGroup1.png) "New Group window"
+    ![](images/newGroup2.png "New Group Window")
 
 6.  Select **+ New group** again, fill in the following options and Select **Create**.
 
