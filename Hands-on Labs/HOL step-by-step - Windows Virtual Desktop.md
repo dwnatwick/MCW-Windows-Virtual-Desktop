@@ -294,7 +294,7 @@ It is also important to keep in mind that these groups can also originate from t
 
     -    **Membership type:** Assigned
 
-    ![New Group window](images/newGroup2.png "New Group window")
+    ![](images/newgroup2.png "New Group Window")
 
 5.  Select **+ New group** again, fill in the following options and Select **Create**.
 
@@ -2628,12 +2628,12 @@ C:WindowsdebugNetSetup.log
 
 4. Select **Delete Resource group**
 
-    ![](images/deleteresourcegroup1.png "Search for Resource groups")
+    ![](images/resourcegroup1.png "Go to the Resource groups")
 
    
 5. Enter the name of the **Resource group** and select **Delete**
 
-    ![](images/searchresourcegroup.png "Search for Resource groups")
+    ![](images/deleteresourcegroup1.png "Delete the resource groups")
 
    
 6. Repeat these steps for all **Resource groups** created for this lab, including those for **Azure Monitor** and **Log Analytics**
