@@ -11,7 +11,6 @@ August 2020
 - Infrastructure Specialists
 - Cloud Solution Architects
 - Account Technology Specialists
-- Partners/Customers
 
 ## Abstracts
 
@@ -42,11 +41,6 @@ At the end of this hands-on lab, you will be better able to build a secure and r
 - Azure Active Directory
 - Azure Networking
 - Azure Virtual Machines
-
-
-## Azure solutions
-
-Windows Virtual Desktop
 
 ## Related references
 
