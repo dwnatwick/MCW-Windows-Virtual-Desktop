@@ -64,7 +64,7 @@ Before you start setting up your Windows Virtual Desktop workspace, make sure yo
 
 Duration:  X minutes
 
-###Task 1: Deploying Azure Infrastructure and AD DS
+### Task 1: Deploying Azure Infrastructure and AD DS
 
 In this task you will leverage a custom Azure Resource Manager (ARM) template to deploy the required Active Directory Domain Services infrastructure for WVD. If you already have an AD DS environment and AD Connect configured, you can move on to **HOL step-by-step, Exercise 4: Configuring Azure AD Connect with AD DS**.
 
