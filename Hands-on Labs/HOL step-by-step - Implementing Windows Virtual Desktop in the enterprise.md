@@ -9,7 +9,7 @@ Hands-on lab step-by-step guide
 </div>
 
 <div class="MCWHeader3">
-August 2020
+September 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -30,8 +30,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 - [Implementing Windows Virtual Desktop for the enterprise hands-on lab step-by-step](#implementing-windows-virtual-desktop-for-the-enterprise-hands-on-lab-step-by-step)
   - [Abstract and learning objectives](#abstract-and-learning-objectives)
   - [Overview](#overview)
-  - [Before the hands-on lab](#before-the-hands-on-lab)
   - [Solution architecture](#solution-architecture)
+  - [Requirements](#requirements)
+  - [Before the hands-on lab](#before-the-hands-on-lab)
   - [Exercise 1: Configuring Azure AD Connect with AD DS](#exercise-1-configuring-azure-ad-connect-with-ad-ds)
     - [Task 1: Connecting to the domain controller](#task-1-connecting-to-the-domain-controller)
     - [Task 2: Disabling IE Enhanced Security](#task-2-disabling-ie-enhanced-security)
@@ -97,7 +98,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Domain troubleshooting](#domain-troubleshooting)
     - [WVD Agent troubleshooting](#wvd-agent-troubleshooting)
     - [Agent Registration issues](#agent-registration-issues)
-  - [Exercise 12: Lab environment clean up after completion](#exercise-12-lab-environment-clean-up-after-completion)
+  - [After the hands-on lab](#after-the-hands-on-lab)
     - [Task 1: Delete Resource groups to remove lab environment](#task-1-delete-resource-groups-to-remove-lab-environment)
 
 <!-- /TOC -->
@@ -112,6 +113,32 @@ In this hands-on lab, you will implement a Windows Virtual Desktop Infrastructur
 
 In this lab, attendees will deploy the [Windows Virtual Desktop (WVD)](https://azure.microsoft.com/en-us/services/virtual-desktop/) solution. Exclusively available as an Azure cloud service, Windows Virtual Desktop allows you to choose a flexible end user virtualized application or desktop delivery model that best aligns with your enterprise Azure cloud strategy. WVD simplifies the IT model to virtualize and deploy modern and legacy desktop app experiences with unified management---without needing to host, install, configure and manage components such as diagnostics, networking, connection brokering, and gateway. WVD brings together Microsoft Office 365 and Azure to provide users with the only multi-session Windows 10 experience with exceptional scale and reduced IT costs while empowering today's modern digital workspace.
 
+## Solution architecture
+
+![Solution architecture](images/wvdsolutiondiagramv2.png "Solution architecture") This diagram shows a Windows Virtual Desktop architecture with on-premises servers for Active Directory.  In the diagram, the host pools are providing the WVD session to the different supported devices. Azure Monitor, Network Watcher, and Log Analytics are monitoring and logging activity and performance metrics.
+
+## Requirements
+
+Before you start setting up your Windows Virtual Desktop workspace, make sure you have the following items:
+
+-   The Azure Active Directory tenant ID for Windows Virtual Desktop users.
+
+-   A global administrator account within the Azure Active Directory tenant.
+
+    -   This also applies to Cloud Solution Provider (CSP) organizations that are creating a Windows Virtual Desktop workspace for their customers. If you are in a CSP organization, you must be able to sign in as global administrator of the customer\'s Azure Active Directory tenant.
+
+    -   The administrator account must be sourced from the Azure Active Directory tenant in which you are trying to create the Windows Virtual Desktop workspace. This process does not support Azure Active Directory B2B (guest) accounts.
+
+    -   The administrator account must be a work or school account.
+
+-   An Azure subscription.
+
+    -   Enough Quota Cores to build four 4-core servers.
+
+    -   Access to the Azure Active Directory Global Admin account for your new or existing Azure Active Directory Tenant.
+
+    -   Owner rights on all Azure subscription(s).
+
 ## Before the hands-on lab
 
 -   Refer to the Before the hands-on lab setup guide before continuing to the lab exercises.
@@ -120,13 +147,9 @@ In this lab, attendees will deploy the [Windows Virtual Desktop (WVD)](https://a
 
 -   Regions and locations, make sure to stay consistent as much as possible.
 
-
-## Solution architecture
-
-![Solution architecture](images/wvdsolutiondiagramv2.png "Solution architecture") This diagram shows a Windows Virtual Desktop architecture with on-premises servers for Active Directory.  In the diagram, the host pools are providing the WVD session to the different supported devices. Azure Monitor, Network Watcher, and Log Analytics are monitoring and logging activity and performance metrics.
-
-
 ## Exercise 1: Configuring Azure AD Connect with AD DS
+
+Duration:  XX minutes
 
 In this exercise you will be configuring [Azure AD Connect](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/whatis-azure-ad-connect). With Windows Virtual Desktop, all session host VMs within the WVD tenant environment are required to be domain joined to AD DS, and the domain must be synchronized with Azure AD. To manage the synchronization of objects, you will configure Azure AD Connect on the domain controller deployed in Azure.
 
@@ -204,7 +227,7 @@ By default, Azure AD Connect does not synchronize the built-in domain administra
 
 5.  On the Select Groups dialog window, type **Domain Admins** and Select **OK**.
    
-    >**Note**: This account will be used during the host pool creation process for joining the hosts to the domain. Granting Domain Admin permissions will simplify the lab.However, any Active Directory account that has the following permissions will suffice. This can be done using [Active Directory Delegate Control](https://danielengberg.com/domain-join-permissions-delegate-active-directory/). 
+    >**Note**: This account will be used during the host pool creation process for joining the hosts to the domain. Granting Domain Admin permissions will simplify the lab. However, any Active Directory account that has the following permissions will suffice. This can be done using [Active Directory Delegate Control](https://danielengberg.com/domain-join-permissions-delegate-active-directory/). 
 
     ![](images/addusertodomainadmins.png "Add user to Domain Admins group")
 
@@ -250,7 +273,7 @@ By default, Azure AD Connect does not synchronize the built-in domain administra
 
     >**Note**: It can take up to 15 minutes for the Active Directory objects to be synchronized to the Azure AD tenant.
 
-**What\'s New in the Spring 2020 Update?**
+**What's New in the Spring 2020 Update?**
 
 On April 30th, the Spring update for Windows Virtual Desktop entered public preview. This gives everyone the opportunity to start playing with the new features and capabilities. There are number of significant enhancements that customers are going to be eager to get their hands on.
 
@@ -262,6 +285,8 @@ Tom Hickling and Christiaan Brinkhoff have both published excellent writeups on 
     beyond!]](https://www.christiaanbrinkhoff.com/2020/05/01/windows-virtual-desktop-technical-2020-spring-update-arm-based-model-deployment-walkthrough/#NewAzurePortal-Dashboard) 
 
 ## Exercise 2: Create Azure AD Groups for WVD
+
+Duration:  XX minutes
 
 In this exercise you will be working with groups in Azure Active Directory (Azure AD) to assist in managing access assignment to your application groups in WVD. The new ARM portal for WVD supports access assignment using Azure AD groups. This capability greatly simplifies access management. Groups will also be leveraged in this guide to manage
 share permissions in Azure Files for FSLogix.
@@ -320,7 +345,7 @@ It is also important to keep in mind that these groups can also originate from t
 
 Now that the Azure AD groups are in place, we will assign users for testing. Once the groups are populated, we can leverage them for assigning access to WVD resources once they are created.
 
-1.  Sign in to the [Azure Portal](https://portal.azure.com/) .
+1.  Sign in to the [Azure Portal](https://portal.azure.com/).
 
 2.  At the top of the page, in the **Search resources** field, type **Azure Active Directory**. Select **Azure Active Directory** from the list.
 
@@ -337,6 +362,8 @@ Now that the Azure AD groups are in place, we will assign users for testing. Onc
 At this point you have 3 new Azure AD groups with members assigned. Make a note of the group names and accounts you added for use later in this guide. These groups will be used to assign access to WVD application groups.
 
 ## Exercise 3: Create an Azure Files Share for FSLogix
+
+Duration:  XX minutes
 
 There are multiple solutions available for storing FSLogix profiles containers.
 
@@ -355,8 +382,6 @@ In this exercise you will be creating an Azure File share and enabling SMB acces
 -   AD authentication enabled for your Azure storage account.
 
 -   Permissions applied for user access to the file share.
-
-
 
 ### Task 1: Create a Storage Account
 
@@ -397,6 +422,7 @@ Before you can work with an Azure file share, you need to create an Azure storag
 5.  Enter a Name the new file share and Select **Create**.
 
     ![](images/newfileshare.png "New File share")
+    
     >**Note**: The file share quota supports a maximum of 5,120 GiB and can be managed on the File shares blade.
 
 ### Task 3: Enable AD Authentication for your Storage Account
@@ -722,6 +748,8 @@ Your Azure Files Share is now ready for FSLogix profile containers. Copy the UNC
 
 ## Exercise 4: Create a Master Image for WVD
 
+Duration:  XX minutes
+
 In this exercise we are going to walk through the process of creating a master image for your WVD host pools. The basic concept for a master image is to start with a clean base install of Windows and layer on mandatory updates, applications and configurations. There are many ways to create and manage images for WVD. The steps covered in this exercise are going to walk you through a basic build and capture process that includes core applications and recommended configuration options for WVD.
 
 ### Additional Resources
@@ -937,7 +965,7 @@ This will trigger the PowerShell form to launch. Select the appropriate options 
     sysprep.exe /oobe /generalize /shutdown
     ``` 
 
-The system will automatically shutdown and disconnect your RDP session.
+The system will automatically shut down and disconnect your RDP session.
 
 ### Task 5: Create a managed image from the Master Image VM
 
@@ -971,6 +999,8 @@ The system will automatically shutdown and disconnect your RDP session.
 
 
 ## Exercise 5: Create a Host Pool for pooled desktops
+
+Duration:  XX minutes
 
 In this exercise we will be creating a Windows Virtual Desktop host pool for pooled desktops. This is a set of computers or hosts which operate on an as-needed basis. In a pooled configuration we will be hosting multiple non-persistent sessions, with no user profile information stored locally. This is where FSLogix Profile Containers provide the users profile to the host dynamically. This provides the ability for an organization to fully utilize the compute resources on a single host and lower the total overhead, cost, and number of remote workstations.
 
@@ -1053,6 +1083,8 @@ In the new Windows Virtual Desktop ARM portal, we now have the ability to use Az
 With the assignment added, you can move on to the next exercise. The users in the Azure AD group can be used to validate access to the new host pool in a later exercise.
 
 ## Exercise 6: Create a Host Pool for Pooled RemoteApps
+
+Duration:  XX minutes
 
 In this exercise we will be creating a non-persistent host pool for publishing RemoteApps. This enables you to assign users access to specific applications rather than an entire desktop. This type of application deployment serves many purposes and is not new to WVD, but has existed in Windows Server Remote Desktop Services for many years.
 
@@ -1148,8 +1180,9 @@ You have successfully created a Remote App non-persistent Host Pool with publish
 
 ## Exercise 7: Create a Host Pool for Personal Desktops
 
-In the new WVD ARM portal, Workspaces are the equivalent to Tenants in the Fall 2019 portal. This means we can create multiple Workspaces for different management purposes. This can be beneficial when working with multiple business groups within the same organization, providing logical segmentation of resources.
+Duration:  XX minutes
 
+In the new WVD ARM portal, Workspaces are the equivalent to Tenants in the Fall 2019 portal. This means we can create multiple Workspaces for different management purposes. This can be beneficial when working with multiple business groups within the same organization, providing logical segmentation of resources.
 
 ### Task 1: Create a new Host Pool and Workspace
 
@@ -1217,6 +1250,8 @@ With the assignment added, you can move on to the next exercise. The users in th
 
 ## Exercise 8: Connect to WVD with the Web Client
 
+Duration:  XX minutes
+
 In this exercise we are going to walk through connecting to your WVD environment using the HTML5 web client and validating your deployment. The following operating systems and browsers are supported:
 
 ### Additional Resources
@@ -1231,15 +1266,13 @@ There are multiple clients available for you to access WVD resources. Refer to t
 | Connect with the macOS client |  [Connect with the macOS Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-macos) |
 | Connect with the iOS client | [Connect with the iOS Client](https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-ios) |
 
-
-
 ### Task 1: Connecting with the HTML5 Web Client
 
 1.  Open a supported web browser.
 
 2.  Navigate to the [Spring 2020 portal](https://rdweb.wvd.microsoft.com/arm/webclient/index.html) .
 
-    >**Note**: During the public preview, the URL for the Spring 2020 portal is different then the Fall 2019 portal. 
+    >**Note**: During the public preview, the URL for the Spring 2020 portal is different than the Fall 2019 portal. 
     **Fall 2019**: <https://rdweb.wvd.microsoft.com/webclient/index.html> 
     **Spring 2020**: <https://rdweb.wvd.microsoft.com/arm/webclient/index.html> 
 
@@ -1302,6 +1335,8 @@ If the Web client keeps prompting for credentials, follow these instructions:
 5.  Open your browser in Private mode.
 
 ## Exercise 9: Connect to WVD with the Windows Desktop Client
+
+Duration:  XX minutes
 
 In this exercise we are going to walk through connecting to your WVD environment using the Windows desktop client and validating your deployment. Download and install the Windows desktop client using the following links:
 
@@ -1410,6 +1445,8 @@ Starting with version 1.2.790, you can reset the user data from the **About** pa
 
 ## Exercise 10: Configure Session Hosts with Group Policy
 
+Duration:  XX minutes
+
 After working with the Windows 10 Marketplace builds, we found some areas that needed improvement. Our goal is to ensure that we are enabling the best experience for our customers and their users. This guide will cover the recommended configurations using Group Policy.
 
 To perform the tasks of configuring group policy, we will require you to have access to your domain controller or to a Admin jump box where you can configure domain group policies. Perform the following steps on this system.
@@ -1441,7 +1478,7 @@ These are Group Policy Backup files from which the customer can import the recom
     >**Note**: If you are helping a customer the name of the policy is not critical just what configured. So, customers should be encouraged to use
 standard naming conventions.
 
-9.  Right Select on each policy and select import Settings. Select next through backup GPO, on the backup locations screen select the folder where the back ups are located.
+9.  Right Select on each policy and select import Settings. Select next through backup GPO, on the backup locations screen select the folder where the backups are located.
 
 10. Select next through backup GPO, on the backup locations screen select the folder where the backups are located.
 
@@ -1570,6 +1607,8 @@ Provided below is a summary of the group policy settings that Microsoft recommen
 
 ## Exercise 11: Setup Monitoring for WVD
 
+Duration:  XX minutes
+
 In this exercise we will setup monitoring for our WVD host pools. There are multiple reasons why monitoring serves a critical role -- troubleshooting, performance, security, etc\... There are also multiple components that make up the WVD service, which can add some variation on how customers implement monitoring (e.g. adding additional 3rd party solutions). With the Spring 2020 Update we can leverage Azure Monitor for most aspects. By the end of this exercise you will have the following monitoring capabilities enabled:
 
 -   Diagnostic logging for the WVD service
@@ -1607,7 +1646,7 @@ In this exercise we will create a dedicated workspace for our Spring 2020 enviro
 
 4.  On the Create Log Analytics workspace blade, fill in the following information and Select **Review + Create**.
 
-    -    **Subscription:** Select the desired subsciption for the Log Analytics workspace.
+    -    **Subscription:** Select the desired subscription for the Log Analytics workspace.
 
     -    **Resource Group:** Create a new resource group or select 1 from the list.
 
@@ -2201,7 +2240,7 @@ LastUpdateTime : 1/18/2020 6:26:13 AM
 UpdateErrorMessage :
 ```
 
-If a VM is removed without removing the host pool configuration on the tenant, it will appear with a \'No heartbeat\' status. If thats the case, run:
+If a VM is removed without removing the host pool configuration on the tenant, it will appear with a \'No heartbeat\' status. If that's the case, run:
 
 ```
 Get-RdsSessionHost \@hostPoolLevelInput \| ForEach-Object {
@@ -2285,7 +2324,7 @@ LastUpdateTime : 1/18/2020 6:26:13 AM
 UpdateErrorMessage :
 ```
 
-If a VM is removed without removing the host pool configuration on the tenant, it will appear with a \'No heartbeat\' status. If thats the case, run
+If a VM is removed without removing the host pool configuration on the tenant, it will appear with a \'No heartbeat\' status. If that's the case, run:
 
 ```
 Get-RdsSessionHost \@hostPoolLevelInput \| ForEach-Object {
@@ -2586,7 +2625,7 @@ When using an ARM template you man encounter domain join errors. Use the followi
 
 Generally error 5 means lack of permission. Which is what is implied from your comment that he has access only to a specific OU.
 
->**Note**:Please review the following guide - [[https://support.microsoft.com/en-us/help/4341920/troubleshoot-errors-thatoccur-when-you-join-windows-based-computers-t]](https://support.microsoft.com/en-us/help/4341920/troubleshoot-errors-thatoccur-when-you-join-windows-based-computers-t) 
+>**Note**: Please review the following guide - [[https://support.microsoft.com/en-us/help/4341920/troubleshoot-errors-thatoccur-when-you-join-windows-based-computers-t]](https://support.microsoft.com/en-us/help/4341920/troubleshoot-errors-thatoccur-when-you-join-windows-based-computers-t) 
 
 6. Grab additional logs from the path, Windows clients log the details of domain join operations in the %windir%\\debug\\Netsetup.log file.
 
@@ -2611,11 +2650,12 @@ C:WindowsdebugNetSetup.log
     {\"code\":\"DeploymentFailed\",\"message\":\"At least one resource deployment operation failed. Please list deployment operations for details. Please see [[https://aka.ms/arm-debug]](https://aka.ms/arm-debug) for usage details.\",\"details\":\[{\"code\":\"Conflict\",\"message\":\"{\\r\\n \"status\": \"Failed\",\\r\\n \"error\": {\\r\\n \"code\": \"ResourceDeploymentFailure\",\\r\\n \"message\": \"The resource operation completed with terminal provisioning state \'Failed\'.\",\\r\\n \"details\": \[\\r\\n {\\r\\n \"code\": \"VMExtensionProvisioningError\",\\r\\n \"message\": \"VM has reported a failure when processing extension \'dscextension\'. Error message: \\\"DSC Configuration \'FirstSessionHost\' completed with error(s). Following are the first few: PowerShell DSC resource MSFT\_ScriptResource failed to execute Set-TargetResource functionality with error message: One or more errors occurred. The SendConfigurationApply function did not succeed.\\\".\"\\r\\n }\\r\\n \]\\r\\n }\\r\\n}\"}\]}
 
 
-## Exercise 12: Lab environment clean up after completion
+## After the hands-on lab
+
+Duration:  XX minutes
 
 | WARNING: Prior to continuing you should remove all resources used for this lab.  To do this in the **Azure Portal** click **Resource groups**.  Select any resources groups you have created.  On the resource group blade click **Delete Resource group**, enter the Resource Group Name and click **Delete**.  Repeat the process for any additional Resource Groups you may have created. **Failure to do this may cause issues with other labs.** |
    
-
 ### Task 1: Delete Resource groups to remove lab environment
 
 1. Go to the **Azure portal**
@@ -2638,5 +2678,5 @@ C:WindowsdebugNetSetup.log
    
 6. Repeat these steps for all **Resource groups** created for this lab, including those for **Azure Monitor** and **Log Analytics**
    
-
+You should follow all steps provided *after* attending the Hands-on lab.
 
