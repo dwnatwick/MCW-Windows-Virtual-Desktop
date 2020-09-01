@@ -35,7 +35,6 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- /TOC -->
 
-
 # Implementing Windows Virtual Desktop in the enterprise before the hands-on lab setup guide
 
 ## Requirements
@@ -68,7 +67,7 @@ Duration:  X minutes
 
 In this task you will leverage a custom Azure Resource Manager (ARM) template to deploy the required Active Directory Domain Services infrastructure for WVD. If you already have an AD DS environment and AD Connect configured, you can move on to **HOL step-by-step, Exercise 4: Configuring Azure AD Connect with AD DS**.
 
-Link to the ARM template: [AAD hybrid lab ARM template from GitHub](https://github.com/PeterR-msft/M365WVDWS/tree/master/AAD-Hybrid-Lab).
+1. Link to the ARM template: [AAD hybrid lab ARM template from GitHub](https://github.com/PeterR-msft/M365WVDWS/tree/master/AAD-Hybrid-Lab).
 
 This ARM Template will provision the following resources:
 
@@ -104,11 +103,11 @@ deployment. To avoid confusion and deployment errors, **open an InPrivate browse
 
 3.  Under Quick Start, click **Deploy to Azure**. This will open a new browser tab to the Azure Portal for custom deployments.
     
-    ![Deploy to Azure button within Github](images/1.png)
+    ![Screenshop of the Deploy to Azure button within Github.](images/1.png)
 
 4.  If prompted, make sure to sign in with an account that is an owner for the Azure subscription.
 
-5.  Fill in the required ARM template parameters. Refer to the following example for more information on the parameters.
+5.  Fill in the required ARM template parameters. Refer to the following example for more information on the parameters:
     - Create a new **Resource group**
     - Select a **Region**
     - Create an **Admin password**
