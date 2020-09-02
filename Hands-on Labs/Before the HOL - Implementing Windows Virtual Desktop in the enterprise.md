@@ -117,9 +117,8 @@ deployment. To avoid confusion and deployment errors, **open an InPrivate browse
     - Select **Review + create**
 
     >**Note**: Make sure that you save these inputs, they will be needed for reference when you go through the HOL Step-by-Step
-    
-    
-       ![This image identifies the fields that you will complete for the WVD Domain custom deployment template](images\wvdcustomdeployment.png "Windows Virtual Desktop custom deployment template")
+        
+    ![This image identifies the fields that you will complete for the WVD Domain custom deployment template](images/wvdcustomdeployment.png "Windows Virtual Desktop custom deployment template")
 
 6.  Agree to the Terms and conditions and click **Purchase**.
 
