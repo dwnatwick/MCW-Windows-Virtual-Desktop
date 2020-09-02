@@ -103,7 +103,7 @@ deployment. To avoid confusion and deployment errors, **open an InPrivate browse
 
 3.  Under Quick Start, click **Deploy to Azure**. This will open a new browser tab to the Azure Portal for custom deployments.
     
-    ![Screenshop of the Deploy to Azure button within Github.](images/1.png)
+    ![Screenshot of the Deploy to Azure button within Github.](images/1.png)
 
 4.  If prompted, make sure to sign in with an account that is an owner for the Azure subscription.
 
@@ -118,7 +118,8 @@ deployment. To avoid confusion and deployment errors, **open an InPrivate browse
 
     >**Note**: Make sure that you save these inputs, they will be needed for reference when you go through the HOL Step-by-Step
     
-    ![WVD Domain custom deployment template](images\wvdcustomdeployment.png "Windows Virtual Desktop custom deployment template")
+    
+       ![This image identifies the fields that you will complete for the WVD Domain custom deployment template](images\wvdcustomdeployment.png "Windows Virtual Desktop custom deployment template")
 
 6.  Agree to the Terms and conditions and click **Purchase**.
 
