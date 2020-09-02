@@ -61,7 +61,7 @@ Before you start setting up your Windows Virtual Desktop workspace, make sure yo
 
 ## Before the hands-on lab
 
-Duration:  45 minutes
+Duration:  X minutes
 
 ### Task 1: Deploying Azure Infrastructure and AD DS
 
@@ -103,7 +103,7 @@ deployment. To avoid confusion and deployment errors, **open an InPrivate browse
 
 3.  Under Quick Start, click **Deploy to Azure**. This will open a new browser tab to the Azure Portal for custom deployments.
     
-    ![Screenshot of the Deploy to Azure button within Github.](images/1.png)
+    ![Screenshop of the Deploy to Azure button within Github.](images/1.png)
 
 4.  If prompted, make sure to sign in with an account that is an owner for the Azure subscription.
 
@@ -117,8 +117,8 @@ deployment. To avoid confusion and deployment errors, **open an InPrivate browse
     - Select **Review + create**
 
     >**Note**: Make sure that you save these inputs, they will be needed for reference when you go through the HOL Step-by-Step
-        
-    ![This image identifies the fields that you will complete for the WVD Domain custom deployment template](images/wvdcustomdeployment.png "Windows Virtual Desktop custom deployment template")
+    
+    ![WVD Domain custom deployment template](images\wvdcustomdeployment.png "Windows Virtual Desktop custom deployment template")
 
 6.  Agree to the Terms and conditions and click **Purchase**.
 
