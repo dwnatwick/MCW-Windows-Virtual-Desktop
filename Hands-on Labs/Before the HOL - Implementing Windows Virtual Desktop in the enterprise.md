@@ -61,7 +61,7 @@ Before you start setting up your Windows Virtual Desktop workspace, make sure yo
 
 ## Before the hands-on lab
 
-Duration:  X minutes
+Duration:  60 minutes
 
 ### Task 1: Deploying Azure Infrastructure and AD DS
 
