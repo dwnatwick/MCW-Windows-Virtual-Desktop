@@ -9,7 +9,7 @@ Whiteboard design session trainer guide
 </div>
 
 <div class="MCWHeader3">
-August 2020
+Sepbemter 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -38,9 +38,6 @@ Microsoft and the trademarks listed at https://www.microsoft.com/en-us/legal/int
     - [Customer needs](#customer-needs)
     - [Customer objections](#customer-objections)
     - [Infographic for common scenarios](#infographic-for-common-scenarios)
-    - [Security Scenarios](#security-scenarios)
-    - [Network Scenarios](#network-scenarios)
-    - [Windows Virtual Desktop standard architecture](#windows-virtual-desktop-standard-architecture)
   - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution)
   - [Step 3: Present the solution](#step-3-present-the-solution)
   - [Wrap-up](#wrap-up)
@@ -173,7 +170,7 @@ When participants are doing activities, you can **look ahead to refresh your mem
 
 ## Abstract and learning objectives
 
-In the Whiteboard Design Session (WDS), you will work in groups to design a Windows Virtual Desktop solution using Microsoft 365 and Azure technologies. Your solution will consider the necessary Microsoft 365 subscription required for Windows 10 Enterprise multi-user licensing, as well as the Azure Active Directory and security needs for a healthcare provider. You will need to determine how to connect Azure to the current VMware and Citrix on-premises infrastructure and the connections needed to connect this infrastructure to Azure for application access. Finally, you will need to design the Windows Virtual Desktop solution utilizing Azure virtual machines with availability and scalability to handle 24x7 operations without performance degradation.
+In the whiteboard design session you will work in groups to design a Windows Virtual Desktop solution using Microsoft 365 and Azure technologies. Your solution will consider the necessary Microsoft 365 subscription required for Windows 10 Enterprise multi-user licensing, as well as the Azure Active Directory and security needs for a healthcare provider. You will need to determine how to connect Azure to the current VMware and Citrix on-premises infrastructure and the connections needed to connect this infrastructure to Azure for application access. Finally, you will need to design the Windows Virtual Desktop solution utilizing Azure virtual machines with availability and scalability to handle 24x7 operations without performance degradation.
 
 At the end of the whiteboard design session, you will be better able to design a solution that leverages Microsoft 365 and Azure technologies together to build a secure and robust Windows Virtual Desktop infrastructure.
 
@@ -197,11 +194,11 @@ Directions: With all participants in the session, the facilitator/SME presents a
 
 Contoso Healthcare, headquartered in Los Angeles, California, is a national healthcare provider with a network of affiliate hospitals and doctor’s offices located throughout North America. These locations continue to grow through acquisition.  The nature of their business requires a high level of security of Personal Identifiable Information (PII) for their employees.
 
-Contoso currently has approximately 250 workstations within their environment with business applications for non-clinical users from the developer, finance, and knowledge departments. Contoso is currently supporting existing data centers in California and Northern Virginia with VMware for the server control plane and a partial deployment of Citrix virtual desktop infrastructure. These locations are connected with a private WAN connection and a backup VPN over broadband.  
+Contoso currently has approximately 250 workstations within their environment with business applications for non-clinical users from developer, finance, and knowledge departments. Contoso is currently supporting existing data centers in California and Northern Virginia with VMware for the server control plane and a partial deployment of Citrix virtual desktop infrastructure. These locations are connected with a private WAN connection and a backup VPN over broadband.  
 
 Ken Greenwald, Contoso Healthcare CTO, has been evaluating the value of the public cloud and views Microsoft Azure as an excellent option to maintain availability and increase scalability of resources to the organization.  His team has also struggled with managing 250 workstations spread across the organization and needs an option to easily manage and maintain a standardized desktop image that gives users secure access to applications.  Ideally, these desktop images would not be maintained on local machines.  As Ken states, "Contoso Healthcare has continued to grow through the acquisition of doctor's offices and hospitals throughout North America, which has created an issue with our ability to standardize hardware at these locations.  The Board of Directors has been unwilling to increase capital expenditures for new equipment and we are forced as an IT organization to maximize our current VMware and Citrix virtual desktop infrastructure to deliver applications to users.  We need the ability to utilize what we have in place within our data centers and integrate Microsoft Azure technologies to facilitate our ability to standardize across the organization and quickly integrate a new office acquisition."
 
-Contoso Healthcare's CISO, Laura Knight, has an additional list of objectives to address.  She is concerned with the threat of data exposure throughout the organization that is posed by the multiple devices that they have acquired through their office acquisitions.  The continued increase in mobility of these devices raises concerns of Personal Health Information (PHI) and PII being exposed to unauthorized individuals.  She also is responsible for the auditing of privacy standards, such as ISO 27001, HIPAA, and California Personal Protection Act (similar to GDPR) controls.  Laura has said, "The growth of Contoso Healthcare has created an increased burden on my security and compliance organization.  It has become more difficult to monitor systems as they come online with variations of operating systems.  Some of these operating systems do not support mobile device management software to audit use and application access.  In addition, enforcing a centralized standard for security policies and access to confidential information has been challenging.  My organization needs to be able to maintain the security of our data and resources, and mitigate the prospect of data loss due to threat or unauthorized access to devices." 
+Contoso Healthcare's CISO, Laura Knight, has an additional list of objectives to address.  She is concerned with the threat of data exposure throughout the organization that is posed by the multiple devices that they have acquired through their office acquisitions.  The continued increase in mobility of these devices raises concerns of Personal Health Information (PHI) and Personally Identifiable Information (PII) being exposed to unauthorized individuals.  She also is responsible for the auditing of privacy standards, such as ISO 27001, HIPAA, and California Personal Protection Act (similar to GDPR) controls.  Laura has said, "The growth of Contoso Healthcare has created an increased burden on my security and compliance organization.  It has become more difficult to monitor systems as they come online with variations of operating systems.  Some of these operating systems do not support mobile device management software to audit use and application access.  In addition, enforcing a centralized standard for security policies and access to confidential information has been challenging.  My organization needs to be able to maintain the security of our data and resources, and mitigate the prospect of data loss due to threat or unauthorized access to devices." 
 
 Contoso Healthcare has completed an initial cloud assessment of their current infrastructure and applications, and they have divided the following areas that they feel that Microsoft 365 and Azure technologies can support:
 
@@ -470,11 +467,11 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 2. What subscription is required for Contoso's mobile device requirements?
    
-   Microsoft Enterprise Mobility + Security E3 or E5 are required for Intune MDM
+   Microsoft Enterprise Mobility + Security E3 or E5 are required for Intune MDM.
 
 3. What subscription is needed to classify and protect PHI and PII access?
    
-   Microsoft 365 E5 license is required for the full suite of data protection, information protection and classification, and advanced threat protection capabilities.
+   A Microsoft 365 E5 license is required for the full suite of data protection, information protection and classification, and advanced threat protection capabilities.
 
 4. What subscription is necessary to enforce device access on the local network only?
    
@@ -482,13 +479,13 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 5. Why did you select the Microsoft 365 subscription(s)?
 
-   Microsoft 365 Enterprise E5 will be required with Enterprise Mobility + Security E5 to support the full list of requirements outlined by the customer.  Microsoft 365 licenses that support Windows Virtual Desktop include M365 E3, E5, A3, A5, F3, and Business Premium.  However, the additional requirements for mobile device management, data classification and information protection, and conditional access policies require the E5 and EMS E5 licenses.  Business Premium licensing is also only supported to up to 300 users.
+   A Microsoft 365 Enterprise E5 will be required with Enterprise Mobility + Security E5 to support the full list of requirements outlined by the customer.  Microsoft 365 licenses that support Windows Virtual Desktop include M365 E3, E5, A3, A5, F3, and Business Premium.  However, the additional requirements for mobile device management, data classification and information protection, and conditional access policies require the E5 and EMS E5 licenses.  Business Premium licensing is also only supported to up to 300 users.
 
 *Security*
 
 1. What is required to audit, log, and monitor controls for ISO 27001 and HIPAA? 
     
-    Azure Policy initiatives for ISO 27001 and HIPAA should be enabled for the Resource Groups that are created to govern the Windows Virtual Desktop infrastructure.  In addition, Azure Security Center should be upgraded to the Standard tier subscription to properly monitor and alert on control compliance to ISO 27001 and HIPAA standards.
+    Azure Policy initiatives for ISO 27001 and HIPAA should be enabled for the resource groups that are created to govern the Windows Virtual Desktop infrastructure.  In addition, Azure Security Center should be upgraded to the Standard tier subscription to properly monitor and alert on control compliance to ISO 27001 and HIPAA standards.
     
     To address compliance with the California Personal Protection Act, the Azure Policy initiative for GDPR will be assigned and custom policies will be added as needed to comply with the CPPA.
 
@@ -496,10 +493,11 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
    
    Azure Monitor agents should be installed on all Azure and on-premises virtual machines in order to govern the Azure Policy initiatives.  These agents will provide activity logs that can be monitored within Azure Security Center.
 
-    ATP should be used to monitor threats.  
-    Azure Sentinel should be used for incident response and investigation
+    ATP should be used to monitor threats.
+    
+    Azure Sentinel should be used for incident response and investigation.
 
-3. How will you avoid data exposure for data in-transit and data at-rest?
+3. How will you avoid data exposure for data in transit and data at rest?
     
     All connections for data in-transit will be transmitted through an encrypted SSL connection.  Data at-rest will be encrypted at-rest. 
     
@@ -562,15 +560,15 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 1. How will the standardized desktop image be created?
 
-    The recommendation would be to create the managed WVD image that Contoso Healthcare is wanting to deliver to their users. Optionally, the could also create a VHD for the standard image.  Details on this process is in the links provided in the student guide.  Another option is to have an image created with Windows 10 multi-user licensing and Office365 ProPlus at the time of creating the Windows Virtual Desktop host pool, and then making adjustments to that image based on custom requirements. You could use the following automated image building solutions to create and manage this image, such as Azure Image Builder (https://docs.microsoft.com/en-us/azure/virtual-machines/windows/image-builder-overview) or Build image with Packer (https://docs.microsoft.com/en-us/azure/virtual-machines/windows/build-image-with-packer) to manage images in Azure. 
+    The recommendation would be to create the managed WVD image that Contoso Healthcare is wanting to deliver to their users. Optionally, the could also create a VHD for the standard image.  Details on this process are in the links provided in the student guide.  Another option is to have an image created with Windows 10 multi-user licensing and Office365 ProPlus at the time of creating the Windows Virtual Desktop host pool, and then making adjustments to that image based on custom requirements. You could use the following automated image building solutions to create and manage this image, such as Azure Image Builder (https://docs.microsoft.com/en-us/azure/virtual-machines/windows/image-builder-overview) or Build image with Packer (https://docs.microsoft.com/en-us/azure/virtual-machines/windows/build-image-with-packer) to manage images in Azure. 
 
 2. How will applications be delivered to the desktop image?
     
-    To simplify the application delivery and licensing, Contoso Healthcare would like to leverage the current Citrix infrastructure that they have in place.  To accomplish this, a shortcut can be provided on the standard desktop image for the Citrix app marketplace that provides users with the applications that they are authorized to access.
+    To simplify the application delivery and licensing, Contoso Healthcare would like to leverage the current Citrix infrastructure that they have in place.  To accomplish this, a shortcut can be provided on the standard desktop image for the Citrix app marketplace that provides users with the applications they are authorized to access.
 
 3. What are the connection options for users to access the Windows Virtual Desktop image?
     
-    There are multiple connection options for users to access their Windows Virtual Desktop.  The Remote Desktop client application can be used in Windows 10, Windows 7, Android, macOS, or iOS.  Users can also connect through a HTML5-capable web browser.  Since we are unsure the full scope of operating systems on the 500 existing workstations within Contoso Healthcare, we will recommend connection through the web browser on desktop devices, and using the Remote Desktop app on mobile devices.
+    There are multiple connection options for users to access their Windows Virtual Desktop.  The Remote Desktop client application can be used with Windows 10, Windows 7, Android, macOS, or iOS.  Users can also connect through an HTML5-capable web browser.  Since we are unsure of the full scope of operating systems on the 500 existing workstations within Contoso Healthcare, we recommend connection through the web browser on desktop devices, and using the Remote Desktop app on mobile devices.
 
 4. What are the minimum system requirements for users to access the Windows Virtual Desktop image?
 
@@ -590,26 +588,32 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 - Diagram of the on-premises to Azure Windows Virtual Desktop solution:
 
     This diagram shows the possible solution for Contoso's Windows Virtual Desktops.  The California datacenter is connecting to the Azure West US region, and the Northern Virginia datacenter is connecting to the East US region utilizing ExpressRoutes to each.  The West US and East US region VNETs are peered for high-speed backbone connection with a pass through peering allowed from East US to the WVD VM host pool VNET that is peered with West US.
-    ![](images/wvdsolutiondiagramv2.png "On-premises to Azure Windows Virtual Desktop solution")
+    
+    ![Diagram showing the the on-premises to Azure Windows Virtual Desktop solution as described above.](images/wvdsolutiondiagramv2.png "On-premises to Azure Windows Virtual Desktop solution")
 
   
 
 ## Checklist of preferred objection handling
 
 1. The CTO at Contoso Healthcare does not want to invest in new workstations and mobile devices to support the standardized desktop image. Can these devices support the new image?
-    - Windows Virtual Desktop is flexible in the way that users can access their virtual desktop.  The design will utilize web browser access to the virtual desktop on workstations, and the remote desktop app on mobile devices.  
+
+    Windows Virtual Desktop is flexible in that users can access their virtual desktop.  The design will utilize web browser access to the virtual desktop on workstations, and the remote desktop app on mobile devices.  
 
 2. The CISO at Contoso Healthcare needs to be convinced that data will not be exposed. How would Microsoft support the data protection needs for Contoso Healthcare?
-    - The designed solution for Contoso Healthcare includes Microsoft 365 E5 with Enterprise Mobility + Security (EMS) E5.  This provides a full suite of data and information protection to classify sensitive data and audit activity.  Cloud App Security can also be used to block access to unauthorized file sharing services to avoid users from copying files to unprotected locations.  Data protection controls can be monitored through Microsoft 365 Security Policy Advisor, and Azure Security Center.
+
+    The designed solution for Contoso Healthcare includes Microsoft 365 E5 with Enterprise Mobility + Security (EMS) E5.  This provides a full suite of data and information protection to classify sensitive data and audit activity.  Cloud App Security can also be used to block access to unauthorized file sharing services to avoid users from copying files to unprotected locations.  Data protection controls can be monitored through Microsoft 365 Security Policy Advisor, and Azure Security Center.
 
 3. Contoso Healthcare must be able to log and audit all activity on the desktop image.  How will this be handled within the cloud and on-premises environments?
-    - Azure Monitor and Azure Log Analytics will be activated within the Azure environment.  Azure Monitor agents will be deployed to the session hosts in Azure and the on-premises devices (laptops, phones) to monitor activity across the entire infrastructure. 
+    
+    Azure Monitor and Azure Log Analytics will be activated within the Azure environment.  Azure Monitor agents will be deployed to the session hosts in Azure and the on-premises devices (laptops, phones) to monitor activity across the entire infrastructure. 
 
 4. Connections between the cloud and existing data centers must be secure and reliable to support their requirements.  How will this be addressed and monitored?
-    - The initial design will utilize a secure and encrypted site-to-site VPN connections from Azure to the California and Northern Virginia data centers.  An option has also been provided to utilize an Azure ExpressRoute connection to provide private dedicated connectivity from Azure to the California and Northern Virginia data centers.  Network Watcher will be used to monitor network traffic and throughput over the connections.  Azure Security Center and Advanced Threat Protection will be in place to monitor and alert on potential vulnerabilities and threats.
+
+    The initial design will utilize a secure and encrypted site-to-site VPN connections from Azure to the California and Northern Virginia data centers.  An option has also been provided to utilize an Azure ExpressRoute connection to provide private dedicated connectivity from Azure to the California and Northern Virginia data centers.  Network Watcher will be used to monitor network traffic and throughput over the connections.  Azure Security Center and Advanced Threat Protection will be in place to monitor and alert on potential vulnerabilities and threats.
 
 5. Contoso Healthcare has made a substantial capital investment in their current data centers that they do not want to decommission. How can the infrastructure be architected to support the current data centers?
-    - The designed solution has been architected to integrate the current application delivery configuration through Citrix into the standardized Windows Virtual Desktop image.  In addition, Azure AD Connect will be used with hash synchronization to provide a single sign-on environment between the Azure Active Directory identity management and the existing on-premises Active Directory domain.  As hardware is depreciated within the current data centers, application servers can be migrated to Azure and the Windows Virtual Desktop image can be updated for the new location of these servers.
+
+    The designed solution has been architected to integrate the current application delivery configuration through Citrix into the standardized Windows Virtual Desktop image.  In addition, Azure AD Connect will be used with hash synchronization to provide a single sign-on environment between the Azure Active Directory identity management and the existing on-premises Active Directory domain.  As hardware is depreciated within the current data centers, application servers can be migrated to Azure and the Windows Virtual Desktop image can be updated for the new location of these servers.
 
 ## Customer quote (to be read back to the attendees at the end)
 
