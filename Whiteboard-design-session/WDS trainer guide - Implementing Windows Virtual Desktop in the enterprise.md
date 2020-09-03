@@ -513,7 +513,7 @@ Design a Windows Virtual Desktop infrastructure that addresses the needs and req
 
 5. How will you address the secure and centralized file storage needs of the organization?
     
-    Azure Files is the preferred method for storage use with Windows Virtual Desktop.  In addition, FSLogix can be used in conjunction with Azure Files to manage user virtual desktop profiles.  Azure Files must deployed in the same region as the Virtual Machine pools.
+    Azure Files is the preferred method for storage use with Windows Virtual Desktop.  In addition, FSLogix can be used in conjunction with Azure Files to manage user virtual desktop profiles.  Azure Files must be deployed in the same region as the Virtual Machine pools.
 
 6. Describe the reasons for the specific security services selected.
 
@@ -552,7 +552,7 @@ Design a Windows Virtual Desktop infrastructure that addresses the needs and req
     
     Network Watcher will be utilized to monitor network connection speeds and health.
     
-    Service Map will be utilized for additional monitoring of virtual machines
+    Service Map will be utilized for additional monitoring of virtual machines.
     
     Azure Sentinel will be the central source for incident response and investigation of threats, vulnerabilities, and anomalies.
 
@@ -564,7 +564,7 @@ Design a Windows Virtual Desktop infrastructure that addresses the needs and req
 
 1. How will the standardized desktop image be created?
 
-    The recommendation would be to create the managed WVD image that Contoso Healthcare is wanting to deliver to their users. Optionally, the could also create a VHD for the standard image.  Details on this process are in the links provided in the student guide.  Another option is to have an image created with Windows 10 multi-user licensing and Office365 ProPlus at the time of creating the Windows Virtual Desktop host pool, and then making adjustments to that image based on custom requirements. You could use the following automated image building solutions to create and manage this image, such as Azure Image Builder (https://docs.microsoft.com/en-us/azure/virtual-machines/windows/image-builder-overview) or Build image with Packer (https://docs.microsoft.com/en-us/azure/virtual-machines/windows/build-image-with-packer) to manage images in Azure. 
+    The recommendation would be to create the managed WVD image that Contoso Healthcare is wanting to deliver to their users. Optionally, they could also create a VHD for the standard image.  Details on this process are in the links provided in the student guide.  Another option is to have an image created with Windows 10 multi-user licensing and Office365 ProPlus at the time of creating the Windows Virtual Desktop host pool, and then making adjustments to that image based on custom requirements. You could use the following automated image building solutions to create and manage this image, such as Azure Image Builder (https://docs.microsoft.com/en-us/azure/virtual-machines/windows/image-builder-overview) or Build image with Packer (https://docs.microsoft.com/en-us/azure/virtual-machines/windows/build-image-with-packer) to manage images in Azure. 
 
 2. How will applications be delivered to the desktop image?
     
@@ -586,11 +586,11 @@ Design a Windows Virtual Desktop infrastructure that addresses the needs and req
 
 2. How many virtual machines are required to support the number of concurrent sessions?
     
-    You should have used the Azure pricing calculator to create an initial capacity estimate.  This estimate calculated at most 31 DS2s v3 instances as the base availability set with 8 virtual desktop sessions per host (according to: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/virtual-machine-recs) .  Additional instances to scale as capacity increases.  The example estimate can be accessed here: https://azure.com/e/296a636cede24f1c859b42a63687c80c.
+    You should have used the Azure pricing calculator to create an initial capacity estimate.  This estimate calculated at most 31 DS2s v3 instances as the base availability set with 8 virtual desktop sessions per host (according to: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/virtual-machine-recs).  Additional instances to scale as capacity increases.  The example estimate can be accessed here: https://azure.com/e/296a636cede24f1c859b42a63687c80c.
 
 *Diagram of the on-premises to Azure Windows Virtual Desktop solution*
 
-   This diagram shows the possible solution for Contoso's Windows Virtual Desktops.  The California datacenter is connecting to the Azure West US region, and the Northern Virginia datacenter is connecting to the East US region utilizing ExpressRoutes to each.  The West US and East US region VNETs are peered for high-speed backbone connection with a pass through peering allowed from East US to the WVD VM host pool VNET that is peered with West US.
+   This diagram shows the possible solution for Contoso's Windows Virtual Desktops.  The California datacenter is connecting to the Azure West US region, and the Northern Virginia datacenter is connecting to the East US region utilizing ExpressRoutes to each.  The West US and East US region VNETs are peered for high-speed backbone connection with a pass-through peering allowed from East US to the WVD VM host pool VNET that is peered with West US.
     
    ![Diagram showing the the on-premises to Azure Windows Virtual Desktop solution as described above.](images/wvdsolutiondiagramv2.png "On-premises to Azure Windows Virtual Desktop solution")
 
