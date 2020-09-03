@@ -238,20 +238,22 @@ Contoso Healthcare has completed an initial cloud assessment of their current in
 
 ### Infographic for common scenarios
 
-
 ### Security Scenarios
 The security scenario applies to the potential security, monitoring, and compliance auditing options needed to design the solution.
-![](images/security.png "Security Scenarios")
+
+![Security infographic showing potential security, monitoring, and compliance auditing options needed to design a solution.](images/security.png "Security Scenario")
 
 
 ### Network Scenarios
 Network scenarios diagram the potential options for connecting from Microsoft Azure to the on-premises network.
-![](images/network.png "Network Scenarios")
+
+![Network infographic showing potential options for connecting from Microsoft Azure to the on-premises network.](images/network.png "Network Scenario")
 
 
 ### Windows Virtual Desktop standard architecture
 This diagram outlines a simple Windows Virtual Desktop architecture with Azure and Microsoft 365. This includes the Windows Virtual Desktop user connection and the Windows Virtual Desktop host pools.
-![](images/wvdarchitecture.png "Windows Virtual Desktop standard architecture")
+
+![Standard architecture diagram outlining a simple Windows Virtual Desktop with Azure and Microsoft 365 solution.](images/wvdarchitecture.png "Windows Virtual Desktop standard architecture")
 
 
 ## Step 2: Design a proof of concept solution
@@ -540,7 +542,7 @@ Design a Windows Virtual Desktop infrastructure that addresses the needs and req
 5. What inbound ports, if any, need to be open to the session hosts for users to connect securely? 
     
     The answer is none. Because of reverse-connect, no inbound ports are required to the session hosts, thus reducing the attack surface 
-    (https://docs.microsoft.com/en-us/azure/virtual-desktop/security-guide#session-host-security-best-practices)
+    (https://docs.microsoft.com/en-us/azure/virtual-desktop/security-guide#session-host-security-best-practices).
 
 6. What will you use to identify and monitor threats on the network?
     
@@ -588,9 +590,9 @@ Design a Windows Virtual Desktop infrastructure that addresses the needs and req
 
 *Diagram of the on-premises to Azure Windows Virtual Desktop solution*
 
-    This diagram shows the possible solution for Contoso's Windows Virtual Desktops.  The California datacenter is connecting to the Azure West US region, and the Northern Virginia datacenter is connecting to the East US region utilizing ExpressRoutes to each.  The West US and East US region VNETs are peered for high-speed backbone connection with a pass through peering allowed from East US to the WVD VM host pool VNET that is peered with West US.
+   This diagram shows the possible solution for Contoso's Windows Virtual Desktops.  The California datacenter is connecting to the Azure West US region, and the Northern Virginia datacenter is connecting to the East US region utilizing ExpressRoutes to each.  The West US and East US region VNETs are peered for high-speed backbone connection with a pass through peering allowed from East US to the WVD VM host pool VNET that is peered with West US.
     
-    ![Diagram showing the the on-premises to Azure Windows Virtual Desktop solution as described above.](images/wvdsolutiondiagramv2.png "On-premises to Azure Windows Virtual Desktop solution")
+   ![Diagram showing the the on-premises to Azure Windows Virtual Desktop solution as described above.](images/wvdsolutiondiagramv2.png "On-premises to Azure Windows Virtual Desktop solution")
 
 ## Checklist of preferred objection handling
 
