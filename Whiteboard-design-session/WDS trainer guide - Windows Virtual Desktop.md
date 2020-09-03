@@ -276,7 +276,7 @@ Directions: With all participants at your table, respond to the following questi
 
 *High-level architecture*
 
-Design a Windows Virtual Desktop infrastructure that addresses the needs and requirements of the organization. Provide details of your implementation. Make sure to document your design with a diagram along with addressing the questions.  Address the requirements in the following areas.
+Design a Windows Virtual Desktop infrastructure that addresses the needs and requirements of the organization. Provide details of your implementation. Make sure to document your design with a diagram along with addressing the questions.  Address the requirements in the following areas:
 
 *Microsoft 365*
 
@@ -457,7 +457,9 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 ## Preferred solution
 
-*Provide an overview of the technologies and the implementation at a high-level. How will you use Microsoft 365 and Azure technologies to meet the Customer's needs?*
+*High-level architecture*
+
+Design a Windows Virtual Desktop infrastructure that addresses the needs and requirements of the organization. Provide details of your implementation. Make sure to document your design with a diagram along with addressing the questions.  Address the requirements in the following areas:
 
 *Microsoft 365*
 
@@ -584,14 +586,11 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
     
     You should have used the Azure pricing calculator to create an initial capacity estimate.  This estimate calculated at most 31 DS2s v3 instances as the base availability set with 8 virtual desktop sessions per host (according to: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/virtual-machine-recs) .  Additional instances to scale as capacity increases.  The example estimate can be accessed here: https://azure.com/e/296a636cede24f1c859b42a63687c80c.
 
-
-- Diagram of the on-premises to Azure Windows Virtual Desktop solution:
+*Diagram of the on-premises to Azure Windows Virtual Desktop solution*
 
     This diagram shows the possible solution for Contoso's Windows Virtual Desktops.  The California datacenter is connecting to the Azure West US region, and the Northern Virginia datacenter is connecting to the East US region utilizing ExpressRoutes to each.  The West US and East US region VNETs are peered for high-speed backbone connection with a pass through peering allowed from East US to the WVD VM host pool VNET that is peered with West US.
     
     ![Diagram showing the the on-premises to Azure Windows Virtual Desktop solution as described above.](images/wvdsolutiondiagramv2.png "On-premises to Azure Windows Virtual Desktop solution")
-
-  
 
 ## Checklist of preferred objection handling
 
