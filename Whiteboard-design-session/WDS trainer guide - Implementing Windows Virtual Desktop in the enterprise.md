@@ -241,19 +241,19 @@ Contoso Healthcare has completed an initial cloud assessment of their current in
 ### Security Scenarios
 The security scenario applies to the potential security, monitoring, and compliance auditing options needed to design the solution.
 
-![Security infographic showing potential security, monitoring, and compliance auditing options needed to design a solution.](images/security.png "Security Scenario")
+![Common scenario of how Azure Monitor and Network Watcher can be used for both Azure and non-Azure VMs and network connections.  On the right, the on-premises servers are connected to Azure Monitor with an agent and Network Watcher is monitoring the connection between the on-premises datacenter and Azure.  In Azure, Azure Monitor is connected to the Windows Virtual Desktop host pool instances, and network watcher is monitoring the connect to these hosts and the VNET.  The metric and activity log information is then fed into Azure Monitor, Log Analytics, Azure Policy, and Azure Security Center for managing these resources for performance, activity, and compliance.](images/security.png "Security Scenario")
 
 
 ### Network Scenarios
 Network scenarios diagram the potential options for connecting from Microsoft Azure to the on-premises network.
 
-![Network infographic showing potential options for connecting from Microsoft Azure to the on-premises network.](images/network.png "Network Scenario")
+![Diagram presenting the site-to-site connection configuration for the on-premises datacenter to connect to Azure through a VPN connection between the on-premises firewall and the Azure firewall.](images/network.png "Network Scenario")
 
 
 ### Windows Virtual Desktop standard architecture
 This diagram outlines a simple Windows Virtual Desktop architecture with Azure and Microsoft 365. This includes the Windows Virtual Desktop user connection and the Windows Virtual Desktop host pools.
 
-![Standard architecture diagram outlining a simple Windows Virtual Desktop with Azure and Microsoft 365 solution.](images/wvdarchitecture.png "Windows Virtual Desktop standard architecture")
+![Diagram referencing that there are multiple devices that will need to connect to the Windows desktop virtual image for Windows 10 and Microsoft 365 applications via the WVD hostpool.](images/wvdarchitecture.png "Windows Virtual Desktop standard architecture")
 
 
 ## Step 2: Design a proof of concept solution
