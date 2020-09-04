@@ -65,12 +65,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 3: Add Remote Apps to your Host Pool](#task-3-add-remote-apps-to-your-host-pool)
   - [Exercise 7: Connect to WVD with the web client](#exercise-7-connect-to-wvd-with-the-web-client)
     - [Task 1: Connecting with the HTML5 web client](#task-1-connecting-with-the-html5-web-client)
-  - [Exercise 9: Connect to WVD with the windows desktop client](#exercise-9-connect-to-wvd-with-the-windows-desktop-client)
-    - [Task 1: Connecting with the windows desktop client](#task-1-connecting-with-the-windows-desktop-client)
-  - [Exercise 10: Configure session hosts with Group Policy](#exercise-10-configure-session-hosts-with-group-policy)
-    - [Task 1: Create a Group Policy backup](#task-1-create-a-group-policy-backup)
-    - [Task 2: Configure the Group Policy settings](#task-2-configure-the-group-policy-settings)
-  - [Exercise 11: Setup monitoring for WVD](#exercise-11-setup-monitoring-for-wvd)
+  - [Exercise 8: Setup monitoring for WVD](#exercise-8-setup-monitoring-for-wvd)
     - [Task 1: Create a Log Analytics workspace](#task-1-create-a-log-analytics-workspace)
     - [Task 2: Enabling diagnostic logging for WVD](#task-2-enabling-diagnostic-logging-for-wvd)
     - [Task 3: Enable logging for host pools](#task-3-enable-logging-for-host-pools)
@@ -1109,7 +1104,7 @@ The system will automatically shut down and disconnect your RDP session.
 
 ### Task 6: Provision a Host Pool with a custom image
 
-1.  To start provisioning a host pool with your custom image, follow the instructions in [Exercise 5](#exercise-5-create-a-host-pool-for-pooled-desktops).
+1.  To start provisioning a host pool with your custom image, follow the instructions in [Exercise 6](#exercise-6-create-a-host-pool-and-assign-pooled-remote-apps).
 
 2.  When you get to step 5 to configure **Virtual machine settings**, select **Browse all images and disks** and then select the tab option for **My Items** to select the image that was created.
 
@@ -1146,15 +1141,20 @@ In this exercise we will be creating a Windows Virtual Desktop host pool for poo
 
     ![Here is where you will enter the information for the host pool.](images/createhostpool.png "Create host pool page")
 
-5.  On the Virtual Machines page, refer to the following screenshot to fill in the required fields. Once complete, Select **Next: Workspace**.
+5.  On the Virtual Machines page, provision a Virtual machine with the **Windows 10 multi-user + M365 apps**. Once complete, Select **Next: Workspace**.
    
-    ![Create a host pool virtual machine tab](images/hostpoolvm2.png "Create a host pool virtual machine tab")
+6.  For the **Image**, select **Browse all images and disks** and search to find **Windows 10 Enterprise multi-session, Version 1909 + Microsoft 365 Apps** and select that image.
+    >**Note**: Selecting this image is very important. You will need the Microsoft 365 for assigning apps in this exercise.
 
-6.  On the Workspace page, select **Yes** to register a new desktop app group. Select **Create new** and provide a **Workspace name**. Select **OK** and **Review + create**.
+    ![This is the image that you need for your host pool virtual machine.](images/vmwith365.png)
+
+    ![In this blade, enter in the information for the host pool name and select next for virtual machines.](images/nextworkspace.png)
+
+7.  On the Workspace page, select **Yes** to register a new desktop app group. Select **Create new** and provide a **Workspace name**. Select **OK** and **Review + create**.
 
     ![From the create a host pool workspace tab, enter the required information.](images/hostpoolWorkspace.png "Create a host pool workspace tab")
 
-7.  On the Create a host pool page, Select **Create**.
+8.  On the Create a host pool page, Select **Create**.
 
 ### Task 2: Create a friendly name for the workspace
 
@@ -1244,20 +1244,19 @@ In this exercise we will be creating a non-persistent host pool for publishing r
 
     ![In this blade, enter in the information for the virtual machines that will host the remote apps and select next for workspace.](images/remoteapppool.png)
 
-5.  On the Virtual Machines page, provision a Virtual machine with the **Windows 10 multi-user + M365 apps**. Once complete, Select **Next: Workspace**
+5.  When you configure **Virtual machine settings**, select **Browse all images and disks** and then select the tab option for **My Items** to select the image that was created.
 
-6.  For the **Image**, select **Browse all images and disks** and search to find **Windows 10 Enterprise multi-session, Version 1909 + Microsoft 365 Apps** and select that image.
+    ![This is where you will find your custom image to add to the host pool.](images/hostpoolcustom.png)
+
     >**Note**: Selecting this image is very important. You will need the Microsoft 365 for assigning apps in this exercise.
-
-    ![This is the image that you need for your host pool virtual machine.](images/vmwith365.png)
 
     ![In this blade, enter in the information for the host pool name and select next for virtual machines.](images/nextworkspace.png)
 
-7.  On the Workspace page, select **Yes** to register a new desktop app group. Select **Create new** and provide a **Workspace name**. Select **OK** and **Review + create**.
+6.  On the Workspace page, select **Yes** to register a new desktop app group. Select **Create new** and provide a **Workspace name**. Select **OK** and **Review + create**.
 
     ![In this blade, select yes and create a new workspace.  Select review and create when complete.](images/newworkspaceremoteapps.png)
 
-8.  On the Create a host pool page, Select **Create**.
+7.  On the Create a host pool page, Select **Create**.
 
 ### Task 2: Create a friendly name for the workspace
 
@@ -1309,13 +1308,17 @@ The name of the Workspace is displayed when the user signs in. Available resourc
 
 8.  On the Add Application fly out, next to Application source, select **Start Menu**. add the following applications, Selecting **Save** between selections.
 
-    -    Outlook
+    - Outlook
 
-    -    Word
+    - Microsoft Edge
 
-    -    PowerPoint
+    - Microsoft Teams
 
-    -    Excel
+    - Word
+
+    - PowerPoint
+
+    - Excel
 
     ![After selecting and saving each application, it will be populated in the list of applications.](images/selectapps.png)
 
@@ -1327,11 +1330,11 @@ The name of the Workspace is displayed when the user signs in. Available resourc
 
     >**Note**: The **Register application group** field will automatically populate with the workspace name.
 
-12. Select **Review + Create**.
+11. Select **Review + Create**.
 
     ![The workspace name will auto-populate and you will select review and create.](images/remoteappws.png)
 
-13. Select **Create**.
+12. Select **Create**.
 
 You have successfully created a Remote App non-persistent Host Pool with published apps. You can validate this configuration when we connect to the environment in a later exercise.
 
@@ -1363,7 +1366,9 @@ There are multiple clients available for you to access WVD resources. Refer to t
     >**Note**: You will be asked to login when you access the above URL.  The credentials that you use are those from the lab.
 
 3.  Sign in using a synchronized identity that has been assigned to an application group.
-    >**Note**: If you added the **AAD DC Administrators** to the groups in the previous exercises, you will be able to use your Global Administrator information.
+    >**Note**: If you added the **AAD DC Administrators** to the groups in the previous exercises, you will be able to use your Global Administrator information.  This **must** be a user that is syncronized with the AD DS with Azure AD Connect.  To verify, go to Azure Active Directory users and verify the directory sync users.
+
+    ![Here is where you would verify that a user is syncronized with the domain controller.](images/confirmsync.png)
 
     ![Select to use another account to enter the login email.](images/useanotheraccount.png)
 
@@ -1373,36 +1378,24 @@ There are multiple clients available for you to access WVD resources. Refer to t
 
 4.  Select an available resource from the web client. In this example we will connect to a host pool containing pooled desktop.
 
+    ![Once you login to the portal, you will see the apps that are available for you to use.](images/appsavailable.png)
+
 5.  On the **Access local resources** prompt, review the available options for and Select **Allow**.
 
     ![Here you will select the default desktop and allow local resources.](images/allowlocal.png)
 
-6.  On the **Enter your credentials** prompt, sign in using the same account from Step 3 and Select **Submit**.
+6.  On the **Enter your credentials** prompt, sign in using the same account from Step 3 and Select **Submit**. 
+   
+    >**Note**: The username and password to login to the WVD desktop will be credentials from the domain controller user name and password created upon initial deployment.  If you need the user email, RDP into the domain controller VM and find the user in the **Active Directory Users and Groups** and **OrgUsers**.
 
-7.  Once connected, validate the components relative to your configuration:
+    ![On the domain controller VM, you can find the username here.](images/dcusername.png)
 
-    -    **FSLogix Profile Container**
+    ![Enter the username from the domain controller and the password created during initial lab deployment.](images/dccreds.png)
 
-         - Did the profile direct get created on the file share?
-         - Is the profile appearing in Disk Management?
-         - Do your profile settings persist when connecting to different hosts?
+7.  Once connected, validate the components relative to your configuration. The desktop should show icons for Microsoft Edge and Microsoft Teams.  When you go to the Windows start menu, you can find the Office applications.
 
-    -    **Business Applications**
+    ![The desktop WVD image should look like this.](images/wvddesktopimage.png)
 
-         - Are the business applications in your image working as expected?
-
-    -    **OneDrive**
-
-         - Did OneDrive for Business automatically sign you in?
-         - Is Folders on Demand and Known Folder Move enabled?
-
-    -    **Teams**
-
-         - Did Teams automatically sign you in?
-
-    -    **Log Analytics Monitoring Agent**
-
-         - Are there connection events logged for the session in your Logs Analytics workspace?
 
 **Troubleshooting**
 
@@ -1426,277 +1419,9 @@ If the Web client keeps prompting for credentials, follow these instructions:
 
 5.  Open your browser in Private mode.
 
-## Exercise 9: Connect to WVD with the windows desktop client
 
-Duration:  30 minutes
 
-In this exercise we are going to walk through connecting to your WVD environment using the Windows desktop client and validating your deployment. Download and install the Windows desktop client using the following links:
-
--   [Windows 64-bit](https://go.microsoft.com/fwlink/?linkid=2068602) 
-
--   [Windows 32-bit](https://go.microsoft.com/fwlink/?linkid=2098960) 
-
--   [Windows ARM64](https://go.microsoft.com/fwlink/?linkid=2098961) 
-
-
-
-**Additional Resources**
-
-There are multiple clients available for you to access WVD resources. Refer to the following Docs for more information about each client:
-  |              |            |  
-|----------|:-------------:|
-| Description | Links |
-|Connect with the Windows Desktop Client |  https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-windows-7-and-10 |
-| Connect with the HTML5 web client |  https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-web |
-| Connect with the Android client | https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-android |
-| Connect with the macOS client |  https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-macos |
-| Connect with the iOS client | https://docs.microsoft.com/en-us/azure/virtual-desktop/connect-ios |
-  |              |            | 
-
-### Task 1: Connecting with the windows desktop client
-
-1.  Open the Remote Desktop client.
-
-    >**Note**: WVD does not support the RemoteApp and Desktop Connections (RDAC) client or the Remote Desktop Connection (MSTSC) client.
-
-2.  From the Remote Desktop client, Select **Subscribe**.
-
-3.  Sign in using a synchronized identity that has been assigned to an application group.
-
-    >**Note**: The Windows client automatically defaults to Windows Virtual Desktop Fall 2019 release. However, if the client detects that the user also has Azure Resource Manager resources, it automatically adds the resources or notifies the user that they are available.
-
-4.  Select an available resource from the Remote Desktop client. In this example we will connect to a host pool containing pooled desktop.
-
-    >**Note**: You can right-click on desktop resources (non-app) and modify the default connection settings. For example, setting the default display configuration.
-
-5.  On the **Enter your credentials** prompt, sign in using the same account from Step 3 and Select **OK**.
-
-6.  Once connected, validate the components relative to your configuration:
-
-    -    **FSLogix Profile Container**
-
-         - Did the profile direct get created on the file share?
-         - Is the profile appearing in Disk Management?
-         - Do your profile settings persist when connecting to different hosts?
-
-    -    **Business Applications**
-
-         - Are the business applications in your image working as expected?
-
-    -    **OneDrive**
-
-         - Did OneDrive for Business automatically sign you in?
-         - Is Folders on Demand and Known Folder Move enabled?
-
-    -    **Teams**
-
-         - Did Teams automatically sign you in?
-  
-    -    **Log Analytics Monitoring Agent**
-
-         - Are there connection events logged for the session in your Logs Analytics workspace?
-
-**Troubleshooting**
-
-**Remote Desktop client stops responding or cannot be opened**
-
-Starting with version 1.2.790, you can reset the user data from the **About** page or using a command.
-
-**Resetting the app from the GUI**
-
-1.  Open the Remote Desktop app.
-
-2.  Select **More options** in the upper right corner and select **About**.
-
-3.  Select **Reset** and **Continue**.
-
-4.  Open the Remote Desktop client and re-subscribe by signing in.
-
-**Resetting the app from the command line**
-
-1.  Make sure the Remote Desktop client is not running.
-
-2.  Open a command prompt and navigate to the installation folder.
-
-    -   **User-based installation:** C:\\Users\<user\>\\AppData\\Local\\Apps\\Remote
-        Desktop
-
-    -   **Machine-based installation (64-bit):** C:\\Program Files\\Remote Desktop
-
-3.  Run the following command:
-
-    ```
-    msrdcw.exe /reset
-    ```
-
-5.  On the warning dialog, Select **Yes**.
-
-    >**Note**: You can use the /f switch to skip the confirmation dialog.
-
-6.  Open the Remote Desktop client and re-subscribe by signing in.
-
-## Exercise 10: Configure session hosts with Group Policy
-
-Duration:  60 minutes
-
-After working with the Windows 10 Marketplace builds, we found some areas that needed improvement. Our goal is to ensure that we are enabling the best experience for our customers and their users. This guide will cover the recommended configurations using Group Policy.
-
-To perform the tasks of configuring group policy, we will require you to have access to your domain controller or to a Admin jump box where you can configure domain group policies. Perform the following steps on this system.
-
-**Additional Resources**
-
-  |              |            |  
-|----------|:-------------:|
-| Description | Links |
-| Install Office on WVD master image | https://docs.microsoft.com/en-us/azure/virtual-desktop/install-office-on-wvd-master-image  |
-| Outlook performance issues when there are too many items or folders | https://support.microsoft.com/en-us/help/2768656/outlook-performance-issues-when-there-are-too-many-items-or-folders-in |
-| Microsoft Edge update policies | https://docs.microsoft.com/en-us/deployedge/microsoft-edge-update-policies |
-| FSLogix group policy templates |  https://docs.microsoft.com/en-us/FSLogix/use-group-policy-templates-ht |
-| FSLogix profile container configuration |  https://docs.microsoft.com/en-us/FSLogix/profile-container-configuration-reference |
-| FSLogix Office container configuration |  https://docs.microsoft.com/en-us/FSLogix/office-container-configuration-reference) |
-| OneDrive redirect known folders | https://docs.microsoft.com/en-us/onedrive/redirect-known-folders |
-| OneDrive silent account configuration | https://docs.microsoft.com/en-us/onedrive/use-silent-account-configuration |
-| Save disk space with OneDrive files on demand for Windows 10 |  https://support.office.com/en-us/article/Save-disk-space-with-OneDrive-Files-On-Demand-for-Windows-10-0e6860d3-d9f3-4971-b321-7092438fb38e |
-| Set-up customized master image |  https://docs.microsoft.com/en-us/azure/virtual-desktop/set-up-customize-master-image |
- |              |            | 
-
-### Task 1: Create a Group Policy backup
-
-1.  **Download** the Group Policy Backup from this guide. [[WVD-GPO-Backups.zip]](https://raw.githubusercontent.com/shawntmeyer/WVD/master/GPOBackups/WVD-GPO-Backups.zip) 
-
-2.  **Extract** the contents of Zip file.
-
-These are Group Policy Backup files from which the customer can import the recommended configurations or set them on their own. There are HTML files to view what was configured as well as explanation of configuration later in this guide.
-
-3.  Expand the extracted directories and open the **ADMX Templates** folder.
-
-4.  Open a new file explorer session and navigate to:
-   
- 
-    ``  \\\<domainname\>\\sysvol\<domainfqdn\>\\policies\\policydefinitions
-    ``
-
-5.  Copy the **admx** files from the ADMX Templates folder to the **policydefinitions** folder and copy the **adml** files to the **policydefinitions\\en-us** subfolder. If you are asked whether you want to replace existing files, make you decision based on the date of each file. Replace older files only.
-
-6.  Open **Group Policy Management**, this is located under Windows Administrative tools in the Start Menu.
-
-7.  Expand the directories until you find Group Policy Objects.
-
-8.  Right-click Group Policy Objects and Select **New**, go ahead and create six new GPOs and name them after the six policies in the backup folder. After you are done, they should look like below.
-
-    >**Note**: If you are helping a customer the name of the policy is not critical just what configured. So, customers should be encouraged to use
-standard naming conventions.
-
-9.  Right-click on each policy and select import Settings. Select next through backup GPO, on the backup locations screen select the folder where the backups are located.
-
-10. Select next through backup GPO, on the backup locations screen select the folder where the backups are located.
-
-11. Select the backup that corresponds to the policy selected.
-
-12. Select next through all the prompts until you get a succeeded message.
-
-13. Repeat this for the other five policies.
-
-14. Review the GPO Settings of each policy in GPMC and the summary below. Change the settings to organizational preferences because they are set to Microsoft Recommendations as-is.
-
-15. Now link these policies to the OU where your WVD resource are located.
-
-
-### Task 2: Configure the Group Policy settings 
-
-Provided below is a summary of the group policy settings that Microsoft recommends applying to Pooled desktops. Each policy is detailed with the policy setting and reasoning. For more information, open the HTML files in the extracted GPBackup folder you downloaded earlier.
-
-
-**WVD Pooled - Microsoft 365 Apps - User Settings**
-  
-|              |            |               |
-|----------|:-------------:|:-------------:|
- | **Policy**| **Value** |**Reason** |
- |  Show the option for Office Insider    |                       Disabled       |         Hides the option to join office insider |
-  |Cached Exchange Mode Sync Settings          |                     One Month           |    Prevents bloating of outlook profiles on non-persistent machines.|
-  |Use Cached Exchange Mode for new and existing outlook profiles   | Enabled                | Ensures all profiles are running cached. |
-  | CalendarSyncWindowSetting       |                                 Primary Calendar Only  | Sync only the primary Calendar Folder, preventing bloat in the profile.|
- | CalendarSyncWindowSettingMonths                           |       1 Month                 | Setting to control the number of months in the Calendar Sync window |
-
-**WVD Pooled - Microsoft 365 Apps - Computer Settings**
-
-
-|              |            |               |
-|----------|:-------------:|:-------------:|
- | **Policy**      |   **Value**    |    **Reason** |
- | Use Shared Computer Activation                    |     Enabled        |  Shared Computer Activation for shared desktops |
- | Enable Automatic Updates                          |     Disabled     |    Prevents office version drift between Hosts |
- | Hide option to enable or disable updates          |    Enabled      |    Prevents users for modifying settings |
- | Hide Update Notifications                         |     Enabled      |    Prevents notification to end user about available updates. |
- | Configure user Group Policy loopback processing mode  | Enabled: Merge |  Allows the Microsoft 365 User Policy to apply to users on these Session Hosts |
-
-
-**WVD Pooled - Microsoft Edge Enterprise - Computer Settings**
-
-
-|              |            |               |
-|----------|:-------------:|:-------------:|
- | **Policy** |  **Value**   |  **Reason** |
-|  Update policy override default  | Updates Disabled |  Disables automatic updates for Edge |
-
-**WVD Pooled - Microsoft FSLogix - Computer Settings**
-
-
-|              |            |               |
-|----------|:-------------:|:-------------:|
-|  **Policy** | **Value**  |  **Reason** |
- | Include Office Activation data in container  |Enabled |  Maintains user's office activation token in FSLogix profile |
- | Delete local profile when FSLogix Profile should apply | Enabled  |Prevents remnants of local profiles on session hosts |
-  Enabled  |   Enabled  |   Enables the FSLogix Profile Container which is required for user state management on pooled desktops. |
-  | Profile Type Normal direct-access profile This is the simplest configuration and allows only 1 connection to profile container VHD Location | Enabled \<servername>\<sharename> |  The location of the stored VHD Profile. Update for customer environment Swap Directory name components Enabled Sorts by User name rather than SID in profile folder |
-
-**WVD Pooled - Microsoft OneDrive - Computer Settings**
-
-|              |            |               |
-|----------|:-------------:|:-------------:|
-|  **Policy**   |  **Value**    |   **Reason** |
- | Silently move windows known folders to OneDrive   | Set Tenant ID  | This policy will silently move the users Documents, Desktop, and Photos to one drive, **requires the orgs AAD Tenant ID**.
- | Silently sign into OneDrive sync client with their windows credentials |  Enabled  |       Automatically configured one drive on sign in.
- | Use OneDrive Files On-Demand  | Enabled    |     Uses Files on Demand to prevent Profile bloat.
-
-**WVD Pooled - Microsoft Windows - Computer Settings**
-
-|              |            |               |
-|----------|:-------------:|:-------------:|
- | **Policy**  |   **Value** |   **Reason** |
- | Allow Storage Sense | Disabled   |  Disables Storage Sense in Pooled VMs
- | Allow users to connect remotely by using remote desktop services |  Enabled   |   Enabled RDP in Host
-|  Configure Keep-Alive connection intervals |  Enabled: 1 |  Time to keep session alive post disconnect to time out. This is to help make the session available to another host as soon as possible.
-|  Configure Automatic Updates    | Disabled  |   Prevents hosts from updating on their own.
-
-In addition to the Administrative templates settings specified in the table above, the WVD Pooled - Microsoft Windows - Computer Settings Group Policy Object (GPO) contains the following registry preference items:
-
-
-  **Registry Path**  
-  |              |            |               |
-|----------|:-------------:|:-------------:|                                                          
-|**Registry Key** | **Value** |  **Reason** |
- | HKLM\\Software\\Policies\\Microsoft\\Windows\\WorkplaceJoin                       BlockWorkplaceJoin  |           1  |         Block domain joined machines from inadvertently getting Azure AD registered by users |
- | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   MaxMonitors  |  4   |        
-|  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   MaxXResolution   |              5120 |        
- | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   MaxYResolution   |              2880  |      
- | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   PortNumber    |                 3389   |     
- | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   LanAdapter      |               0  |         
- | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   UserAuthentication   |          1     |      
- | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   SecurityLayer    |              1    |       
- | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   fAllowSecProtocolNegotiation |  1     |      
-|  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   KeepAliveTimeout    |           1    |       
- | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   fInheritReconnectSame    |      1     |     
- | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp   fReconnectSame     |            1   |        
- | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-sxs   MaxMonitors    |                4    |       
- | HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-sxs   MaxXResolution   |              5120  |      
-| HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-sxs   MaxYResolution   |              2880   |     
- | HKLM\\ SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation                    RealTimeIsUniversal   |         1      |     
- |              |            |  
-
-
-
-## Exercise 11: Setup monitoring for WVD
+## Exercise 8: Setup monitoring for WVD
 
 Duration:  45 minutes
 
