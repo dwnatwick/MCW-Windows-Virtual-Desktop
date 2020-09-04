@@ -1111,7 +1111,9 @@ The system will automatically shut down and disconnect your RDP session.
 
 1.  To start provisioning a host pool with your custom image, follow the instructions in [Exercise 5](#exercise-5-create-a-host-pool-for-pooled-desktops).
 
-2.  When you get to the step to configure **Virtual machine settings**, select the option for **Managed Image** and fill in the required fields.
+2.  When you get to step 5 to configure **Virtual machine settings**, select **Browse all images and disks** and then select the tab option for **My Items** to select the image that was created.
+
+    ![This is where you will find your custom image to add to the host pool.](images/hostpoolcustom.png)
 
 
 ## Exercise 5: Create a host pool for personal desktops
