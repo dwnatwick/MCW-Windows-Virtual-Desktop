@@ -55,19 +55,15 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 4: Run Sysprep](#task-4-run-sysprep)
     - [Task 5: Create a managed image from the Master Image VM](#task-5-create-a-managed-image-from-the-master-image-vm)
     - [Task 6: Provision a Host Pool with a custom image](#task-6-provision-a-host-pool-with-a-custom-image)
-  - [Exercise 5: Create a host pool for pooled desktops](#exercise-5-create-a-host-pool-for-pooled-desktops)
+  - [Exercise 5: Create a host pool for personal desktops](#exercise-5-create-a-host-pool-for-personal-desktops)
     - [Task 1: Create a new Host Pool and Workspace](#task-1-create-a-new-host-pool-and-workspace)
     - [Task 2: Create a friendly name for the workspace](#task-2-create-a-friendly-name-for-the-workspace)
     - [Task 3: Assign an Azure AD group to an application group](#task-3-assign-an-azure-ad-group-to-an-application-group)
-  - [Exercise 6: Create a host pool for pooled remote apps](#exercise-6-create-a-host-pool-for-pooled-remote-apps)
+  - [Exercise 6: Create a host pool and assign pooled remote apps.](#exercise-6-create-a-host-pool-and-assign-pooled-remote-apps)
     - [Task 1: Create a new host pool and workspace](#task-1-create-a-new-host-pool-and-workspace-1)
     - [Task 2: Create a friendly name for the workspace](#task-2-create-a-friendly-name-for-the-workspace-1)
     - [Task 3: Add Remote Apps to your Host Pool](#task-3-add-remote-apps-to-your-host-pool)
-  - [Exercise 7: Create a host pool for personal desktops](#exercise-7-create-a-host-pool-for-personal-desktops)
-    - [Task 1: Create a new host pool and workspace](#task-1-create-a-new-host-pool-and-workspace-2)
-    - [Task 2: Create a friendly name for the workspace](#task-2-create-a-friendly-name-for-the-workspace-2)
-    - [Task 3: Assign Azure AD group to application group](#task-3-assign-azure-ad-group-to-application-group)
-  - [Exercise 8: Connect to WVD with the web client](#exercise-8-connect-to-wvd-with-the-web-client)
+  - [Exercise 7: Connect to WVD with the web client](#exercise-7-connect-to-wvd-with-the-web-client)
     - [Task 1: Connecting with the HTML5 web client](#task-1-connecting-with-the-html5-web-client)
   - [Exercise 9: Connect to WVD with the windows desktop client](#exercise-9-connect-to-wvd-with-the-windows-desktop-client)
     - [Task 1: Connecting with the windows desktop client](#task-1-connecting-with-the-windows-desktop-client)
@@ -328,6 +324,12 @@ It is also important to keep in mind that these groups can also originate from t
 
     ![Create a new security group type and provide the WVD Persistent Desktop user for the group name.](images/newGroup3.png "New Group Window")
 
+7. Confirm that the groups have been added by going to **Azure Active Directory**, selecting **Groups**.  Scroll down to the bottom of the list of groups and the three groups that you created should be listed.
+
+    ![Go to Azure Active Directory Groups to view the list of groups.](images/aadgroups.png)
+
+    ![Scroll to the bottom of the list to view the three new groups that were created.](images/aadnewgroups.png)
+
 ### Task 2: Assign users to groups
 
 Now that the Azure AD groups are in place, we will assign users for testing. Once the groups are populated, we can leverage them for assigning access to WVD resources once they are created.
@@ -336,7 +338,7 @@ Now that the Azure AD groups are in place, we will assign users for testing. Onc
 
 2.  At the top of the page, in the **Search resources** field, type **Azure Active Directory**. Select **Azure Active Directory** from the list.
 
-3.  On the Azure Active Directory page, select **Groups** on the left and select the desired group.
+3.  On the **Azure Active Directory** page, select **Groups** on the left and select the **WVD Persistent Desktop User** group.
 
 4.  Select **Members** and **+ Add Members**
 
@@ -344,13 +346,16 @@ Now that the Azure AD groups are in place, we will assign users for testing. Onc
 
 5.  In the search field, enter the name of a User to add **Select** to add them to the group.
 
-6.  Repeat steps 4-6 for the other two groups.
+6.  Repeat steps 4-6 for the **WVD Pooled Desktop User** and **WVD Remote App All Users** groups.
 
-At this point you have three new Azure AD groups with members assigned. Make a note of the group names and accounts you added for use later in this guide. These groups will be used to assign access to WVD application groups.
+    At this point you have three new Azure AD groups with members assigned. Make a note of the group names and accounts you added for use later in this guide. These groups will be used to assign access to WVD application groups.
+
+    ![Here is the list of users that you should be adding to each of the groups.](images/aadwvdusers.png)
+
 
 ## Exercise 3: Create an Azure Files Share for FSLogix
 
-Duration:  45 minutes
+Duration:  90 minutes
 
 In this exercise you will be creating an Azure File share and enabling SMB access via Active Directory authentication. Azure Files is a platform service (PaaS) and is one of the recommended solutions for hosting FSLogix containers for WVD users. At the end of this exercise you will have the following components:
 
@@ -436,29 +441,45 @@ In this task we will be completing the steps on the Domain Controller in Azure u
 
 1.  From a domain joined computer, download and unzip the [AzFilesHybrid module](https://github.com/Azure-Samples/azure-files-samples/releases).
 
+    **Link address**: https//github.com/Azure-Samples/azure-files-samples/releases   
+
+    ![Here is what you should see when you go to the github site for Azure samples](images/azfileshybriddownload.png)
+
+2. From the GitHub repository, select and download the AzFilesHybrid.zip file to the domain joined computer **Documents** folder.
+
+    ![When prompted to save the file, select save as to choose the location.](images/filesaveas.png)
+
+    ![In the window that opens, find the documents folder to save the file.](images/filedownload.png)
+
+3. After the download is complete, navigate to the file location in file explorer.
+
     ![After going to the github link to download the AzFilesHybrid file, locate this file in the folder it was saved.](images/azfileshybridzip.png "AzFilesHybrid module zip file")
 
-2. Extract this file to the **Documents** folder on the local Domain controller.
+4. Extract this file to the **Documents** folder on the local Domain controller.
 
     ![Open the zip file and select extract all.](images/extractzipfile.png "Extract zip file to documents")
 
     ![Choose the location to extract the files within the zip file to the documents folder.](images/extractlocation.png "Extract to documents")
 
-3.  Open an elevated PowerShell ISE window.
+5.  Open an elevated PowerShell ISE window by finding the **PowerShell ISE** icon on the desktop. Right-click on the icon and select **Run as administrator**.
 
-4.  Configure the PowerShell execution policy **Unrestricted** for the current user.
+    ![Locate the PowerShell icon on the domain computer desktop, right click and select run as administrator.](images/runasadministrator.png)
+
+6.  Configure the PowerShell execution policy **Unrestricted** for the current user.
 
     ```
      Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
     ```
 
-5.  Navigate to where you unzipped the AzFilesHybrid. For example:
+7.  Navigate to where you unzipped the AzFilesHybrid. For example:
 
     ```
-    cd C:\\AzFilesHybrid
+    cd C:\Users\ADAdmin\Documents\AzFilesHybrid
     ```
 
-6.  Install the Az PowerShell module.
+    ![The path to the file should be the documents folder location in file explorer](images/filelocation.png)
+
+8.  Install the Az PowerShell module.
 
     ```  
     if ($PSVersionTable.PSEdition -eq 'Desktop' -and (Get-Module -Name AzureRM -ListAvailable)) {
@@ -469,81 +490,94 @@ In this task we will be completing the steps on the Domain Controller in Azure u
     }
     ```
 
-7.  Install the AzFilesHybrid module.
+9.  Install the AzFilesHybrid module.
 
     ```
-    .\\CopyToPSPath.ps1
+    .\CopyToPSPath.ps1
     ```
 
-8.  Import the AzFilesHybrid module.
+10. Import the AzFilesHybrid module.
 
     ```  
     Import-Module -Name AzFilesHybrid
     ```
 
-9.  Sign in with an account that meets the prerequisites.
+    ![After running these commands, the results will look like this screenshot.](images/azimportresults.png)
+    
+11. Sign in with an account that meets the prerequisites.
 
     ```
     Connect-AzAccount
     ```
 
-10.  Create the following PowerShell variables:
+12.  Create the following PowerShell variables replacing the subscription id, resource group name, and storage account with the information specific to your lab environment:
     
 
-    ```
-    $SubscriptionId = "\<subscription-id\>\"
-    $ResourceGroupName = "\<resource-group-name\>\"
-    $StorageAccountName = "\<storage-account-name\>\"
-    ```
-
-    >**Note**: The Resource Group Name and Storage Account Name were assigned in Task 1.
-
-    >**Note**: You can run **Get-AzSubscription** to lookup the available subscription names.
+        ```
+        $SubscriptionId = "\<subscription-id\>\"
+        $ResourceGroupName = "\<resource-group-name\>\"
+        $StorageAccountName = "\<storage-account-name\>\"
+        ```
 
 
-11.  Select the target subscription for the current session.
+
+        >**Note**: The Resource Group Name and Storage Account Name were assigned in Task 1.
+
+        >**Note**: You can run **Get-AzSubscription** to lookup the available subscription names.
+
+        ![Here is where you would find the subscription id when running the Get-AzSubscription command.](images/subscriptionid.png)
+
+
+13.  Select the target subscription for the current session.
   
 
         ```
         Select-AzSubscription -SubscriptionId $SubscriptionId
         ```
 
-12. Register the storage account with your Active Directory domain.
+14. Register the storage account with your Active Directory domain.
 
     ```
-    Join-AzStorageAccountForAuth
-    -ResourceGroupName $ResourceGroupName
-    -Name $StorageAccountName
-    -DomainAccountType "ServiceLogonAccount" 
-    -OrganizationalUnitDistinguishedName "\<ou-name\>"
+    Join-AzStorageAccount -ResourceGroupName $ResourceGroupName
+   
     ```
 
-    >**Note**: You have the option to not provide an OU, in which case the object will be created in the root of the domain and can be moved manually. You also have the option to use **-OrganizationalUnitName** instead of the DN. If you choose to provide just the name, the object will be created in the first OU that matches that name.
+    >**Note**: You will be prompted to enter the Azure storage account name after you run this command.  The prompt will look like the below screenshot.
 
-    >**Note**: You have the option to set -DomainAccountType to **ComputerAccount** (computer object)
-    or **ServiceLogonAccount** (user object). Both objects will work but watch for password change policies. In this example we are using ServiceLogonAccount because the user object is setup automatically with **Password never expires**.
+    ![This is the prompt to enter the Azure storage account after running the join command.](images/enterstorage.png)
 
-13. Confirm the object was created successfully in **Active Directory Users and Computers**.
+15. When the script completes, you will be provided with confirmation that you are connected to the storage account.
 
-14. Confirm that the feature is enabled.
+    ![This is the confirmation of the storage account connection.](images/storageconfirmed.png)
+
+16. Confirm the object was created successfully in **Active Directory Users and Computers** by going to Domain controllers and looking for the computer object for Azure storage account.
+
+    ![Here is what the newly created computer object looks like in Active Directory.](images/confirmnewobject.png)
+
+17. Confirm that the feature is enabled.
 
         ```
         $storageaccount = Get-AzStorageAccount -ResourceGroupName $ResourceGroupName -Name $StorageAccountName
         ```
 
-15.  List the directory service of the selected service account.
+18.  List the directory service of the selected service account.
  
         ```
         $storageAccount.AzureFilesIdentityBasedAuth.DirectoryServiceOptions
         ```
 
-16. List the directory domain information if the storage account has enabled AD authentication for file shares.
+19. List the directory domain information if the storage account has enabled AD authentication for file shares.
 
     ```
     $storageAccount.AzureFilesIdentityBasedAuth.ActiveDirectoryProperties
     ```
 
-17. You can also confirm activation with your domain by navigating to the Azure portal, going to the storage account and selecting **Configuration** under **Settings**. Refer to the group on Active Directory (AD), as shown in the example below.
+    ![Here is what the responses should be when running the previous Powershell tasks.](images/confirmpowershell.png)
+
+
+20. You can also confirm activation with your domain by navigating to the Azure portal, going to the storage account and selecting **Configuration** under **Settings**. Refer to the group on Active Directory (AD), as shown in the example below.
+
+    ![In the storage account configuration, you will see that Active Directory Domain Services is enabled](images/portalconfirm.png)
 
 You have now successfully enabled AD authentication over SMB and assigned a custom role that provides access to an Azure file share with an AD identity.
 
@@ -583,35 +617,47 @@ To simplify administration, create 4 new security groups in Active Directory to 
 
         ![Create a new group object named WVD User.](images/wvduser.png "WVD User")
 
-3.  Add an administrative account to the group **AZF FSLogix Elevated Contributor**. This account will have permissions to modify file share permissions.
+3.  Add the WVD administrative account that you created previously to the group **AZF FSLogix Elevated Contributor**. This account will have permissions to modify file share permissions.
 
-4.  Add the group **WVD Users** to the group **AZF FSLogix Contributor**.
+    ![Find the WVD admin user that you created previously and right-click to add to a group](images/chooseadmin.png)
 
-5.  Add user accounts to the group **WVD Users**. These users will have access to use FSLogix profiles.
+4.  Type **AZF FSLogix Elevated Contributor** and select **Check Names** to verify. Select **Ok** to save.
+
+    ![Here is how to add the AZF FSLogix Elevated Contributor group to this user.](images/addadmin.png)
+
+5.  Add the group **WVD Users** to the group **AZF FSLogix Contributor** by going to the Builtin groups, locating WVDUsers and righ-click to **Add to a group**.
+  
+    ![This shows how you would find the WVD Users group and add it to a group.](images/wvduseraddtogroup.png)
+
+    ![Here is where you enter the FSLogix contributor group and check the name before adding.](images/wvduseraddgroup.png)
+
+6.  Add user accounts to the group **WVD Users** by selecting **OrgUsers** and choosing all of the users in the list.  Select all of the users and right-click to add them to a group. These users will have access to use FSLogix profiles. Also be sure to add the **ADAdmin** user to these groups.
 
     ![Go to the list of users in the organization, select the users and add them to the WVD Users group.](images/wvdaddusers.png "Add users to the WVD users group")
 
-6.  Wait for the new groups to synchronize with Azure AD.
+7.  Wait for the new groups to synchronize with Azure AD.  These groups can be verified by going to **Groups** within **Azure Active Directory** and looking for the names in the list.
+
+    ![Here is where you would verify that the groups that were created on the domain controller have synchronized with Azure AD](images/newgroups.png)
 
     With the new security groups available in Azure AD, use the following steps to assign them to your storage account in the Azure portal. This will enable to manage share permissions using AD security groups.
 
-7.  In the Azure portal, in the **Search resources** field, type **storage accounts** and select **Storage accounts** from the list.
+8.  In the Azure portal, in the **Search resources** field, type **storage accounts** and select **Storage accounts** from the list.
 
     ![From the Azure portal, search for storage accounts on the search bar.](images/storageaccount.png "Search for storage accounts")
 
-2.  On the Storage accounts blade, Select on the Storage account you created in Task 1.
+9.  On the Storage accounts blade, Select on the Storage account you created in Task 1.
 
-3.  On the blade for your storage account, locate and Select on **File shares** .
+10. On the blade for your storage account, locate and Select on **File shares** .
 
-4.  On the File shares blade, Select on your file share.
+11. On the File shares blade, Select on your file share.
 
-5.  Select **Access Control (IAM)**.
+12. Select **Access Control (IAM)**.
 
-6.  Select **+ Add** and select **Add role assignment**.
+13. Select **+ Add** and select **Add role assignment**.
 
     ![In the storage account, under access control, locate and select add under add a role assignment.](images/addroleassign.png "Add Azure AD Role assignment")
 
-7.  On the Add role assignment fly out, fill in the following options and Select **Save**.
+14. On the Add role assignment fly out, fill in the following options and Select **Save**.
 
     -    **Role:** Storage File Data SMB Share Contributor
 
@@ -619,7 +665,7 @@ To simplify administration, create 4 new security groups in Active Directory to 
 
     -    **Select:** AZF FSLogix Contributor
 
-8.  Repeat steps 3-4 for the remaining two roles.
+15. Repeat steps 3-4 for the remaining two roles.
 
     -    Storage File Data SMB Share Elevated Contributor \> AZF FSLogix Elevated Contributor
 
@@ -636,34 +682,48 @@ Azure Files supports the full set of NTFS basic and advanced permissions. You ca
 
 The first time you configure NTFS permission, do so using superuser permissions. This is accomplished by mounting the file share using your storage account key.
 
+>**Note**: In order to complete this task, you will need to disable secure transfer in the storage account.  This can be accessed from the storage account **Configuration** and selecting **Disabled** under **Secure transfer required**.  Select **Save** to save the changes.
+
+![In the configuration, you will disable secure transfer required and save](images/disablesecuretransfer.png)
+
 1.  In the Azure portal, in the **Search resources** field, type **storage accounts** and select **Storage accounts** from the list.
 
 2.  On the Storage accounts blade, Select on the Storage account you created in Task 1.
 
-3.  On the blade for your storage account, under **Settings**, select **Properties**. Locate the **Primary File Service Endpoint** address. This is the path you will use to access your file share. Reformat the path to UNC and copy it to a notepad file. For example:
-
-    https://mydomainazfiles.file.core.windows.net/ ==
-    \\\\mydomainazfiles.file.core.windows.net\\\<file-share-name\>
+3.  On the blade for your storage account, under **Settings**, select **Properties**. Locate the **Primary File Service Endpoint** address. This is the path you will use to access your file share. 
 
     ![Use the storage account properties blade to find the storage account path.](images/storagefileendpoint.png)
 
-5.  On the blade for your storage account, under **Settings**, select **Access keys**. Copy the value for **key1** to the same notepad file.
+4.  Reformat the path to UNC and copy it to a notepad file. For example:
+
+    https://mydomainazfiles.file.core.windows.net/ ==
+    \\\mydomainazfiles.file.core.windows.net\\\<file-share-name\>
+
+    ![Here is what the reformatted name should look like in notepad on the domain controller.](images/notepadreformatted.png)
+
+5.  On the blade for your storage account, under **Settings**, select **Access keys**. Copy and paste the value for **key1** to the same notepad file.
+
+    ![Here is where you will find the storage account key to copy to the notepad.](images/copykey.png)
 
 6.  From a domain joined computer, open a standard command prompt and mount your file share using the storage account key. **Do not** use an elevated command prompt or the mount point will not be visible in File Explorer. 
+
+    ![Go to the search on Windows to find and open the Command prompt.](images/opencommandprompt.png)
      
-    >**Note**: Refer to the following examples to prepare your command:
-    net use z:\\\\\<storage-account-name\>.file.core.windows.net\\\<share-name\>/user:Azure\\\<storage-account-name\> \<storage-account-key\>
+    >**Note**: Refer to the following examples to prepare your command. Be sure to enter spaces where (space) is noted:
+    net use z:(space) \\\\\<storage-account-name\>.file.core.windows.net\\\<share-name>(space) <storage-account-key\>(space) /user:Azure\\\<storage-account-name\>
 
         Example with sample values:
                 
-        net use z: \\\\mydomainazfiles.file.core.windows.net\\FSLogix/user:Azure\\mydomainazfilesuPCvi+gP2qbCQcn3EATgbALE0H8nxhspyLRO2Nf9Hm2gMxfn/389/M33XHh7YEqNJ2GhbJXgStiifPwMBXk38Q==
+        net use z: \\mydomainazfiles.file.core.windows.net\FSLogix uPCvi+gP2qbCQcn3EATgbALE0H8nxhspyLRO2Nf9Hm2gMxfn/389/M33XHh7YEqNJ2GhbJXgStiifPwMBXk38Q== user:Azure\\mydomainazfiles
         
 
     ![From the command prompt, run the script list above to connect the storage account as a network drive.](images/cmdprompt.png "Command Prompt script for mapping drive")
 
     >**Note**: This is an SMB connection on port 445. Most consumer ISPs block this port by default. If you are doing this in your lab and experience issues mounting the share from a local computer, try connecting from a domain joined VM in Azure.
 
-7.  Open **File Explorer**, right-click on the **X:** drive and select **Properties**.
+    ![After the net use command is completed successfully, you will receive a prompt that it was completed successfully.  You will also be able to see the drive as a network location in file explorer.](images/successfulstoragemap.png)
+
+7.  Open **File Explorer**, right-click on the **Z:** drive and select **Properties**.
 
 8.  On the properties window, select the **Security** tab and Select **Advanced**.
 
@@ -673,15 +733,15 @@ The first time you configure NTFS permission, do so using superuser permissions.
 
     ![Select add in security settings to add new objects.](images/addsecurity.png)
 
+    >**Note**: The images shows all of the objects that need to be added but only one can be added at a time.  Add one and then repeat the process until all four are added.
+
 10. Select **OK** to save your changes.
 
     ![Choose select a principal to open the select user, computer, service account, or group window.  In the enter the object name window, enter the FSLogix groups that were created previously.  Check names and select ok.](images/addobjects.png)
 
-11. Disconnect the mount point by running the following in the command prompt.
+    ![After adding all four objects as principals, they will be in the list of permission entries.](images/addsecuritycomplete.png)
 
-    ```
-    net use /delete z:
-    ```
+
 
 ### Task 6: Configure NTFS permissions for the containers
 
@@ -689,13 +749,11 @@ With the NTFS permissions applied at the root file share, you can now create the
 
 In this task we will create directories for each of the FSLogix profile types and assign the recommended permissions.
 
-1.  From a domain joined computer, browse to your Azure file share using the account you added previously to the **AZF FSLogix Elevated Contributor** security group.
+1.  Navigate to the networked drive in File explorer
 
-    ```
-    \\\\mydomainazfiles.file.core.windows.net\\\<file-share-name\>
-    ```
+    ![This is where you will find the network drive that you mounted in the previous task.](images/networkdrive.png)
 
-3.  Create three new directories in the root share.
+2.  Create three new folder directories in the root share.
 
     -    **Profiles**
 
@@ -703,17 +761,27 @@ In this task we will create directories for each of the FSLogix profile types an
 
     -    **MSIX**
 
-4.  Right-click on the **Profiles** directory and select **Properties**.
+    ![After adding these folders, file explorer for that shared drive will look like this.](images/newfolders.png)
 
-5.  On the properties window, select the **Security** tab and Select **Advanced**.
+3.  Right-click on the **Profiles** directory and select **Properties**.
 
-6.  Select **Disable inheritance** and select **Remove all inherited permissions from this object**.
+4.  On the properties window, select the **Security** tab and Select **Advanced**.
 
-7.  Select **Add** and add **AZF FSLogix Elevated Contributor**. Grant **Full Control** to **This folder, subfolders and files**. Select **OK**.
+5.  Select **Disable inheritance** and select **Remove all inherited permissions from this object**.
 
-8.  Select **Add** and add **Creator owner**. Grant **Full Control** to **Subfolders and files only**. Select **OK**.
+    ![Here is the screen that you would remove the inherited permissions.](images/removeinheritedperm.png)
 
-9.  Select **Add** and add **WVD Users**. Grant the following special permissions to **This folder only**. Select **OK**.
+6.  Select **Add** and add **AZF FSLogix Elevated Contributor**. Grant **Full Control** and check **Only apply these permissions to objects and/or containers within this container**. Select **OK**.
+
+    ![These are the selections that should be complete before selecting ok.](images/addfullcontrol.png)
+
+7.  Select **Add** and add **Creator owner**. Grant **Full Control** to **Only apply these permissions to objects and/or containers within this container**. Select **OK**.
+
+    ![This is what you willl see to add the creator owner object.](images/addcreatorowner.png)
+
+    ![These are the permissions for full control to the creator owner.](images/addfullcontrolcreator.png)
+
+8.  Select **Add** and add **WVD Users**. Grant the following special permissions to **Only apply these permissions to objects and/or containers within this container**. Select **OK**.
 
     -   Traverse folder / execute file
 
@@ -723,23 +791,33 @@ In this task we will create directories for each of the FSLogix profile types an
 
     -   Create folders / append data
 
-10. Select **OK** on both property windows to apply your changes.
+    ![This is what the special permissions for WVD user should look like.](images/userfolderpermissions.png)
 
-11. Repeat steps 3-9 for the **ODFC** directory.
+9.  Select **OK** on both property windows to apply your changes.
 
-12. Right-click on the **MSIX** directory and select **Properties**.
+    ![This is the list of permission objects that were just created.](images/permissionscomplete.png)
 
-13. On the properties window, select the **Security** tab and Select **Advanced**.
+10. Repeat steps 3-9 for the **ODFC** directory.
 
-14. Select **Disable inheritance** and select **Remove all inherited permissions from this object**.
+11. Right-click on the **MSIX** directory and select **Properties**.
 
-15. Select **Add** and add **AZF FSLogix Elevated Contributor**. Grant **Full Control** to **This folder, subfolders and files**. Select **OK**.
+12. On the properties window, select the **Security** tab and Select **Advanced**.
 
-16. Select **Add** and add **WVD Users**. Grant **Read & execute** to **This folder, subfolders and files**. Select **OK**.
+13. Select **Disable inheritance** and select **Remove all inherited permissions from this object**.
 
-17. Confirm your permissions match the screenshots below.
+    ![Here is the screen that you would remove the inherited permissions.](images/removeinheritedperm.png)
 
-18. Select **OK** on both property windows to apply your changes.
+14. Select **Add** and add **AZF FSLogix Elevated Contributor**. Grant **Full Control** to **Only apply these permissions to objects and/or containers within this container**. Select **OK**.
+
+    ![These are the selections that should be complete before selecting ok.](images/addfullcontrol.png)
+
+15. Select **Add** and add **WVD Users**. Grant **Read & execute** to **Only apply these permissions to objects and/or containers within this container**. Select **OK**.
+
+    ![These are the custom permissions for the WVD users on the MSIX folder](images/msixwvdusers.png)
+
+16. Confirm your permissions match the screenshots below.
+
+17. Select **OK** on both property windows to apply your changes.
 
 Your Azure Files Share is now ready for FSLogix profile containers. Copy the UNC path and add it to your FSLogix deployment (image, GPO, etc..).
 
@@ -768,11 +846,14 @@ For more information on how to setup a Bastion host in Azure|https://docs.micros
 
 3.  On the New page, search for **Microsoft Windows 10**. Select **Windows 10 Enterprise multi-session, Version 1909** and Select **Create**.
 
+
     ![This window will display the creation of a New Microsoft Windows 10 VM using software plan Windows 10 Enterprise multi-session, Version 1909.](images/windows10VM.png "New Microsoft Windows 10 VM using software plan Windows 10 Enterprise multi-session, Version 1909")
 
     >**Note**: In this exercise we are selecting a base Windows 10 image to start with, and installing Office 365 ProPlus using a custom deployment script. We are also using the latest available release of Windows 10 Enterprise multi-session, but you can choose the version based on your requirements.
 
-1.  On the Create a virtual machine page, fill in the required fields and create the VM.
+4.  On the Create a virtual machine page, fill in the required fields and create the VM by selecting **Review + create**.
+
+    ![This is what your configuration should look like.](images/win10vmcreate.png)
 
     >**Note**: Make a note of the **Username** and **Password** used to create the VM. This information will be required to access the VM after creation.
 
@@ -780,7 +861,13 @@ For more information on how to setup a Bastion host in Azure|https://docs.micros
 
     ![In the "Create a virtual machine" page within the Azure portal for the Windows 10 VM, allow port 3389 as an inbound port.](images/windows10VMcreate.png "The 'Create a virtual machine' page within the Azure portal for the Windows 10 VM")
 
-5.  Once the VM is successfully deployed, connect using RDP. Sign in using the credentials you supplied when creating the VM.
+5.  Once the VM is successfully deployed, go to the resource, and connect using RDP. Sign in using the credentials you supplied when creating the VM.
+
+    ![Select connect in the Windows 10 VM overview to RDP to the vm.](images/connectwin10vm.png)
+
+6.  Download the RDP file and open the RDP file to connect.
+
+    ![This image shows the download RDP button and the file that is downloaded to connect to the vm.](images/connectrdp.png)
 
 ### Task 2: Run Windows Update
 
@@ -804,6 +891,8 @@ The authors for this content have developed a scripted solution to assist in aut
 policies and settings for an optimized user experience.
 
 The script and related tools are maintained in GitHub - [Download Link](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/shawntmeyer/WVD/tree/master/Image-Build/Customizations) 
+
+https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/shawntmeyer/WVD/tree/master/Image-Build/Customizations 
 
 For additional documentation about the script (e.g. parameters, functions, etc.), refer to the comments in **Prepare-WVDImage.ps1**.
 
@@ -867,18 +956,26 @@ The UI form offers the following actions:
 
 1.  [**Download**](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/shawntmeyer/WVD/tree/master/Image-Build/Customizations) the .zip file to your local workstation.
 
-2.  **Copy** the .zip file on your local workstation. Open the RDP window to your master image VM. **Paste** the .zip file to the desktop.
+    https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/shawntmeyer/WVD/tree/master/Image-Build/Customizations 
+
+    ![You will open Microsoft Edge and paste the above link into the browser to download the file.](images/savecustomizations.png)
+
+2.  **Save** the .zip file on your local workstation. Open the RDP window to your master image VM. **Save as** the .zip file to the documents folder.
 
 3.  On the master image VM, right-click on the .zip file on your desktop and select **Extract All\...**.
 
-4.  Extract the files to **C:\\BuildArtifacts**.
+    ![After the file downloads, select the customizations document and extract the files to documents.](images/extractcustomizations.png)
 
-5.  Open an elevated PowerShell window.
+4.  Extract the files to **C:\Documents**.
 
-6.  Navigate to \"C:\\BuildArtifacts\\Customizations\".
+5.  Open an elevated PowerShell window by searching for PowerShell on the Windows 10 VM. Right-click and run as administrator.
+
+    ![You will search for the PowerShell application and right-click to run as administrator.](images/adminpowershell.png)
+
+6.  Navigate to \"C:\Users\\(loginaccount)\Documents\Customizations".
 
     ```
-    cd C:\\BuildArtifacts\\Customizations
+    cd C:\Users\(LoginAccount)\Documents\Customizations\Customizations
     ```
 
 7.  Run the following command to allow for script execution:
@@ -890,10 +987,14 @@ The UI form offers the following actions:
 8.  Execute the script by running the following command:
 
     ```
-    .\\Prepare-WVDImage.ps1 -DisplayForm
+    .\Prepare-WVDImage.ps1 -DisplayForm
     ```
 
+    ![This is what you should be executing in PowerShell.](images/prepareimage.png)
+
 This will trigger the PowerShell form to launch. Select the appropriate options based on the following input information.
+
+![This script will open the WVD golden image preparation window.](images/wvdgoldenimage.png)
 
 -   Select **Install Office 365** to Install Office 365 ProPlus while excluding Teams, Groove and Skype. This will enable the Email and Calendar Caching settings below.
 
@@ -911,6 +1012,8 @@ This will trigger the PowerShell form to launch. Select the appropriate options 
 
 -   Select **Run System Clean Up (CleanMgr.exe)** to execute Disk Cleanup.
 
+![After selecting the options above, the preparation should look like this prior to selecting execute.](images/goldenimagesettings.png)
+
 9.  With the desired options selected, Select **Execute**.
 
     The form will close at this point and the script will begin configuring the image. **DO NOT close any of the remaining windows that appear until the script has finished execution**. Doing so will interrupt the process and will require you to start over.
@@ -925,9 +1028,16 @@ This will trigger the PowerShell form to launch. Select the appropriate options 
 
     ![The Window for the WVD Image Preparation Script will open for you to execute.](images/WVHScript.png "The Window for the WVD Image Preparation Script")
 
-    >**Note**: After the Disk Cleanup Wizard closes, you may notice the PowerShell window does not update. It is waiting for the cleanmgr.exe process to close, which can take some time. You can select the PowerShell window and continue to hit the up arrow on your keyboard until you are presented with an active prompt.
+    >**Note**: This script takes some time to run, so be patient as it may seem like nothing is happening for a while, and then applications will begin to install. You can watch the status from within PowerShell. After the Disk Cleanup Wizard closes, you may notice the PowerShell window does not update. It is waiting for the cleanmgr.exe process to close, which can take some time. You can select the PowerShell window and continue to hit the up arrow on your keyboard until you are presented with an active prompt.
 
-10.  Once the script has completed execution, complete these final tasks:
+    ![This is what you will see in PowerShell while the applications are being installed on the WVD golden image.](images/powershellstatus.png)
+
+
+10.  After the script has completed, select the Window start icon and note that Office, Microsoft Edge Chromium, and Microsoft Teams have been installed.
+
+        ![Here you can view the newly installed applications.](images/newapplications.png)
+
+11.  Once the script has completed execution, complete these final tasks:
 
 -    Delete the C:\\BuildArtifacts directory.
 
@@ -939,6 +1049,10 @@ This will trigger the PowerShell form to launch. Select the appropriate options 
 
 -    Reboot the VM.
 
+        ![After the image preparation is complete, delete the downloaded files and empty the recycle bin](images/deletescripts.png)
+
+        ![Navigate to the Windows start menu and reboot the Windows 10 VM.](images/win10reboot.png)
+
 ### Task 4: Run Sysprep
 
 1.  After the VM has rebooted, reconnect your RDP session and sign in.
@@ -948,7 +1062,7 @@ This will trigger the PowerShell form to launch. Select the appropriate options 
 3.  Navigate to: **C:\\Windows\\System32\\Sysprep**.
 
     ```
-    cd C:\\Windows\\System32\\Sysprep
+    cd C:\Windows\System32\Sysprep
     ```
 
 4.  Run the following command to sysprep the VM and shutdown:
@@ -987,7 +1101,11 @@ The system will automatically shut down and disconnect your RDP session.
 
 8.  On the Images blade, locate your image and **Select** on the name.
 
+    ![When you search on images, this is the icon that you will need to select.](images/findimage.png)
+
 9.  On the Overview blade for your image, make note of the **Name** field and **Resource group** field. These attributes are needed when you provision your host pools.
+
+    ![This is the information that you need to note for the name and resource group.](images/newimage.png)
 
 ### Task 6: Provision a Host Pool with a custom image
 
@@ -996,9 +1114,9 @@ The system will automatically shut down and disconnect your RDP session.
 2.  When you get to the step to configure **Virtual machine settings**, select the option for **Managed Image** and fill in the required fields.
 
 
-## Exercise 5: Create a host pool for pooled desktops
+## Exercise 5: Create a host pool for personal desktops
 
-Duration:  20 minutes
+Duration:  45 minutes
 
 In this exercise we will be creating a Windows Virtual Desktop host pool for pooled desktops. This is a set of computers or hosts which operate on an as-needed basis. In a pooled configuration we will be hosting multiple non-persistent sessions, with no user profile information stored locally. This is where FSLogix Profile Containers provide the users profile to the host dynamically. This provides the ability for an organization to fully utilize the compute resources on a single host and lower the total overhead, cost, and number of remote workstations.
 
@@ -1020,18 +1138,17 @@ In this exercise we will be creating a Windows Virtual Desktop host pool for poo
 
 3.  Under Manage, select **Host pools** and Select **+ Add**.
    
-    ![This will open the Windows Virtual Desktop blade.](images/wvdHostPool.png "Windows Virtual Desktop blade")
+    ![Select host pools under manage and select add to add a new host pool.](images/wvdHostPool.png "Windows Virtual Desktop blade")
 
 4.  On the Basics page, refer to the following screenshot to fill in the required fields. Once complete, Select **Next: Virtual Machines**.
 
-    ![Create host pool page](images/createhostpool.png "Create host pool page")
+    ![Here is where you will enter the information for the host pool.](images/createhostpool.png "Create host pool page")
 
 5.  On the Virtual Machines page, refer to the following screenshot to fill in the required fields. Once complete, Select **Next: Workspace**.
-
-    ![Create a host pool virtual machine tab](images/hostpoolVM.png "Create a host pool virtual machine tab")
+   
+    ![Create a host pool virtual machine tab](images/hostpoolvm2.png "Create a host pool virtual machine tab")
 
 6.  On the Workspace page, select **Yes** to register a new desktop app group. Select **Create new** and provide a **Workspace name**. Select **OK** and **Review + create**.
-
 
     ![From the create a host pool workspace tab, enter the required information.](images/hostpoolWorkspace.png "Create a host pool workspace tab")
 
@@ -1039,7 +1156,9 @@ In this exercise we will be creating a Windows Virtual Desktop host pool for poo
 
 ### Task 2: Create a friendly name for the workspace
 
-The name of the Workspace is displayed when the user signs in. Available resources are organized by Workspace. For a better user experience, we will provide a friendly name for our new Workspace.
+The name of the Workspace is displayed when the user signs in. Available resources are organized by Workspace. For a better user experience, we will provide a friendly name for our new Workspace. 
+
+>**Note**: The workspace will not appear until Task 1 has completed deployment. 
 
 1.  Sign in to the [Azure Portal](https://portal.azure.com/).
 
@@ -1049,13 +1168,17 @@ The name of the Workspace is displayed when the user signs in. Available resourc
 
 3.  Under Manage, select **Workspaces**. Locate the Workspace you want to update and Select on the name.
 
+    ![Locate the workspace that was created in Task 1 and select it.](images/workspaceproperties.png)
+
 4.  Under Settings, select **Properties**.
 
 5.  Update the **Friendly name** field to your desired name.
 
+    ![Under properties of the workspace, enter a name under friendly name and save.](images/savefriendlyname.png)
+
 6.  Select **Save**.
 
-![From the workspace properties tab, view the workspace that you created.](images/workspaceFriendlyName.png "workspace properties tab")
+    ![From the workspace properties tab, view the workspace that you created.](images/workspaceFriendlyName.png "workspace properties tab")
 
 ### Task 3: Assign an Azure AD group to an application group
 
@@ -1069,11 +1192,18 @@ In the new Windows Virtual Desktop ARM portal, we now have the ability to use Az
 
 3.  Under Manage, select **Application groups**.
     
-4.  Locate the Application group that was created as part of Task 1. In this exercise it is named "**WVD\_Pooled\_Desktop-DAG**". Select on the name.
+4.  Locate the Application group that was created as part of Task 1. Select on the name.
+
+    ![Here is where you will find the application group created in Task 1.](images/wvdappgroups.png)
 
 5.  Under Manage, select **Assignments** and Select **+ Add**.
 
-6.  In the fly out, enter the name of your Azure AD group. In this exercise we will select **WVD Pooled Desktop Users**.
+    ![Find manage in the menu and select assignments and add.](images/addassignments.png)
+
+6.  In the fly out, enter **WVD** in the search to find the name of your Azure AD group. In this exercise we will select **WVD Pooled Desktop Users** and **AAD DC Administrators**.
+    >**Note**: AAD DC Administrators will allow you to use your Azure tenant login to access resources in Exercise 7.
+
+    ![Here are the groups that you need to select and save.](images/wvdpooleduseradd.png)
 
 7.  Choose **Select** to save your changes.
 
@@ -1081,9 +1211,9 @@ In the new Windows Virtual Desktop ARM portal, we now have the ability to use Az
 
 With the assignment added, you can move on to the next exercise. The users in the Azure AD group can be used to validate access to the new host pool in a later exercise.
 
-## Exercise 6: Create a host pool for pooled remote apps
+## Exercise 6: Create a host pool and assign pooled remote apps.
 
-Duration:  30 minutes
+Duration:  45 minutes
 
 In this exercise we will be creating a non-persistent host pool for publishing remote apps. This enables you to assign users access to specific applications rather than an entire desktop. This type of application deployment serves many purposes and is not new to WVD, but has existed in Windows Server Remote Desktop Services for many years.
 
@@ -1106,21 +1236,26 @@ In this exercise we will be creating a non-persistent host pool for publishing r
 
 3.  Under Manage, select **Host pools** and Select **+ Add**.
 
-    ![Enter the information to create a Host pool under the basics tab.](images/hostPool2.png "Host pool basics tabs")
+    ![Select host pools under manage and select add to add a new host pool.](images/wvdHostPool.png "Windows Virtual Desktop blade")
 
-4.  On the Basics page, refer to the following screenshot to fill in the required fields. Once complete, Select **Next: Virtual Machine**.
+4.  On the Basics page, refer to the following screenshot to fill in the required fields. Selecting **Pooled** for host pool type. Once complete, Select **Next: Virtual Machine**.
 
-    ![In this blade, enter in the information for the virtual machines that will host the windows 10 images and select next for workspace.](images/nextvirtualmachines.png)
+    ![In this blade, enter in the information for the virtual machines that will host the remote apps and select next for workspace.](images/remoteapppool.png)
 
-5.  On the Virtual Machines page, provision a Virtual machine with the Windows 10 multi-user + M365 apps. Once complete, Select **Next: Workspace**
+5.  On the Virtual Machines page, provision a Virtual machine with the **Windows 10 multi-user + M365 apps**. Once complete, Select **Next: Workspace**
+
+6.  For the **Image**, select **Browse all images and disks** and search to find **Windows 10 Enterprise multi-session, Version 1909 + Microsoft 365 Apps** and select that image.
+    >**Note**: Selecting this image is very important. You will need the Microsoft 365 for assigning apps in this exercise.
+
+    ![This is the image that you need for your host pool virtual machine.](images/vmwith365.png)
 
     ![In this blade, enter in the information for the host pool name and select next for virtual machines.](images/nextworkspace.png)
 
-6.  On the Workspace page, select **Yes** to register a new desktop app group. Select **Create new** and provide a **Workspace name**. Select **OK** and **Review + create**.
+7.  On the Workspace page, select **Yes** to register a new desktop app group. Select **Create new** and provide a **Workspace name**. Select **OK** and **Review + create**.
 
-    ![In this blade, select yes and create a new workspace.  Select review and create when complete.](images/nextreviewcreate.png)
+    ![In this blade, select yes and create a new workspace.  Select review and create when complete.](images/newworkspaceremoteapps.png)
 
-7.  On the Create a host pool page, Select **Create**.
+8.  On the Create a host pool page, Select **Create**.
 
 ### Task 2: Create a friendly name for the workspace
 
@@ -1132,13 +1267,20 @@ The name of the Workspace is displayed when the user signs in. Available resourc
 
     ![From the Azure portal search bar, search for windows virtual desktop and select the service.](images/searchwvd.png "Search for Windows Virtual Desktop")
 
-3.  Under Manage, select **Workspaces**. Locate the Workspace you want to update and Select on the name.
+3.  Under Manage, select **Workspaces**. Locate the Workspace that was created for remote apps and Select on the name.
+
+    ![Locate the workspace that was created in Task 1 and select it.](images/workspaceproperties.png)
 
 4.  Under Settings, select **Properties**.
 
 5.  Update the **Friendly name** field to your desired name.
 
+    ![Under properties of the workspace, enter a name under friendly name and save.](images/savefriendlyname.png)
+
 6.  Select **Save**.
+
+    ![From the workspace properties tab, view the workspace that you created.](images/workspaceFriendlyName.png "workspace properties tab")
+
 
 ### Task 3: Add Remote Apps to your Host Pool
 
@@ -1146,125 +1288,52 @@ The name of the Workspace is displayed when the user signs in. Available resourc
 
 2.  Search for **Windows Virtual Desktop** and select it from the list.
 
-3.  Under Manage, select **Application groups** and Select **+ Add**.
+3.  Under Manage, select **Host pools** and select the host pool that you created in Task 1.  Select **Application groups** and select **Add** to create a new application group.
    
-    ![From the Windows Virtual Desktop blade, select application groups under manage and select add to create a new application group.](images/manageappgroup.png "Manage Application groups")
+    ![From the Windows Virtual Desktop blade, select the host pool and then add to add an application groups.](images/newappgroup.png "Manage Application groups")
 
-4.  On the Basics page, select your resource group and host pool. Once complete, Select **Next: Assignments**.
+4.  In the Basics tab, name the application group and select **Next: Assignments**.
+   
+    ![From this blade, enter a name for the application group.](images/appgroupname.png)
 
-    ![From this blade, select the lab resource group and select next assignements.](images/nextassignments.png)
+5.  On the assignments tab, select **Add assignments**.  Search for the **WVD Remote App All Users** and **AAD DC Administrators** created earlier in this guide and choose **Select**.  
+    >**Note**: AAD DC Administrators will allow you to use your Azure tenant login to access resources in Exercise 7.
 
-5.  On the Assignments page, Select **+ Add Azure AD users or user groups**.
+6.  Select **Next: Applications**.
 
-6.  Search for the **RemoteApp Group** created earlier in this guide and choose **Select**.
+    ![From the application group blade, you will select to add users or user groups and select the WVD Remote App All users from the blade that opens next.](images/assigngroup.png)
 
-7.  Select **Next: Applications**.
+7.  On the Applications page, Select **+ Add Application**.
 
-    ![From the application group blade, you will select to add users or user groups and select the WVD Remote App All users from the blade that opens next.](images/nextapplications.png)
-
-8.  On the Applications page, Select **+ Add Application**.
-
-9.  On the Add Application fly out, next to Application source, select **Start Menu**. add the following applications, Selecting **Save** between selections.
+8.  On the Add Application fly out, next to Application source, select **Start Menu**. add the following applications, Selecting **Save** between selections.
 
     -    Outlook
 
     -    Word
 
-    -    Microsoft Edge
-
-    -    Microsoft Teams
+    -    PowerPoint
 
     -    Excel
 
-10. Select **Next: Workspace**.
+    ![After selecting and saving each application, it will be populated in the list of applications.](images/selectapps.png)
 
-11. On the Workspace page, select **Yes** to register the application group.
+    ![The final list of applications will look like this.](images/listofapps.png)
 
->**Note**: The **Register application group** field will automatically populate the application group we created earlier.
+9.  Select **Next: Workspace**.
+
+10. On the Workspace page, select **Yes** to register the application group.
+
+    >**Note**: The **Register application group** field will automatically populate with the workspace name.
 
 12. Select **Review + Create**.
+
+    ![The workspace name will auto-populate and you will select review and create.](images/remoteappws.png)
 
 13. Select **Create**.
 
 You have successfully created a Remote App non-persistent Host Pool with published apps. You can validate this configuration when we connect to the environment in a later exercise.
 
-## Exercise 7: Create a host pool for personal desktops
-
-Duration:  20 minutes
-
-In the new WVD ARM portal, Workspaces are the equivalent to Tenants in the Fall 2019 portal. This means we can create multiple Workspaces for different management purposes. This can be beneficial when working with multiple business groups within the same organization, providing logical segmentation of resources.
-
-### Task 1: Create a new host pool and workspace
-
-1.  Sign in to the [Azure Portal](https://portal.azure.com/).
-
-2.  Search for **Windows Virtual Desktop** and select it from the list.
-
-    ![From the Azure portal search bar, search for windows virtual desktop and select the service.](images/searchwvd.png "Search for Windows Virtual Desktop")
-
-3.  Under Manage, select **Host pools** and Select **+ Add**.
-
-    ![From the Windows Virtual Desktop blade, from the overview, select create a host pool.](images/createahostpool.png "Create a WVD Host pool")
-
-4.  On the Basics page, refer to the following screenshot to fill in the required fields. Once complete, Select **Next: Virtual Machine**.
-
-    ![In this blade, enter in the information for the virtual machines that will host the windows 10 images and select next for workspace.](images/nextvirtualmachines.png)   
-
-5.  On the Virtual Machines page, refer to the following screenshot to fill in the required fields. Once complete, Select **Next: Workspace**.
-
-    ![In this blade, enter in the information for the host pool name and select next for virtual machines.](images/nextworkspace.png)
-
-6.  On the Workspace page, select **Yes** to register a new desktop app group. Select **Create new** and provide a **Workspace name**. Select **OK** and **Review + create**.
-
-    ![In this blade, select yes and create a new workspace.  Select review and create when complete.](images/nextreviewcreate.png)
-
-7.  On the Create a host pool page, Select **Create**.
-
-### Task 2: Create a friendly name for the workspace
-
-The name of the Workspace is displayed when the user signs in. Available resources are organized by Workspace. For a better user experience, we will provide a friendly name for our new Workspace.
-
-1.  Sign in to the [Azure Portal](https://portal.azure.com/).
-
-2.  Search for **Windows Virtual Desktop** and select it from the list.
-
-3.  Under Manage, select **Workspaces**. Locate the Workspace you want to update and Select on the name.
-
-4.  Under Settings, select **Properties**.
-
-5.  Update the **Friendly name** field to your desired name.
-
-6.  Select **Save**.
-
-    ![After the host pool is created, the overview dashboard for that host pool can be viewed under the host pool name.](images/hostpooloverview.png "WVD Host pool overview dashboard")
-
-### Task 3: Assign Azure AD group to application group
-
-In the new Windows Virtual Desktop ARM portal, we now have the ability to use Azure Active Directory groups to manage access to our host pools.
-
-1.  Sign in to the [Azure Portal](https://portal.azure.com/).
-
-2.  Search for **Windows Virtual Desktop** and select it from the list.
-
-    ![From the Azure portal search bar, search for windows virtual desktop and select the service.](images/searchwvd.png "Search for Windows Virtual Desktop")
-
-3.  Under Manage, select **Application groups**.
-
-4.  Locate the Application group that was created as part of Task 1. In this exercise it is named "**WVD\_Pooled\_Desktop-DAG**". Select on the name.
-
-5.  Under Manage, select **Assignments** and Select **+ Add**.
-
-    ![From the Windows Virtual Desktop blade, locate and select application groups under the manage menu and select add to create a new applicatio group.](images/manageappgroup.png "Add an Application group")
-
-6.  In the fly out, enter the name of your Azure AD group. In this exercise we will select **WVD Persistent Desktop Users**.
-
-7.  Select **Review + Create** to save your changes.
-
-    ![In the create an application group blade, select the resource group and host pool.](images/createappgroup.png "Create an application group")
-
-With the assignment added, you can move on to the next exercise. The users in the Azure AD group can be used to validate access to the new host pool in a later exercise.
-
-## Exercise 8: Connect to WVD with the web client
+## Exercise 7: Connect to WVD with the web client
 
 Duration:  30 minutes
 
@@ -1292,10 +1361,19 @@ There are multiple clients available for you to access WVD resources. Refer to t
     >**Note**: You will be asked to login when you access the above URL.  The credentials that you use are those from the lab.
 
 3.  Sign in using a synchronized identity that has been assigned to an application group.
+    >**Note**: If you added the **AAD DC Administrators** to the groups in the previous exercises, you will be able to use your Global Administrator information.
+
+    ![Select to use another account to enter the login email.](images/useanotheraccount.png)
+
+    ![Enter the email address for the lab Azure tenant.](images/signinwithtenantadmin.png)
+
+    ![Enter the password for the username that you entered.](images/enterpw.png)
 
 4.  Select an available resource from the web client. In this example we will connect to a host pool containing pooled desktop.
 
 5.  On the **Access local resources** prompt, review the available options for and Select **Allow**.
+
+    ![Here you will select the default desktop and allow local resources.](images/allowlocal.png)
 
 6.  On the **Enter your credentials** prompt, sign in using the same account from Step 3 and Select **Submit**.
 
